@@ -3,7 +3,8 @@
     <div class="panel-body">
         <div class="row">
             {{ macros.input(form.title,3) }}
-            {{ macros.input(form.tarteb,3) }}
+            {{ macros.input(form.additionalPrice,3) }}
+            {{ macros.input(form.additionalPreparingDays,3) }}
             {% if form.type is defined %}
                 {{ macros.input(form.type,3) }}
             {% else %}
@@ -15,11 +16,8 @@
                 </div>
             {% endif %}
             {{ macros.checkbox(form.mandatory,3) }}
+            {{ macros.checkbox(form.standard,3) }}
         </div>
-        <div class="row">
-            {{ macros.checkbox(form.search,3) }}
-        </div>
-
     </div>
     <div class="panel-footer">
         {% include 'adminTemplate/saveAndResetFormFooter.html.twig' %}

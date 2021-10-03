@@ -32,13 +32,15 @@ class AttributeType extends AbstractType
             ->add('title',TextType::class,[
                 "label"=>"Spec"
             ])
-            ->add('search')
             ->add('mandatory')
-            ->add('tarteb', IntegerType::class, [
-                "label" => "Sort No.",
-                'required' => false,
-                "attr" => ['min' => 0],
-            ])
+            ->add('additionalPrice')
+            ->add('additionalPreparingDays')
+            ->add('standard')
+//            ->add('tarteb', IntegerType::class, [
+//                "label" => "Sort No.",
+//                'required' => false,
+//                "attr" => ['min' => 0],
+//            ])
             ->add('translations', TranslationsType::class, [
                 'entry_type' => AttributeTranslationType::class,
                 "label" => false,

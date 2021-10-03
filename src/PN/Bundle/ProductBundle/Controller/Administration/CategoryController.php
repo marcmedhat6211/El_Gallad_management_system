@@ -77,10 +77,6 @@ class CategoryController extends AbstractController
             $em->persist($category);
             $em->flush();
 
-            if ($request->request->get("action") == "saveAndNext") {
-                return $this->redirectToRoute('attribute_index', ["id" => $category->getId()]);
-            }
-
             $uploadImage = $this->uploadImage($request, $form, $category);
             if ($uploadImage != false) {
                 $this->addFlash('success', 'Successfully saved');

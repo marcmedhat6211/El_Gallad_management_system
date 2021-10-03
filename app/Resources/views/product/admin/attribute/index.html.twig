@@ -1,5 +1,5 @@
 {% extends 'adminTemplate/base.html.twig' %}
-{% set page_title %}{{ category.title }}'s Specs List{% endset %}
+{% set page_title %}{{ product.title }}'s Specs List{% endset %}
 {% block stylesheets %}
     {{ parent() }}
 {% endblock stylesheets %}
@@ -7,18 +7,8 @@
     <div class="breadcrumb-line">
         <ul class="breadcrumb">
             <li><a href="{{ path('dashboard') }}"><i class="icon-home2 position-left"></i>Dashboard</a></li>
-            <li><a href="{{ path('category_index') }}">Categories</a></li>
-            {% for categoryParent in categoryParents %}
-                <li>
-                    {% if loop.last == false %}
-                        <a href="{{ path('category_index',{"parentCategory":categoryParent.id}) }}">
-                            {{ categoryParent.title }}
-                        </a>
-                    {% else %}
-                        {{ categoryParent.title }}
-                    {% endif %}
-                </li>
-            {% endfor %}
+            <li><a href="{{ path('product_index') }}">Products</a></li>
+            <li><a href="{{ path('product_edit', {"id": product.id}) }}">Edit {{ product.title }}</a></li>
             <li class="active">{{ page_title }}</li>
         </ul>
     </div>
@@ -27,7 +17,7 @@
     {% if is_granted('ROLE_ADMIN') %}
         <ul class="fab-menu fab-menu-fixed fab-menu-bottom-right">
             <li>
-                <a href="{{ path('attribute_new', {"id": category.id}) }}"
+                <a href="{{ path('attribute_new', {"id": product.id}) }}"
                    class="fab-menu-btn btn bg-blue btn-float btn-rounded btn-icon">
                     <i class="fab-icon-open icon-plus3"></i>
                     <i class="fab-icon-close icon-cross2"></i>
@@ -44,9 +34,8 @@
                 <tr>
                     <th>#</th>
                     <th>Spec</th>
-                    <th>Sort No.</th>
                     <th>Type</th>
-                    <th>Search</th>
+                    <th>Standard</th>
                     <th>Mandatory</th>
                     <th>Action</th>
                 </tr>
@@ -65,5 +54,5 @@
     {{ parent() }}
     <script type="text/javascript" src="{{ asset('admin/js/plugins/tables/datatables/datatables.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('admin/js/plugins/forms/selects/select2.min.js') }}"></script>
-    {{ include('adminTemplate/datatable.html.twig', {'path':path('attribute_datatable', {"id": category.id})}) }}
+    {{ include('adminTemplate/datatable.html.twig', {'path':path('attribute_datatable', {"id": product.id})}) }}
 {% endblock javascripts %}

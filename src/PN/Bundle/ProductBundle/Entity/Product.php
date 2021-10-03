@@ -85,6 +85,18 @@ class Product implements Translatable, DateTimeInterface, UUIDInterface
 
     /**
      * @Gedmo\Versioned
+     * @ORM\Column(name="price", type="float")
+     */
+    private $price;
+
+    /**
+     * @Gedmo\Versioned
+     * @ORM\Column(name="serial", type="string")
+     */
+    private $serial;
+
+    /**
+     * @Gedmo\Versioned
      * @ORM\Column(name="tarteb", type="smallint", nullable=true)
      */
     private $tarteb;
@@ -119,12 +131,6 @@ class Product implements Translatable, DateTimeInterface, UUIDInterface
     private $publish = true;
 
     /**
-     * @Assert\NotNull
-     * @ORM\OneToMany(targetEntity="PN\Bundle\ProductBundle\Entity\ProductPrice", mappedBy="product", cascade={"persist"})
-     */
-    private $productPrices;
-
-    /**
      * @ORM\OneToMany(targetEntity="PN\Bundle\ProductBundle\Entity\Translation\ProductTranslation", mappedBy="translatable", cascade={"ALL"}, orphanRemoval=true)
      */
     private $translations;
@@ -154,6 +160,11 @@ class Product implements Translatable, DateTimeInterface, UUIDInterface
      */
     private $productHasOccasions;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Attribute", mappedBy="product")
+     */
+    private $attributes;
+
     public function __toString()
     {
         return $this->getTitle();
@@ -174,8 +185,8 @@ class Product implements Translatable, DateTimeInterface, UUIDInterface
         $this->productHasAttributes = new ArrayCollection();
         $this->productHasCollections = new ArrayCollection();
         $this->productHasOccasions = new ArrayCollection();
-        $this->productPrice = new ArrayCollection();
-        $this->productPrices = new ArrayCollection();
+        $this->attributes = new ArrayCollection();
+        $this->projects = new ArrayCollection();
     }
 
     /**
@@ -205,15 +216,6 @@ class Product implements Translatable, DateTimeInterface, UUIDInterface
                 $translationsClone->add($itemClone);
             }
             $this->translations = $translationsClone;
-
-            $productPricesClone = new ArrayCollection();
-            foreach ($this->getProductPrices() as $productPrice) {
-                $itemClone = clone $productPrice;
-                $itemClone->setProduct($this);
-                $productPricesClone->add($itemClone);
-            }
-            $this->productPrices = $productPricesClone;
-
             $specsClone = new ArrayCollection();
             foreach ($this->getProductHasAttributes() as $productHasAttribute) {
                 $itemClone = clone $productHasAttribute;
@@ -222,23 +224,6 @@ class Product implements Translatable, DateTimeInterface, UUIDInterface
             }
             $this->productHasAttributes = $specsClone;
         }
-    }
-    /**
-     * @return Collection|ProductPrice[]
-     */
-    public function getProductPrices(): Collection
-    {
-        return $this->productPrices->filter(function ($entity) {
-            if ($entity->getDeleted() == null) {
-                return $entity;
-            }
-        });
-    }
-
-    public function removeProductPrice(ProductPrice $productPrice): self
-    {
-        $productPrice->setDeleted(new \DateTime());
-        return $this;
     }
 
     private function updateNormalizedTxt()
@@ -593,15 +578,57 @@ class Product implements Translatable, DateTimeInterface, UUIDInterface
         return $this;
     }
 
-    public function addProductPrice(ProductPrice $productPrice): self
+    /**
+     * @return Collection|Attribute[]
+     */
+    public function getAttributes(): Collection
     {
-        if (!$this->productPrices->contains($productPrice)) {
-            $this->productPrices[] = $productPrice;
-            $productPrice->setProduct($this);
+        return $this->attributes;
+    }
+
+    public function addAttribute(Attribute $attribute): self
+    {
+        if (!$this->attributes->contains($attribute)) {
+            $this->attributes[] = $attribute;
+            $attribute->setCategory($this);
         }
 
         return $this;
     }
 
+    public function removeAttribute(Attribute $attribute): self
+    {
+        if ($this->attributes->removeElement($attribute)) {
+            // set the owning side to null (unless already changed)
+            if ($attribute->getCategory() === $this) {
+                $attribute->setCategory(null);
+            }
+        }
 
+        return $this;
+    }
+
+    public function getPrice(): ?float
+    {
+        return $this->price;
+    }
+
+    public function setPrice(float $price): self
+    {
+        $this->price = $price;
+
+        return $this;
+    }
+
+    public function getSerial(): ?string
+    {
+        return $this->serial;
+    }
+
+    public function setSerial(string $serial): self
+    {
+        $this->serial = $serial;
+
+        return $this;
+    }
 }

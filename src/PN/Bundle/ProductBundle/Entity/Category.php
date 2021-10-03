@@ -119,17 +119,11 @@ class Category implements Translatable, DateTimeInterface
      */
     private $products;
 
-    /**
-     * @ORM\OneToMany(targetEntity="Attribute", mappedBy="category")
-     */
-    private $attributes;
-
     public function __construct()
     {
         $this->children = new ArrayCollection();
         $this->products = new ArrayCollection();
         $this->translations = new ArrayCollection();
-        $this->attributes = new ArrayCollection();
     }
 
     /**
@@ -402,35 +396,4 @@ class Category implements Translatable, DateTimeInterface
 
         return $this;
     }
-
-    /**
-     * @return Collection|Attribute[]
-     */
-    public function getAttributes(): Collection
-    {
-        return $this->attributes;
-    }
-
-    public function addAttribute(Attribute $attribute): self
-    {
-        if (!$this->attributes->contains($attribute)) {
-            $this->attributes[] = $attribute;
-            $attribute->setCategory($this);
-        }
-
-        return $this;
-    }
-
-    public function removeAttribute(Attribute $attribute): self
-    {
-        if ($this->attributes->removeElement($attribute)) {
-            // set the owning side to null (unless already changed)
-            if ($attribute->getCategory() === $this) {
-                $attribute->setCategory(null);
-            }
-        }
-
-        return $this;
-    }
-
 }

@@ -2,12 +2,13 @@
 <div class="panel panel-flat">
     <div class="panel-body">
         <div class="row">
-            {{ macros.input(form.sku, 6) }}
-            {{ macros.input(form.title, 6) }}
+            {{ macros.input(form.sku, 4) }}
+            {{ macros.input(form.serial, 4) }}
+            {{ macros.input(form.title, 4) }}
         </div>
         <div class="row">
             {{ macros.input(form.category, 6, null,null, 'select-search') }}
-            {{ macros.input(form.tag, 6) }}
+            {{ macros.input(form.price, 6) }}
         </div>
         <div class="row">
             {#            <div class="col-md-4">#}
@@ -28,37 +29,38 @@
             {#                {{ macros.input(form.details.relatedProducts, 6) }}#}
         </div>
         <div class="row">
-            {{ macros.input(form.post.brief) }}
+{#            {{ macros.input(form.tag, 6) }}#}
+{#            {{ macros.input(form.post.brief) }}#}
             <div class="col-md-6">
-                {% set tearSheet = (product.details.tearSheet is defined) ? product.details.tearSheet : null %}
-                <div class="form-group">
-                    {{ form_label(form.details.tearSheet) }}
-                    <div class="{{ tearSheet ? "input-group" }}">
-                        {{ form_widget(form.details.tearSheet,{'attr':{'class':'file-styled'}}) }}
+{#                {% set tearSheet = (product.details.tearSheet is defined) ? product.details.tearSheet : null %}#}
+{#                <div class="form-group">#}
+{#                    {{ form_label(form.details.tearSheet) }}#}
+{#                    <div class="{{ tearSheet ? "input-group" }}">#}
+{#                        {{ form_widget(form.details.tearSheet,{'attr':{'class':'file-styled'}}) }}#}
 
-                        {% if tearSheet %}
-                            <span class="input-group-btn">
-                                <a href="{{ path('download', {'d': '{"document":'~tearSheet.id~'}'}) }}" target="_blank"
-                                   class="btn btn-default"><i class="fa fa-download"></i></a>
-                                {% if cr not in ['product_clone'] %}
-                                    <a href="{{ path('product_pdf_delete',{"id": tearSheet.id}) }}" target="_blank"
-                                       class="btn btn-danger delete-pdf"><i class="fa fa-times"></i></a>
-                                {% endif %}
-                            </span>
-                        {% endif %}
-                    </div>
-                    <span class="help-block">Accepted formats: pdf, Max file size 2MB</span>
-                </div>
+{#                        {% if tearSheet %}#}
+{#                            <span class="input-group-btn">#}
+{#                                <a href="{{ path('download', {'d': '{"document":'~tearSheet.id~'}'}) }}" target="_blank"#}
+{#                                   class="btn btn-default"><i class="fa fa-download"></i></a>#}
+{#                                {% if cr not in ['product_clone'] %}#}
+{#                                    <a href="{{ path('product_pdf_delete',{"id": tearSheet.id}) }}" target="_blank"#}
+{#                                       class="btn btn-danger delete-pdf"><i class="fa fa-times"></i></a>#}
+{#                                {% endif %}#}
+{#                            </span>#}
+{#                        {% endif %}#}
+{#                    </div>#}
+{#                    <span class="help-block">Accepted formats: pdf, Max file size 2MB</span>#}
+{#                </div>#}
             </div>
         </div>
+
 
         <div id="sub-attributes-box">
             {% include 'product/admin/product/_form_specs.html.twig' %}
         </div>
-        {% include 'product/admin/product/productPricesSnippet.html.twig' %}
-        <div class="row">
-            {{ macros.input(form.post.description,12,null,null,'form-control ckeditor') }}
-        </div>
+{#        <div class="row">#}
+{#            {{ macros.input(form.post.description,12,null,null,'form-control ckeditor') }}#}
+{#        </div>#}
 
 
     </div>

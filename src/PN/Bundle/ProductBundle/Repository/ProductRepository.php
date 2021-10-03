@@ -260,54 +260,9 @@ class ProductRepository extends \Doctrine\ORM\EntityRepository
             } else {
                 $product = $row;
             }
-            $product->isOnSale = $this->isProductOnSale($product);
-            $product->minPrice = $this->getMinimumProductPrice($product);
-            $product->maxPrice = $this->getMaximumProductPrice($product);
             $entities[] = $product;
         }
 
         return $entities;
     }
-
-    private function getMinimumProductPrice(Product $product)
-    {
-        $productPrices = $product->getProductPrices();
-        $minPrice = PHP_INT_MAX;
-        if (!empty($productPrices)) {
-            foreach ($productPrices as $productPrice) {
-                if ($productPrice->getSellPrice() < $minPrice) {
-                    $minPrice = $productPrice->getSellPrice();
-                }
-            }
-        }
-
-        return $minPrice;
-    }
-
-    private function getMaximumProductPrice(Product $product)
-    {
-        $productPrices = $product->getProductPrices();
-        $maxPrice = 0;
-        if (!empty($productPrices)) {
-            foreach ($productPrices as $productPrice) {
-                if ($productPrice->getSellPrice() > $maxPrice) {
-                    $maxPrice = $productPrice->getSellPrice();
-                }
-            }
-        }
-
-        return $maxPrice;
-    }
-
-    private function isProductOnSale(Product $product): bool
-    {
-        foreach ($product->getProductPrices() as $productPrice) {
-            if($productPrice->getPromotionalPrice() && $productPrice->getPromotionalExpiryDate() > new \DateTime()) {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
 }

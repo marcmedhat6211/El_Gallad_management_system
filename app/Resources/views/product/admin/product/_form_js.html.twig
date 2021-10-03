@@ -67,9 +67,9 @@
                 }
             }
         });
-        $("select[name*='[category]']").change(function () {
-            getSpecsForm($(this).val());
-        });
+        // $("select[name*='[category]']").change(function () {
+        //     getSpecsForm($(this).val());
+        // });
 
         $("body").on("click", ".delete-pdf", function (e) {
             var $this = $(this);
@@ -131,20 +131,6 @@
     }
     $(document).ready(function () {
         initDatepicker();
-
-        var productPriceHolder = $('#addTable>tbody');
-
-        if (productPriceHolder.find("td").length == 0) {
-            addPrice();
-        }
-
-        function addPrice() {
-            var collectionHolder = $('#addPrice');
-            var prototype = collectionHolder.attr('data-prototype');
-            form = prototype.replace(/\_\_name\_\_/g, productPriceHolder.children().length);
-            productPriceHolder.append(form);
-            initDatepicker();
-        }
 
         $("#addPrice").on('click', function (e) {
             e.preventDefault();

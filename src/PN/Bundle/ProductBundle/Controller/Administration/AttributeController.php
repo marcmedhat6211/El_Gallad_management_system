@@ -6,6 +6,7 @@ use PN\Bundle\BaseBundle\Controller\AbstractController;
 use PN\Bundle\CMSBundle\Lib\Paginator;
 use PN\Bundle\ProductBundle\Entity\Attribute;
 use PN\Bundle\ProductBundle\Entity\Category;
+use PN\Bundle\ProductBundle\Entity\Product;
 use PN\Bundle\ProductBundle\Entity\ProductHasAttribute;
 use PN\Bundle\ProductBundle\Entity\SubAttribute;
 use PN\Bundle\ProductBundle\Form\AttributeType;
@@ -29,14 +30,14 @@ class AttributeController extends \Symfony\Bundle\FrameworkBundle\Controller\Abs
      *
      * @Route("/{id}", name="attribute_index", methods={"GET"})
      */
-    public function indexAction(Request $request, Category $category)
+    public function indexAction(Request $request, Product $product)
     {
         $this->denyAccessUnlessGranted(['ROLE_ADMIN']);
-        $categoryParents = $this->get(CategoryService::class)->parentsByChildId($category);
+//        $categoryParents = $this->get(CategoryService::class)->parentsByChildId($category);
 
         return $this->render("product/admin/attribute/index.html.twig", [
-            'category' => $category,
-            'categoryParents' => $categoryParents,
+            'product' => $product,
+//            'categoryParents' => $categoryParents,
         ]);
     }
 
@@ -45,12 +46,12 @@ class AttributeController extends \Symfony\Bundle\FrameworkBundle\Controller\Abs
      *
      * @Route("/new/{id}", name="attribute_new", methods={"GET", "POST"})
      */
-    public function newAction(Request $request, Category $category)
+    public function newAction(Request $request, Product $product)
     {
         $this->denyAccessUnlessGranted(['ROLE_ADMIN']);
 
         $attribute = new Attribute();
-        $attribute->setCategory($category);
+        $attribute->setProduct($product);
         $form = $this->createForm(AttributeType::class, $attribute);
         $form->handleRequest($request);
 
@@ -61,18 +62,18 @@ class AttributeController extends \Symfony\Bundle\FrameworkBundle\Controller\Abs
             $em->flush();
 
             $this->addFlash('success', 'Successfully saved');
-            if (in_array($attribute->getType(), [Attribute::TYPE_DROPDOWN, Attribute::TYPE_CHECKBOX])) {
+            if (in_array($attribute->getType(), [Attribute::TYPE_DROPDOWN])) {
                 return $this->redirectToRoute('attribute_edit', ["id" => $attribute->getId()]);
             }
 
-            return $this->redirectToRoute('attribute_index', ["id" => $category->getId()]);
+            return $this->redirectToRoute('attribute_index', ["id" => $product->getId()]);
         }
 
-        $categoryParents = $this->get(CategoryService::class)->parentsByChildId($attribute->getCategory());
+//        $categoryParents = $this->get(CategoryService::class)->parentsByChildId($attribute->getCategory());
 
         return $this->render("product/admin/attribute/new.html.twig", [
             'attribute' => $attribute,
-            'categoryParents' => $categoryParents,
+//            'categoryParents' => $categoryParents,
             'form' => $form->createView(),
         ]);
     }
@@ -102,7 +103,7 @@ class AttributeController extends \Symfony\Bundle\FrameworkBundle\Controller\Abs
         }
 
 
-        $categoryParents = $this->get(CategoryService::class)->parentsByChildId($attribute->getCategory());
+//        $categoryParents = $this->get(CategoryService::class)->parentsByChildId($attribute->getCategory());
         $subAttributeForm = $this->createForm(SubAttributeType::class, new SubAttribute(), [
             "action" => $this->generateUrl("sub_attribute_new", ["id" => $attribute->getId()]),
         ]);
@@ -111,7 +112,7 @@ class AttributeController extends \Symfony\Bundle\FrameworkBundle\Controller\Abs
 
         return $this->render("product/admin/attribute/edit.html.twig", [
             'attribute' => $attribute,
-            'categoryParents' => $categoryParents,
+//            'categoryParents' => $categoryParents,
             'form' => $form->createView(),
             'new_sub_attribute_form' => $subAttributeForm->createView(),
             'edit_sub_attribute_form' => $subAttributeData->form->createView(),
@@ -143,7 +144,7 @@ class AttributeController extends \Symfony\Bundle\FrameworkBundle\Controller\Abs
     /**
      * @Route("/data/table/{id}", defaults={"_format": "json"}, name="attribute_datatable", methods={"GET"})
      */
-    public function dataTableAction(Request $request, Category $category)
+    public function dataTableAction(Request $request, Product $product)
     {
         $em = $this->getDoctrine()->getManager();
 
@@ -156,7 +157,7 @@ class AttributeController extends \Symfony\Bundle\FrameworkBundle\Controller\Abs
         $search = new \stdClass;
         $search->string = $srch['value'];
         $search->ordr = $ordr[0];
-        $search->category = $category->getId();
+        $search->product = $product->getId();
         $search->deleted = 0;
 
         $count = $em->getRepository(Attribute::class)->filter($search, true);

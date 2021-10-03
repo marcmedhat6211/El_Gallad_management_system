@@ -4,6 +4,7 @@ namespace PN\Bundle\ProductBundle\Repository;
 
 use Doctrine\ORM\QueryBuilder;
 use PN\Bundle\ProductBundle\Entity\Category;
+use PN\Bundle\ProductBundle\Entity\Product;
 
 /**
  * AttributeRepository
@@ -14,12 +15,12 @@ use PN\Bundle\ProductBundle\Entity\Category;
 class AttributeRepository extends \Doctrine\ORM\EntityRepository
 {
 
-    public function findByCategory(Category $category)
+    public function findByProduct(Product $product)
     {
         $search = new \stdClass();
         $search->deleted = 0;
         $search->ordr = ["column" => 0, "dir" => "ASC"];
-        $search->category = $category->getId();
+        $search->product = $product->getId();
 
         return $this->filter($search);
     }
@@ -76,10 +77,8 @@ class AttributeRepository extends \Doctrine\ORM\EntityRepository
     {
         $sortSQL = [
             "a.id",
-            "a.tarteb",
             "a.title",
             "a.type",
-            "a.search",
             "a.mandatory",
         ];
 
@@ -107,9 +106,9 @@ class AttributeRepository extends \Doctrine\ORM\EntityRepository
             $statement->andWhere('a.id = :id');
             $statement->setParameter('id', $search->id);
         }
-        if (isset($search->category) and $search->category > 0) {
-            $statement->andWhere('a.category = :category');
-            $statement->setParameter('category', $search->category);
+        if (isset($search->product) and $search->product > 0) {
+            $statement->andWhere('a.product = :product');
+            $statement->setParameter('product', $search->product);
         }
 
 

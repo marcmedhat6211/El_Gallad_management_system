@@ -5,6 +5,7 @@ namespace PN\Bundle\ProductBundle\Form;
 use Doctrine\ORM\EntityManagerInterface;
 use PN\Bundle\ProductBundle\Entity\Attribute;
 use PN\Bundle\ProductBundle\Entity\Category;
+use PN\Bundle\ProductBundle\Entity\Product;
 use PN\Bundle\ProductBundle\Entity\ProductHasAttribute;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -23,7 +24,7 @@ class ProductHasAttributeType extends AbstractType
 
     private $em;
     private $translator;
-    private $category;
+    private $product;
 
     //Constructor
     public function __construct(EntityManagerInterface $em, TranslatorInterface $translator)
@@ -38,11 +39,11 @@ class ProductHasAttributeType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
 
-        $this->category = $options['category'];
+        $this->product = $options['product'];
         $product = $options['product'];
         $attributes = [];
-        if ($this->category instanceof Category) {
-            $attributes = $this->em->getRepository(Attribute::class)->findByCategory($this->category);
+        if ($this->product instanceof Product) {
+            $attributes = $this->em->getRepository(Attribute::class)->findByProduct($this->product);
         }
 
         foreach ($attributes as $attribute) {
@@ -71,14 +72,6 @@ class ProductHasAttributeType extends AbstractType
                     if ($attribute->getType() == Attribute::TYPE_DROPDOWN AND $productHasAttribute->getOtherValue() != null) {
                         $attributeValue = "other";
                         $otherValue = $productHasAttribute->getOtherValue();
-                    } elseif (in_array($attribute->getType(), [Attribute::TYPE_NUMBER, Attribute::TYPE_TEXT])) {
-                        $otherValue = $productHasAttribute->getOtherValue();
-                    }
-
-                    if (in_array($attribute->getType(), [Attribute::TYPE_CHECKBOX])) {
-                        $value[] = $attributeValue;
-                    } else {
-                        $value = ($attributeValue == null) ? $otherValue : $attributeValue;
                     }
                 }
             }
@@ -86,23 +79,10 @@ class ProductHasAttributeType extends AbstractType
 
             $inputType = null;
             switch ($attribute->getType()) {
-                case Attribute::TYPE_NUMBER:
-                    $inputType = NumberType::class;
-                    $fieldOptions['attr']['min'] = 0;
-                    $fieldOptions['attr']['class'] = "only-float";
-                    break;
-                case Attribute::TYPE_TEXT:
-                    $inputType = TextType::class;
-                    break;
                 case Attribute::TYPE_DROPDOWN:
                     $fieldOptions['placeholder'] = "Choose an option";
                     $inputType = ChoiceType::class;
                     $fieldOptions['attr']['class'] = "select-search";
-                    break;
-                case Attribute::TYPE_CHECKBOX:
-                    $inputType = ChoiceType::class;
-                    $fieldOptions['multiple'] = true;
-                    $fieldOptions['attr'] = ["class" => "select-search"];
                     break;
             }
 
@@ -110,14 +90,6 @@ class ProductHasAttributeType extends AbstractType
                 $fieldOptions['constraints'] = new NotBlank();
                 $fieldOptions['label_attr']['class'] = 'required';
                 $fieldOptions['attr']['required'] = true;
-            }
-
-            if (in_array($attribute->getType(), [Attribute::TYPE_DROPDOWN, Attribute::TYPE_CHECKBOX])) {
-                $i = 1;
-                foreach ($attribute->getSubAttributes() as $subAttribute) {
-                    $fieldOptions['choices'][$i.". ".$subAttribute->getTitle()] = $subAttribute->getId();
-                    $i++;
-                }
             }
 
             // add other option
@@ -144,7 +116,7 @@ class ProductHasAttributeType extends AbstractType
     public function onSubmit(FormEvent $event)
     {
         $form = $event->getForm();
-        $attributes = $this->em->getRepository(Attribute::class)->findByCategory($this->category);
+        $attributes = $this->em->getRepository(Attribute::class)->findByProduct($this->product);
 
         $product = $form->getRoot()->getData();
 
@@ -213,9 +185,9 @@ class ProductHasAttributeType extends AbstractType
             'data_class' => null,
             'product' => null,
         ));
-        $resolver->setRequired([
-            "category",
-        ]);
+//        $resolver->setRequired([
+//            "category",
+//        ]);
     }
 
 }

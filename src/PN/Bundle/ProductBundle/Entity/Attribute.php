@@ -25,16 +25,10 @@ class Attribute implements Translatable, DateTimeInterface
         DateTimeTrait,
         LocaleTrait;
 
-    const TYPE_NUMBER = "number";
-    const TYPE_TEXT = "text";
     const TYPE_DROPDOWN = "dropdown";
-    const TYPE_CHECKBOX = "checkbox";
 
     public static $types = array(
-        'Number' => self::TYPE_NUMBER,
-        'Text' => self::TYPE_TEXT,
         'Single Choice' => self::TYPE_DROPDOWN,
-        'Multiple Choices' => self::TYPE_CHECKBOX,
     );
 
     /**
@@ -47,9 +41,9 @@ class Attribute implements Translatable, DateTimeInterface
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Category", inversedBy="attributes",cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="PN\Bundle\ProductBundle\Entity\Product", inversedBy="attributes",cascade={"persist"})
      */
-    private $category;
+    private $product;
 
     /**
      * @var string
@@ -66,15 +60,24 @@ class Attribute implements Translatable, DateTimeInterface
     private $type;
 
     /**
-     * @var string
      * @ORM\Column(name="tarteb", type="smallint", nullable=true)
      */
     private $tarteb;
 
     /**
-     * @ORM\Column(name="search", type="boolean")
+     * @ORM\Column(name="additional_price", type="float", nullable=true)
      */
-    private $search = false;
+    private $additionalPrice;
+
+    /**
+     * @ORM\Column(name="additional_preparing_days", type="integer", nullable=true)
+     */
+    private $additionalPreparingDays;
+
+    /**
+     * @ORM\Column(name="standard", type="boolean")
+     */
+    private $standard = true;
 
     /**
      * @ORM\Column(name="mandatory", type="boolean")
@@ -176,30 +179,6 @@ class Attribute implements Translatable, DateTimeInterface
         return $this;
     }
 
-    public function getTarteb(): ?int
-    {
-        return $this->tarteb;
-    }
-
-    public function setTarteb(?int $tarteb): self
-    {
-        $this->tarteb = $tarteb;
-
-        return $this;
-    }
-
-    public function getSearch(): ?bool
-    {
-        return $this->search;
-    }
-
-    public function setSearch(bool $search): self
-    {
-        $this->search = $search;
-
-        return $this;
-    }
-
     public function getMandatory(): ?bool
     {
         return $this->mandatory;
@@ -213,14 +192,14 @@ class Attribute implements Translatable, DateTimeInterface
     }
 
 
-    public function getCategory(): ?Category
+    public function getProduct(): ?Product
     {
-        return $this->category;
+        return $this->product;
     }
 
-    public function setCategory(?Category $category): self
+    public function setProduct(?Product $product): self
     {
-        $this->category = $category;
+        $this->product = $product;
 
         return $this;
     }
@@ -304,6 +283,54 @@ class Attribute implements Translatable, DateTimeInterface
                 $productHasAttribute->setAttribute(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getTarteb(): ?int
+    {
+        return $this->tarteb;
+    }
+
+    public function setTarteb(?int $tarteb): self
+    {
+        $this->tarteb = $tarteb;
+
+        return $this;
+    }
+
+    public function getAdditionalPrice(): ?float
+    {
+        return $this->additionalPrice;
+    }
+
+    public function setAdditionalPrice(?float $additionalPrice): self
+    {
+        $this->additionalPrice = $additionalPrice;
+
+        return $this;
+    }
+
+    public function getAdditionalPreparingDays(): ?int
+    {
+        return $this->additionalPreparingDays;
+    }
+
+    public function setAdditionalPreparingDays(?int $additionalPreparingDays): self
+    {
+        $this->additionalPreparingDays = $additionalPreparingDays;
+
+        return $this;
+    }
+
+    public function getStandard(): ?bool
+    {
+        return $this->standard;
+    }
+
+    public function setStandard(bool $standard): self
+    {
+        $this->standard = $standard;
 
         return $this;
     }

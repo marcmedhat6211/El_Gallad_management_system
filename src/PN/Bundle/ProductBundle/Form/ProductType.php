@@ -48,20 +48,19 @@ class ProductType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $this->product = $builder->getData();
-        $postTypeModel = new PostTypeModel();
-        $postTypeModel->add("description", "Description", [
-            "required" => true,
-            "constraints" => [
-                new NotBlank()
-            ],
-        ]);
-        $postTypeModel->add("brief", "Brief");
+//        $postTypeModel = new PostTypeModel();
+//        $postTypeModel->add("description", "Description", [
+//            "required" => false,
+//        ]);
+//        $postTypeModel->add("brief", "Brief");
         $builder
             ->add('title')
+            ->add('serial')
             ->add('sku', TextType::class, [
                 "label" => "SKU",
                 "required" => true,
             ])
+            ->add('price')
             ->add('category', EntityType::class, [
                 'required' => true,
                 'placeholder' => 'Choose an option',
@@ -72,41 +71,25 @@ class ProductType extends AbstractType
                         ->orderBy('c.id', 'DESC');
                 },
             ])
-            ->add('tag', TextType::class, [
-                "label" => "Search Terms",
-                "required" => false,
-            ])
-            ->add('publish', CheckboxType::class, [
-                "required" => false,
-                "label" => "Published",
-            ])
-            ->add('featured')
-            ->add('newArrival', CheckboxType::class, [
-                "required" => false,
-                "label" => "New Arrival",
-            ])
+//            ->add('tag', TextType::class, [
+//                "label" => "Search Terms",
+//                "required" => false,
+//            ])
+//            ->add('publish', CheckboxType::class, [
+//                "required" => false,
+//                "label" => "Published",
+//            ])
+//            ->add('featured')
+//            ->add('newArrival', CheckboxType::class, [
+//                "required" => false,
+//                "label" => "New Arrival",
+//            ])
             ->add('seo', SeoType::class)
-            ->add('post', PostType::class, [
-                "attributes" => $postTypeModel,
-                "required" => false,
-            ])
-            ->add('details', ProductDetailsType::class)
-            ->add("productPrices", CollectionType::class, array(
-                "required" => true,
-                "entry_type" => ProductPriceType::class,
-                "allow_add" => true,
-                "allow_delete" => true,
-                "prototype" => true,
-                "label" => false,
-                "by_reference" => false,
-                "error_bubbling" => false,
-                "constraints" => [
-                    new Count([
-                        'min' => 1,
-                        'minMessage' => 'You must enter at least one (1) product price',
-                    ]),
-                ],
-            ))
+//            ->add('post', PostType::class, [
+//                "attributes" => $postTypeModel,
+//                "required" => false,
+//            ])
+//            ->add('details', ProductDetailsType::class)
             ->add('translations', TranslationsType::class, [
                 'entry_type' => ProductTranslationType::class,
                 "label" => false,
@@ -119,7 +102,6 @@ class ProductType extends AbstractType
         //        $builder->get('category')->addModelTransformer(new CategoryTransformer($this->em));
         $builder->addEventListener(FormEvents::PRE_SET_DATA, [$this, 'onPreSetData']);
         $builder->addEventListener(FormEvents::PRE_SUBMIT, [$this, 'onPreSubmit']);
-        $builder->addEventListener(FormEvents::SUBMIT, [$this, 'onSubmit']);
     }
 
     public function onPreSetData(FormEvent $event)
@@ -139,23 +121,13 @@ class ProductType extends AbstractType
         $this->getSubAttributesField($form, $this->product, $category);
     }
 
-    public function onSubmit(FormEvent $event)
-    {
-        $form = $event->getForm();
-        $entity = $event->getData();
-
-        if ($entity->getProductPrices()->count() < 1) {
-            $this->session->getFlashBag()->add('error', "You must enter at least one (1) product price");
-        }
-    }
-
 
     private function getSubAttributesField(FormInterface $form, ?Product $product, ?Category $category)
     {
         $form->add('subAttributes', ProductHasAttributeType::class, array(
             "mapped" => false,
             "label" => false,
-            'category' => $category,
+//            'category' => $category,
             'product' => $product,
         ));
     }

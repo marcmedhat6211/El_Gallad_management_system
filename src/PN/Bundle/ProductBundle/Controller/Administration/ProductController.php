@@ -81,16 +81,11 @@ class ProductController extends AbstractController
             $em->persist($product);
             $em->flush();
 
-            $tearSheet = $this->uploadDocument($request, $form, $details);
-
             if ($request->request->get("action") == "saveAndNext") {
-                return $this->redirectToRoute('post_set_images', ['id' => $product->getPost()->getId()]);
+                return $this->redirectToRoute('attribute_index', ['id' => $product->getId()]);
             }
 
-            if ($tearSheet) {
-                $this->addFlash('success', 'Successfully saved');
-                return $this->redirectToRoute('product_index');
-            }
+            $this->addFlash('success', 'Successfully saved');
 
 
             return $this->redirectToRoute('product_edit', ['id' => $product->getId()]);
@@ -121,16 +116,10 @@ class ProductController extends AbstractController
             $em->flush();
 
             if ($request->request->get("action") == "saveAndNext") {
-                return $this->redirectToRoute('post_set_images', ['id' => $product->getPost()->getId()]);
+                return $this->redirectToRoute('attribute_index', ['id' => $product->getId()]);
             }
 
-            $tearSheet = $this->uploadDocument($request, $form, $product->getDetails());
-
-
-            if ($tearSheet) {
-                $this->addFlash('success', 'Successfully updated');
-                return $this->redirectToRoute('product_index');
-            }
+            $this->addFlash('success', 'Successfully updated');
 
             return $this->redirectToRoute('product_edit', ['id' => $product->getId()]);
         }
@@ -140,16 +129,6 @@ class ProductController extends AbstractController
             'currentCategory' => $product->getCategory(),
             'form' => $form->createView(),
         ));
-    }
-
-    private function uploadDocument(Request $request, FormInterface $form, ProductDetails $entity)
-    {
-        $file = $form->get("details")->get("tearSheet")->getData();
-        if ($file) {
-            $this->get('pn_media_upload_document')->uploadSingleDocument($entity, $file, 101, $request, 'tearSheet');
-        }
-
-        return true;
     }
 
     /**
