@@ -1,0 +1,45 @@
+[data-animate] {
+    opacity: 0;
+}
+
+[data-animate].animated {
+    opacity: 1;
+}
+
+@include media-breakpoint-up(lg) {
+    .x-animated {
+        animation-duration: 500ms;
+        animation-fill-mode: both;
+    }
+    .x-fadeInUp {
+        animation-name: x-fadeInUp;
+    }
+    .x-fadeInLeft {
+        animation-name: x-fadeInLeft;
+    }
+}
+
+//////////////////////////////////////////////////////////////////////////////
+// New keyframes for animated
+//////////////////////////////////////////////////////////////////////////////
+@keyframes x-fadeInUp {
+    from {
+        opacity: 0;
+        transform: translate3d(0, 50px, 0);
+    }
+    to {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+@keyframes x-fadeInLeft {
+    from {
+        opacity: 0;
+        transform: translate3d(50px * $transform-direction, 0, 0);
+    }
+    to {
+        opacity: 1;
+        transform: none;
+    }
+}

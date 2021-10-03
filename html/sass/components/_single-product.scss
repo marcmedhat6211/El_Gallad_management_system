@@ -1,0 +1,54 @@
+.frequently-bought-together {
+    .icon {
+        transition: all 0.2s;
+        opacity: 0;
+        width: 26px;
+        height: 26px;
+    }
+    .item {
+        label {
+            cursor: pointer;
+        }
+        label:hover,
+        label:hover~label,
+        input:checked~label,
+        &:hover>input:checked~label {
+            .icon {
+                opacity: 1;
+            }
+        }
+    }
+}
+
+.gallery-product-page-02 {
+    .slick-dots {
+        margin-top: 0;
+        bottom: 80px;
+    }
+}
+
+.product-dropdown {
+    .dropdown-menu {
+        margin-top: 0;
+    }
+    @include media-breakpoint-up(xxl) {
+        .dropdown-menu {
+            #{$end-direction}: -100px;
+        }
+    }
+}
+
+.list-bought-together {
+    .form-control {
+        width: auto;
+        height: 34px;
+    }
+}
+
+.product-details-layout-07 {
+    @media only screen and (min-width: 1920px) {
+        .primary-summary-inner {
+            max-width: 500px;
+        }
+    }
+}

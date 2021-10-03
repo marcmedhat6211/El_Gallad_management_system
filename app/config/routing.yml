@@ -1,0 +1,50 @@
+fos_user:
+    resource: "@UserBundle/Resources/config/all.yml"
+    
+pn_seo:
+    resource: "@PNSeoBundle/Resources/config/routing.yml"
+
+pn_locale:
+    resource: "@PNLocaleBundle/Resources/config/routing.yml"
+
+pn_media:
+    resource: "@PNMediaBundle/Resources/config/routing.yml"
+
+pn_content:
+    resource: "@PNContentBundle/Resources/config/routing.yml"
+
+cms_admin:
+    resource: "@CMSBundle/Controller/Administration"
+    type:     annotation
+    prefix:   /admin
+
+product_admin:
+    resource: "@ProductBundle/Controller/Administration"
+    type:     annotation
+    prefix:   /admin/product
+
+product_bundle:
+    resource: "@ProductBundle/Resources/config/routing.yml"
+
+cms:
+    resource: "@HomeBundle/Controller/"
+    type:    annotation
+    prefix: /
+
+
+cms_frontend:
+    resource: "@CMSBundle/Controller/FrontEnd/"
+    type:    annotation
+    prefix: /{_locale}/
+    defaults:  {_locale: '%locale%' }
+    requirements:
+        _locale: '%app.locales%'
+
+home:
+    resource: "@HomeBundle/Controller/"
+    type: annotation
+    prefix: /{_locale}/
+    defaults:  {_locale: '%locale%' }
+    requirements:
+        _locale: '%app.locales%'
+  

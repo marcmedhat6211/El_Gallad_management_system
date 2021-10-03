@@ -1,0 +1,4 @@
+parameters:
+    product_bundle:
+        multiple_price: true
+        support_weight: false

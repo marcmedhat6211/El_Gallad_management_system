@@ -1,0 +1,80 @@
+{% extends 'fe/base.html.twig' %}
+{% set seo = blog.seo %}
+{% use '@PNSeo/FrontEnd/seo.html.twig' %}
+{% import 'fe/macros.html.twig' as macros %}
+
+{% block stylesheet %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('vendors/swiper/swiper.css') }}">
+{% endblock %}
+{% block content %}
+
+    {% set image = 'images/placeholders/placeholder-lg.jpg' %}
+    {% if blog.post.imageByType(constant("\\PN\\Bundle\\MediaBundle\\Entity\\Image::TYPE_COVER_PHOTO")) %}
+        {% set image = blog.post.imageByType(constant("\\PN\\Bundle\\MediaBundle\\Entity\\Image::TYPE_COVER_PHOTO")).assetPath %}
+    {% endif %}
+    <section class="pt-20 border-bottom blog-details-header-section">
+        <div class="container">
+            {% if blog.date %}
+                <p class="card-text fs-12 mb-2 lh-12 text-uppercase letter-spacing-05 text-center font-weight-500 blog-date">
+                    {{ blog.date|date('d-m-Y') }}
+                </p>
+            {% endif %}
+            <h1 class="mb-2 fs-40 text-center blog-title">
+                {{ blog.title }}
+            </h1>
+            <img src="{{ asset(image) }}" alt="{{ blog.title }}" class="mb-9">
+            <div class="row no-gutters">
+                <div class="col-lg-9 mx-auto mb-7">
+                    <div>
+                        {{ blog.post.content.description|raw }}
+                    </div>
+                    <div class="row no-gutters">
+                        <div class="col-sm-12 d-flex justify-content-sm-end">
+                            <div class="social-media-icons">
+                                <label class="text-primary font-weight-bold mr-3 mb-0">{% trans %}Share:{% endtrans %}</label>
+                                <div class="icons-container">
+                                    <a href="#" class="icon fs-20 lh-1" id="facebook_link"><i
+                                                class="fab fa-facebook-f"></i></a>
+                                    <a href="#" class="icon fs-20 lh-1" id="pinterest_link"><i
+                                                class="fab fa-pinterest-p"></i></a>
+                                    <a href="#" class="icon fs-20 lh-1" id="linkedin_link"><i
+                                                class="fab fa-linkedin"></i></a>
+                                    <a href="#" class="icon fs-20 lh-1" id="twitter_link"><i class="fab fa-twitter"></i></a>
+                                    <a href="#" class="icon fs-20 lh-1" id="whatsapp_link"><i
+                                                class="fab fa-whatsapp"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    {% if relatedBlogs is not empty %}
+        <section class="pt-7 pb-10 pb-md-15 blog-details-related-blogs-section">
+        <div class="container">
+            <h2 class="mb-10 fs-40 text-center">
+                {% trans %}Related Articles{% endtrans %}
+            </h2>
+            <div class="swiper-container"
+                 data-swiper-options='{"slidesPerView": 1.2,"loop":false,"spaceBetween":10,"freeMode":true,"lazy":{"preloadImages":false,"loadPrevNext":true,"loadPrevNextAmount":4},"navigation":{"nextEl":".swiper-btn-next","prevEl":".swiper-btn-prev"},"breakpoints":{"991.98":{"slidesPerView":3,"spaceBetween":20,"allowTouchMove":false}}}'>
+                <div class="swiper-wrapper">
+                    {% for blog in relatedBlogs %}
+                        <div class="swiper-slide">
+                            {{ macros.blog(blog, true) }}
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </section>
+    {% endif %}
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('vendors/swiper/swiper.min.js') }}"></script>
+    <script src="{{ asset('js/pages/blog-details.js') }}"></script>
+{% endblock %}

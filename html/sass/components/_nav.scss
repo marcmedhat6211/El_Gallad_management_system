@@ -1,0 +1,9 @@
+.nav-pills {
+    .nav-link {
+        color: $body-color;
+        &.active {
+            color: $primary;
+            background-color: transparent;
+        }
+    }
+}

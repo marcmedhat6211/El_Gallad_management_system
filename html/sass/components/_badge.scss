@@ -1,0 +1,42 @@
+.badge-circle {
+    border-radius: 100% !important;
+}
+
+.badge {
+    font-size: 12px;
+    line-height: 1.15;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+.badge-green {
+    background-color: #9bd6c1;
+    color: $white;
+}
+
+.badge-yellow {
+    background-color: #ead185;
+    color: $white;
+}
+
+.badge-pink {
+    background-color: #e67a7a;
+    color: $white;
+}
+
+.badge-purple {
+    background-color: $color-purple-3;
+    color: $white;
+}
+
+.badge-blue {
+    background-color: $color-blue-3;
+    color: $white;
+}
+
+.badge-style-1 {
+    font-weight: 700 !important;
+    font-size: 12px !important;
+    border-radius: 6px;
+    padding: 2px;
+}

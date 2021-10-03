@@ -1,0 +1,112 @@
+{% extends 'fe/base.html.twig' %}
+{% set seo = seoPage.seo %}
+{% use '@PNSeo/FrontEnd/seo.html.twig' %}
+
+{% block stylesheet %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('vendors/mapbox-gl/mapbox-gl.min.css') }}">
+{% endblock %}
+
+{% block content %}
+
+    <section class="pt-20 pb-8 pb-md-10">
+        <div class="container">
+            <h2 class="fs-sm-40 mb-11 text-center">{% trans %}Contact Us{% endtrans %}</h2>
+            <div class="row">
+                <div class="col-sm-6 col-md-3 mb-6 mb-md-0">
+                    <div class="text-center px-5">
+                        <p class="font-weight-bold text-primary mb-3">{{ getDCA(12) }}</p>
+                        <p class="mb-2">{{ getDCA(13) }}</p>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-3 mb-6 mb-md-0">
+                    <div class="text-center px-5">
+                        <p class="font-weight-bold text-primary mb-3">{{ getDCA(14) }}</p>
+                        <p class="mb-2">{{ getDCA(15) }}</p>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-3 mb-6 mb-md-0">
+                    <div class="text-center px-5">
+                        <p class="font-weight-bold text-primary mb-3">{{ getDCA(16) }}</p>
+                        <p class="mb-0">{{ getDCA(17) }}</p>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-3 mb-6 mb-md-0">
+                    <div class="text-center px-5">
+                        <p class="font-weight-bold text-primary mb-3">{{ getDCA(18) }}</p>
+                        <ul class="list-inline d-flex align-items-center justify-content-center mb-0">
+                            {% if getDCA(19) %}
+                                <li class="list-inline-item mr-4"><a href="{{ getDCA(19) }}" class="fs-20 lh-1"><i
+                                                class="fab fa-pinterest-p"></i></a>
+                                </li>
+                                {{ editDCA(19) }}
+                            {% endif %}
+                            {% if getDCA(20) %}
+                                <li class="list-inline-item mr-4"><a href="{{ getDCA(20) }}" class="fs-20 lh-1"><i
+                                                class="fab fa-facebook-f"></i></a></li>
+                                {{ editDCA(20) }}
+                            {% endif %}
+                            {% if getDCA(21) %}
+                                <li class="list-inline-item mr-4"><a href="{{ getDCA(21) }}" class="fs-20 lh-1"><i
+                                                class="fab fa-instagram"></i></a></li>
+                                {{ editDCA(21) }}
+                            {% endif %}
+                            {% if getDCA(22) %}
+                                <li class="list-inline-item"><a href="{{ getDCA(22) }}" class="fs-20 lh-1"><i
+                                                class="fab fa-twitter"></i></a></li>
+                                {{ editDCA(22) }}
+                            {% endif %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="pb-10">
+        <div class="container container-xxl">
+            <div id="map" class="mapbox-gl map-point-animate" style="height: 535px"
+                 data-mapbox-access-token="pk.eyJ1IjoiZHVvbmdsaCIsImEiOiJjanJnNHQ4czExMzhyNDVwdWo5bW13ZmtnIn0.f1bmXQsS6o4bzFFJc8RCcQ"
+                 data-mapbox-options='{"center":[30.007255767391946, 31.42335781793647],"setLngLat":[30.007255767391946, 31.42335781793647],"zoom":5}'
+                 data-mapbox-marker='[{"position":[30.0035766, 31.4087666],"className":"marker","backgroundImage":"{{ asset('images/marker-01.png') }}","backgroundRepeat":"no-repeat","width":"70px","height":"70px"}]'></div>
+        </div>
+    </section>
+
+    <div class="pb-11 pb-lg-15">
+        <div class="container">
+            <div class="row">
+                {% include 'fe/_flash_messages.html.twig' %}
+                <div class="col-md-8 mx-auto">
+                    <h2 class="fs-24 mb-1">
+                        {{ getDCA(23) }}
+                    </h2>
+                    <p class="mb-7">{{ getDCA(24) }}</p>
+                    {{ form_start(contact_form, {'attr':{"id":"contact-form" } }) }}
+                    <div class="row mb-6">
+                        <div class="col-sm-6">
+                            {{ form_widget(contact_form.name) }}
+                            {{ form_errors(contact_form.name) }}
+                        </div>
+                        <div class="col-sm-6">
+                            {{ form_widget(contact_form.email) }}
+                            {{ form_errors(contact_form.email) }}
+                        </div>
+                    </div>
+                    <div class="form-group mb-4">
+                        {{ form_widget(contact_form.comment) }}
+                        {{ form_errors(contact_form.comment) }}
+                    </div>
+                    <button type="submit"
+                            class="btn btn-primary text-uppercase letter-spacing-05 btn-outline-primary">{% trans %}submit now{% endtrans %}</button>
+                    {{ form_end(contact_form) }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('vendors/mapbox-gl/mapbox-gl.js') }}"></script>
+{% endblock %}

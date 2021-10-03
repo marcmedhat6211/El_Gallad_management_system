@@ -1,0 +1,67 @@
+.alert {
+    position: fixed;
+    #{$start-direction}: 0;
+    bottom: 0;
+    width: 100%;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    padding: 12px;
+    color: $primary;
+    border: none;
+    border-radius: 0;
+    margin-bottom: 0;
+    box-shadow: 0px -2px 10px 0px rgba($primary, 0.1);
+    @include transition (all 0.6s ease);
+    z-index: 999999;
+    .icon-text {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        svg {
+            width: 32px;
+            height: 32px;
+            margin-#{$end-direction}: 8px;
+        }
+        p {
+            margin-bottom: 0;
+        }
+    }
+    .btns {
+        .btn+.btn {
+            margin-#{$start-direction}: 10px;
+        }
+    }
+    &.hide {
+        @include transition (all 2s ease);
+        bottom: -100%;
+    }
+    &.alert-error {
+        background-color: $danger;
+    }
+    &.alert-success {
+        background-color: $success;
+    }
+    &.alert-warning {
+        background-color: $warning;
+    }
+    &.alert-info {
+        background-color: $info;
+    }
+}
+
+@include media-breakpoint-down(sm) {
+    .alert {
+        flex-direction: column;
+        .icon-text {
+            text-align: center;
+        }
+        .btns {
+            display: flex;
+            justify-content: center;
+        }
+        .icon-text+.btns {
+            margin-top: 10px;
+        }
+    }
+}

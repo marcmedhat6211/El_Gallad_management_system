@@ -1,0 +1,894 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="">
+    <meta name="generator" content="Jekyll">
+    <link rel="icon" href="images/favicon.png">
+
+    <title>Products Filter Page | Seats</title>
+    <!-- Base CSS -->
+    <link rel="stylesheet" href="vendors/fontawesome-pro-5/css/all.css">
+    <link rel="stylesheet" href="vendors/bootstrap-select/css/bootstrap-select.min.css">
+    <link rel="stylesheet" href="vendors/magnific-popup/magnific-popup.min.css">
+    <link rel="stylesheet" href="vendors/jquery-ui/jquery-ui.min.css">
+    <link rel="stylesheet" href="vendors/animate.css">
+    <link rel="stylesheet" href="vendors/mapbox-gl/mapbox-gl.min.css">
+    <link rel="stylesheet" href="css/themes.css?v=1.0.25">
+    <!-- END Base CSS -->
+
+    <!-- PAGE CSS -->
+    <link rel="stylesheet" href="vendors/swiper/swiper.css">
+    <!-- END PAGE CSS -->
+</head>
+
+<body>
+    <!-- HEADER -->
+    <header class="main-header navbar-dark header-sticky header-sticky-smart position-absolute fixed-top">
+        <div class="sticky-area">
+            <div class="container container-xxl">
+                <div class="d-none d-xl-block">
+                    <nav class="navbar navbar-expand-xl px-0 py-2 py-xl-0 row no-gutters">
+                        <div class="col-xl-3">
+                            <a class="navbar-brand mr-0" href="index.html">
+                                <img src="images/logo-white.png" alt="Seats" class="normal-logo">
+                                <img src="images/logo-white.png" alt="Seats" class="sticky-logo">
+                            </a>
+                        </div>
+                        <div class="mx-auto col-xl-6 d-flex justify-content-center position-static">
+                            <ul class="navbar-nav hover-menu main-menu px-0 mx-xl-n4">
+                                <li aria-haspopup="true" aria-expanded="false" class="nav-item py-2 py-xl-5 px-0 px-xl-4">
+                                    <a class="nav-link p-0" href="index.html">
+                        Home
+                                    </a>
+                                </li>
+                                <li aria-haspopup="true" aria-expanded="false" class="nav-item py-2 py-xl-5 px-0 px-xl-4">
+                                    <a class="nav-link p-0" href="#">
+                                        About Us
+                                    </a>
+                                </li>
+                                <li aria-haspopup="true" aria-expanded="false" class="nav-item dropdown-item-pages dropdown py-2 py-xl-5 px-0 px-xl-4">
+                                    <a class="nav-link dropdown-toggle p-0" href="#" data-toggle="dropdown">
+                        Services
+                        <span class="caret"></span>
+                      </a>
+                                    <ul class="dropdown-menu pt-3 pb-0 pb-xl-3 x-animated x-fadeInUp">
+                                        <li class="dropdown-item">
+                                            <a class="dropdown-link" href="#">
+                            Service 1
+                          </a>
+                                        </li>
+                                        <li class="dropdown-item">
+                                            <a class="dropdown-link" href="#">
+                            Service 2
+                          </a>
+                                        </li>
+                                        <li class="dropdown-item">
+                                            <a class="dropdown-link" href="#">
+                            Service 3
+                          </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li aria-haspopup="true" aria-expanded="false" class="nav-item py-2 py-xl-5 px-0 px-xl-4">
+                                    <a class="nav-link p-0" href="#">
+                        Products
+                                    </a>
+                                </li>
+                                <li aria-haspopup="true" aria-expanded="false" class="nav-item py-2 py-xl-5 px-0 px-xl-4">
+                                    <a class="nav-link p-0" href="#">
+                        Projects
+                                    </a>
+                                </li>
+                                <li aria-haspopup="true" aria-expanded="false" class="nav-item py-2 py-xl-5 px-0 px-xl-4">
+                                    <a class="nav-link p-0" href="#">
+                        Contact Us
+                                    </a>
+                                </li>
+                                <li aria-haspopup="true" aria-expanded="false" class="nav-item py-2 py-xl-5 px-0 px-xl-4">
+                                    <a class="nav-link p-0" href="#">
+                      عربي
+                                  </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-xl-3 position-relative">
+                            <div class="d-flex align-items-center justify-content-end">
+                                <a href="#search-popup" data-gtf-mfp="true" data-mfp-options='{"type":"inline","focus": "#keyword","mainClass": "mfp-search-form mfp-move-from-top mfp-align-top"}' class="nav-search d-block py-0 pr-2" title="Search"><i
+                                      class="far fa-search"></i></a>
+                                <ul class="navbar-nav flex-row justify-content-xl-end d-flex flex-wrap text-body py-0 navbar-right">
+                                    <li class="nav-item">
+                                        <a class="nav-link position-relative px-3 menu-cart py-0" href="#" data-canvas="true" data-canvas-options='{"container":".cart-canvas"}'>
+                                            <i class="far fa-shopping-basket"></i>
+                                            <span class="position-absolute number">0</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </nav>
+                </div>
+                <div class="d-block d-xl-none">
+                    <nav class="navbar navbar-expand-xl px-0 py-2 py-xl-0 w-100 align-items-center">
+                        <button class="navbar-toggler border-0 px-0 canvas-toggle" type="button" data-canvas="true" data-canvas-options='{"width":"250px","container":".sidenav"}'>
+                  <span class="fs-24 toggle-icon"></span>
+                </button>
+                        <a class="navbar-brand d-inline-block mx-auto" href="index.html">
+                            <img src="images/logo-white.png" alt="Seats" class="normal-logo">
+                            <img src="images/logo.png" alt="Seats" class="sticky-logo">
+                        </a>
+                        <a href="#search-popup" data-gtf-mfp="true" data-mfp-options='{"type":"inline","focus": "#keyword","mainClass": "mfp-search-form mfp-move-from-top mfp-align-top"}' class="nav-search d-block py-0" title="Search"><i
+                              class="far fa-search"></i></a>
+                        <ul class="navbar-nav flex-row justify-content-xl-end d-flex flex-wrap text-body py-0 navbar-right" id="cart_icon">
+                            <li class="nav-item">
+                                <a class="nav-link position-relative px-3 menu-cart py-0" href="#" data-canvas="true" data-canvas-options='{"container":".cart-canvas"}'>
+                                    <i class="far fa-shopping-basket"></i>
+                                    <span class="position-absolute number">0</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- END HEADER -->
+
+    <!-- MAIN BODY -->
+    <main id="content">
+        <section class="pt-20 py-8 page-title border-top">
+            <div class="container">
+                <h1 class="fs-40 my-1 text-capitalize text-center">Shop All</h1>
+            </div>
+        </section>
+        <div class="pt-6">
+            <div class="container-fluid">
+                <div class="swiper-container swiper-style-1" data-swiper-options='{"slidesPerView": 1,"loop":false,"freeMode":true,"centeredSlides":false,"spaceBetween":20,"lazy":{"preloadImages":false,"loadPrevNext":true,"loadPrevNextAmount":4},"breakpoints":{"991.98":{"slidesPerView":4,"spaceBetween":20}},"pagination":{"el":".swiper-pagination","type":"bullets","clickable":true}}'>
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <a href="#" class="box d-block" data-animate="fadeInUp">
+                                <div class="card border-0 filter-card card-img-top card-img-top">
+                                    <img data-src="images/c_07.jpg" alt="Chairs" class="card-img swiper-lazy">
+                                    <div class="card-img-overlay d-inline-flex flex-column px-6 py-4">
+                                        <h3 class="card-title fs-30">Armed Chairs</h3>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="swiper-slide">
+                            <a href="#" class="box d-block" data-animate="fadeInUp">
+                                <div class="card border-0 filter-card card-img-top">
+                                    <img data-src="images/c_08.jpg" alt="Accessories" class="card-img swiper-lazy">
+                                    <div class="card-img-overlay d-inline-flex flex-column px-6 py-4">
+                                        <h3 class="card-title fs-30">Regular Chairs</h3>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="swiper-slide">
+                            <a href="#" class="box d-block" data-animate="fadeInUp">
+                                <div class="card border-0 filter-card card-img-top active">
+                                    <img data-src="images/c_09.jpg" alt="Tables" class="card-img swiper-lazy">
+                                    <div class="card-img-overlay d-inline-flex flex-column px-6 py-4">
+                                        <h3 class="card-title fs-30">Dining Chairs</h3>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="swiper-slide">
+                            <a href="#" class="box d-block" data-animate="fadeInUp">
+                                <div class="card border-0 filter-card card-img-top">
+                                    <img data-src="images/c_10.jpg" alt="Sofa" class="card-img swiper-lazy">
+                                    <div class="card-img-overlay d-inline-flex flex-column px-6 py-4">
+                                        <h3 class="card-title fs-30">Lounge Chairs</h3>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="swiper-slide">
+                            <a href="#" class="box d-block" data-animate="fadeInUp">
+                                <div class="card border-0 filter-card card-img-top">
+                                    <img data-src="images/c_07.jpg" alt="Chairs" class="card-img swiper-lazy">
+                                    <div class="card-img-overlay d-inline-flex flex-column px-6 py-4">
+                                        <h3 class="card-title fs-30">Chairs</h3>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="swiper-pagination"></div>
+                </div>
+            </div>
+        </div>
+        <section class="pt-13 pb-11 pb-lg-14">
+            <div class="container">
+                <div class="row d-flex justify-content-center">
+                    <div class="col-md-3 mb-10 mb-md-0 filters-sidebar-container" id="sidebar">
+                        <form action="">
+                            <div class="primary-sidebar-inner">
+                                <div class="card border-0 mb-7 card-bg-transparent">
+                                    <div class="card-header bg-transparent border-0 p-0">
+                                        <h3 class="card-title fs-18 mb-0">
+                                            Price
+                                        </h3>
+                                    </div>
+                                    <div class="card-body px-0 pt-4 pb-0">
+                                        <div class="price-range-block">
+                                            <div id="slider-range" class="price-filter-range" name="rangeInput"></div>
+                                            <div class="d-flex justify-content-center">
+                                                <div class="input-container input-style-2 price-range-field">
+                                                    <input type="number" min=0 max="9900" oninput="validity.valid||(value='0');" id="min_price" class="form-control" />
+                                                </div>
+                                                <div class="input-container input-style-2 price-range-field">
+                                                    <input type="number" min=0 max="10000" oninput="validity.valid||(value='10000');" id="max_price" class="form-control" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card border-0 mb-7 card-bg card-bg-transparent">
+                                    <div class="card-header bg-transparent border-0 p-0">
+                                        <h3 class="card-title fs-18 mb-0">
+                                            Wood Type
+                                        </h3>
+                                    </div>
+                                    <div class="card-body px-0 pt-4 pb-0">
+                                        <ul class="list-unstyled">
+                                            <li class="mb-1">
+                                                <div class="custom-control custom-checkbox">
+                                                    <input type="checkbox" class="custom-control-input" id="customCheck1">
+                                                    <label class="custom-control-label fs-15" for="customCheck1">Oak</label>
+                                                </div>
+                                            </li>
+                                            <li class="mb-1">
+                                                <div class="custom-control custom-checkbox">
+                                                    <input type="checkbox" class="custom-control-input" id="customCheck2">
+                                                    <label class="custom-control-label fs-15" for="customCheck2">Walnut</label>
+                                                </div>
+                                            </li>
+                                            <li class="mb-1">
+                                                <div class="custom-control custom-checkbox">
+                                                    <input type="checkbox" class="custom-control-input" id="customCheck3">
+                                                    <label class="custom-control-label fs-15" for="customCheck3">Pine</label>
+                                                </div>
+                                            </li>
+                                            <li class="mb-1">
+                                                <div class="custom-control custom-checkbox">
+                                                    <input type="checkbox" class="custom-control-input" id="customCheck4">
+                                                    <label class="custom-control-label fs-15" for="customCheck4">Redwood</label>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="card border-0 mb-7 card-bg card-bg-transparent">
+                                    <div class="card-header bg-transparent border-0 p-0">
+                                        <h3 class="card-title fs-18 mb-0">
+                                            Categories
+                                        </h3>
+                                    </div>
+                                    <div class="card-body px-0 pt-4 pb-0">
+                                        <ul class="list-unstyled">
+                                            <li class="mb-1">
+                                                <div class="custom-control custom-checkbox">
+                                                    <input type="checkbox" class="custom-control-input" id="customCheck5">
+                                                    <label class="custom-control-label fs-15" for="customCheck5">Armchair</label>
+                                                </div>
+                                            </li>
+                                            <li class="mb-1">
+                                                <div class="custom-control custom-checkbox">
+                                                    <input type="checkbox" class="custom-control-input" id="customCheck6">
+                                                    <label class="custom-control-label fs-15" for="customCheck6">Desk chair</label>
+                                                </div>
+                                            </li>
+                                            <li class="mb-1">
+                                                <div class="custom-control custom-checkbox">
+                                                    <input type="checkbox" class="custom-control-input" id="customCheck7">
+                                                    <label class="custom-control-label fs-15" for="customCheck7">Dining Chair</label>
+                                                </div>
+                                            </li>
+                                            <li class="mb-1">
+                                                <div class="custom-control custom-checkbox">
+                                                    <input type="checkbox" class="custom-control-input" id="customCheck8">
+                                                    <label class="custom-control-label fs-15" for="customCheck8">Wood Chair</label>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <button type="button" class="btn btn-style-2 w-100">Search</button>
+                                <a href="#" class="btn btn-style-3 w-100 mt-3">Clear All Filters</a>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-md-9">
+                        <div class="d-flex mb-6">
+                            <div class="d-flex align-items-center text-primary">
+                                Showing 1-15 of 90 results
+                            </div>
+                            <div class="ml-auto">
+                                <div class="dropdown">
+                                    <a href="#" class="dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          Default Sorting
+                        </a>
+                                    <div class="dropdown-menu dropdown-menu-right" id="sorting_links" aria-labelledby="dropdownMenuButton" style="">
+                                        <a class="dropdown-item text-primary" href="#">Price high to low</a>
+                                        <a class="dropdown-item text-primary" href="#">Price low to high</a>
+                                        <a class="dropdown-item text-primary" href="#">Random</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <!-- card -->
+                            <div class="col-sm-6 col-lg-4 mb-6" data-animate="fadeInUp">
+                                <div class="card border-0 hover-change-content product">
+                                    <div style="background-image: url('images/product-05.jpg')" class="card-img ratio bg-img-cover-center ratio-1-1">
+                                    </div>
+                                    <div class="card-img-overlay d-flex py-4 py-sm-5 pl-6 pr-4">
+                                        <div class="d-flex flex-column">
+                                            <a href="#" class="font-weight-bold mb-1 d-block lh-12 product-card-title">Bow Chair</a>
+                                            <a href="#" class="text-uppercase text-muted letter-spacing-05 fs-12">Chair</a>
+                                            <p class="mt-auto text-primary mb-0">
+                                                EGP 1390.00</p>
+                                        </div>
+                                        <div class="ml-auto d-flex flex-column">
+                                            <div class="my-auto content-change-vertical">
+                                                <a href="#" data-toggle="tooltip" data-placement="left" title="Preview" class="preview d-flex align-items-center justify-content-center text-primary bg-white hover-white bg-hover-primary w-45px h-45px rounded-circle mb-2 border">
+                                                    <i class="far fa-eye"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end card -->
+                            <!-- card -->
+                            <div class="col-sm-6 col-lg-4 mb-6" data-animate="fadeInUp">
+                                <div class="card border-0 hover-change-content product">
+                                    <div style="background-image: url('images/product-02.jpg')" class="card-img ratio bg-img-cover-center ratio-1-1">
+                                    </div>
+                                    <div class="card-img-overlay d-flex py-4 py-sm-5 pl-6 pr-4">
+                                        <div class="d-flex flex-column">
+                                            <a href="#" class="font-weight-bold mb-1 d-block lh-12 product-card-title">Potato Chair</a>
+                                            <a href="#" class="text-uppercase text-muted letter-spacing-05 fs-12">Chair</a>
+                                            <p class="mt-auto text-primary mb-0">
+                                                EGP 1390.00</p>
+                                        </div>
+                                        <div class="ml-auto d-flex flex-column">
+                                            <div class="my-auto content-change-vertical">
+                                                <a href="#" data-toggle="tooltip" data-placement="left" title="Preview" class="preview d-flex align-items-center justify-content-center text-primary bg-white hover-white bg-hover-primary w-45px h-45px rounded-circle mb-2 border">
+                                                    <i class="far fa-eye"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end card -->
+                            <!-- card -->
+                            <div class="col-sm-6 col-lg-4 mb-6" data-animate="fadeInUp">
+                                <div class="card border-0 hover-change-content product">
+                                    <div style="background-image: url('images/product-08.jpg')" class="card-img ratio bg-img-cover-center ratio-1-1">
+                                    </div>
+                                    <div class="card-img-overlay d-flex py-4 py-sm-5 pl-6 pr-4">
+                                        <div class="d-flex flex-column">
+                                            <a href="#" class="font-weight-bold mb-1 d-block lh-12 product-card-title">Bow Chair</a>
+                                            <a href="#" class="text-uppercase text-muted letter-spacing-05 fs-12">Chair</a>
+                                            <p class="mt-auto text-primary mb-0">
+                                                EGP 1390.00</p>
+                                        </div>
+                                        <div class="ml-auto d-flex flex-column">
+                                            <div class="my-auto content-change-vertical">
+                                                <a href="#" data-toggle="tooltip" data-placement="left" title="Preview" class="preview d-flex align-items-center justify-content-center text-primary bg-white hover-white bg-hover-primary w-45px h-45px rounded-circle mb-2 border">
+                                                    <i class="far fa-eye"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end card -->
+
+
+                            <!-- card -->
+                            <div class="col-sm-6 col-lg-4 mb-6" data-animate="fadeInUp">
+                                <div class="card border-0 hover-change-content product">
+                                    <div style="background-image: url('images/product-03.jpg')" class="card-img ratio bg-img-cover-center ratio-1-1">
+                                    </div>
+                                    <div class="card-img-overlay d-flex py-4 py-sm-5 pl-6 pr-4">
+                                        <div class="d-flex flex-column">
+                                            <a href="#" class="font-weight-bold mb-1 d-block lh-12 product-card-title">Armed Chair</a>
+                                            <a href="#" class="text-uppercase text-muted letter-spacing-05 fs-12">Armed Chair</a>
+                                            <p class="mt-auto text-primary mb-0">
+                                                EGP 1390.00</p>
+                                        </div>
+                                        <div class="ml-auto d-flex flex-column">
+                                            <div class="my-auto content-change-vertical">
+                                                <a href="#" data-toggle="tooltip" data-placement="left" title="Preview" class="preview d-flex align-items-center justify-content-center text-primary bg-white hover-white bg-hover-primary w-45px h-45px rounded-circle mb-2 border">
+                                                    <i class="far fa-eye"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end card -->
+                            <!-- card -->
+                            <div class="col-sm-6 col-lg-4 mb-6" data-animate="fadeInUp">
+                                <div class="card border-0 hover-change-content product">
+                                    <div style="background-image: url('images/product-01.jpg')" class="card-img ratio bg-img-cover-center ratio-1-1">
+                                    </div>
+                                    <div class="card-img-overlay d-flex py-4 py-sm-5 pl-6 pr-4">
+                                        <div class="d-flex flex-column">
+                                            <a href="#" class="font-weight-bold mb-1 d-block lh-12 product-card-title">Potato Chair</a>
+                                            <a href="#" class="text-uppercase text-muted letter-spacing-05 fs-12">Chair</a>
+                                            <p class="mt-auto text-primary mb-0">
+                                                EGP 1390.00</p>
+                                        </div>
+                                        <div class="ml-auto d-flex flex-column">
+                                            <div class="my-auto content-change-vertical">
+                                                <a href="#" data-toggle="tooltip" data-placement="left" title="Preview" class="preview d-flex align-items-center justify-content-center text-primary bg-white hover-white bg-hover-primary w-45px h-45px rounded-circle mb-2 border">
+                                                    <i class="far fa-eye"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end card -->
+                            <!-- card -->
+                            <div class="col-sm-6 col-lg-4 mb-6" data-animate="fadeInUp">
+                                <div class="card border-0 hover-change-content product">
+                                    <div style="background-image: url('images/product-11.jpg')" class="card-img ratio bg-img-cover-center ratio-1-1">
+                                    </div>
+                                    <div class="card-img-overlay d-flex py-4 py-sm-5 pl-6 pr-4">
+                                        <div class="d-flex flex-column">
+                                            <a href="#" class="font-weight-bold mb-1 d-block lh-12 product-card-title">Bow Chair</a>
+                                            <a href="#" class="text-uppercase text-muted letter-spacing-05 fs-12">Chair</a>
+                                            <p class="mt-auto text-primary mb-0">
+                                                EGP 1390.00</p>
+                                        </div>
+                                        <div class="ml-auto d-flex flex-column">
+                                            <div class="my-auto content-change-vertical">
+                                                <a href="#" data-toggle="tooltip" data-placement="left" title="Preview" class="preview d-flex align-items-center justify-content-center text-primary bg-white hover-white bg-hover-primary w-45px h-45px rounded-circle mb-2 border">
+                                                    <i class="far fa-eye"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end card -->
+
+
+                            <!-- card -->
+                            <div class="col-sm-6 col-lg-4 mb-6" data-animate="fadeInUp">
+                                <div class="card border-0 hover-change-content product">
+                                    <div style="background-image: url('images/product-05.jpg')" class="card-img ratio bg-img-cover-center ratio-1-1">
+                                    </div>
+                                    <div class="card-img-overlay d-flex py-4 py-sm-5 pl-6 pr-4">
+                                        <div class="d-flex flex-column">
+                                            <a href="#" class="font-weight-bold mb-1 d-block lh-12 product-card-title">Bow Chair</a>
+                                            <a href="#" class="text-uppercase text-muted letter-spacing-05 fs-12">Chair</a>
+                                            <p class="mt-auto text-primary mb-0">
+                                                EGP 1390.00</p>
+                                        </div>
+                                        <div class="ml-auto d-flex flex-column">
+                                            <div class="my-auto content-change-vertical">
+                                                <a href="#" data-toggle="tooltip" data-placement="left" title="Preview" class="preview d-flex align-items-center justify-content-center text-primary bg-white hover-white bg-hover-primary w-45px h-45px rounded-circle mb-2 border">
+                                                    <i class="far fa-eye"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end card -->
+                            <!-- card -->
+                            <div class="col-sm-6 col-lg-4 mb-6" data-animate="fadeInUp">
+                                <div class="card border-0 hover-change-content product">
+                                    <div style="background-image: url('images/product-03.jpg')" class="card-img ratio bg-img-cover-center ratio-1-1">
+                                    </div>
+                                    <div class="card-img-overlay d-flex py-4 py-sm-5 pl-6 pr-4">
+                                        <div class="d-flex flex-column">
+                                            <a href="#" class="font-weight-bold mb-1 d-block lh-12 product-card-title">Potato Chair</a>
+                                            <a href="#" class="text-uppercase text-muted letter-spacing-05 fs-12">Chair</a>
+                                            <p class="mt-auto text-primary mb-0">
+                                                EGP 1390.00</p>
+                                        </div>
+                                        <div class="ml-auto d-flex flex-column">
+                                            <div class="my-auto content-change-vertical">
+                                                <a href="#" data-toggle="tooltip" data-placement="left" title="Preview" class="preview d-flex align-items-center justify-content-center text-primary bg-white hover-white bg-hover-primary w-45px h-45px rounded-circle mb-2 border">
+                                                    <i class="far fa-eye"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end card -->
+                            <!-- card -->
+                            <div class="col-sm-6 col-lg-4 mb-6" data-animate="fadeInUp">
+                                <div class="card border-0 hover-change-content product">
+                                    <div style="background-image: url('images/product-01.jpg')" class="card-img ratio bg-img-cover-center ratio-1-1">
+                                    </div>
+                                    <div class="card-img-overlay d-flex py-4 py-sm-5 pl-6 pr-4">
+                                        <div class="d-flex flex-column">
+                                            <a href="#" class="font-weight-bold mb-1 d-block lh-12 product-card-title">Bow Chair</a>
+                                            <a href="#" class="text-uppercase text-muted letter-spacing-05 fs-12">Chair</a>
+                                            <p class="mt-auto text-primary mb-0">
+                                                EGP 1390.00</p>
+                                        </div>
+                                        <div class="ml-auto d-flex flex-column">
+                                            <div class="my-auto content-change-vertical">
+                                                <a href="#" data-toggle="tooltip" data-placement="left" title="Preview" class="preview d-flex align-items-center justify-content-center text-primary bg-white hover-white bg-hover-primary w-45px h-45px rounded-circle mb-2 border">
+                                                    <i class="far fa-eye"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end card -->
+
+
+                            <!-- card -->
+                            <div class="col-sm-6 col-lg-4 mb-6" data-animate="fadeInUp">
+                                <div class="card border-0 hover-change-content product">
+                                    <div style="background-image: url('images/product-11.jpg')" class="card-img ratio bg-img-cover-center ratio-1-1">
+                                    </div>
+                                    <div class="card-img-overlay d-flex py-4 py-sm-5 pl-6 pr-4">
+                                        <div class="d-flex flex-column">
+                                            <a href="#" class="font-weight-bold mb-1 d-block lh-12 product-card-title">Bow Chair</a>
+                                            <a href="#" class="text-uppercase text-muted letter-spacing-05 fs-12">Chair</a>
+                                            <p class="mt-auto text-primary mb-0">
+                                                EGP 1390.00</p>
+                                        </div>
+                                        <div class="ml-auto d-flex flex-column">
+                                            <div class="my-auto content-change-vertical">
+                                                <a href="#" data-toggle="tooltip" data-placement="left" title="Preview" class="preview d-flex align-items-center justify-content-center text-primary bg-white hover-white bg-hover-primary w-45px h-45px rounded-circle mb-2 border">
+                                                    <i class="far fa-eye"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end card -->
+                            <!-- card -->
+                            <div class="col-sm-6 col-lg-4 mb-6" data-animate="fadeInUp">
+                                <div class="card border-0 hover-change-content product">
+                                    <div style="background-image: url('images/product-02.jpg')" class="card-img ratio bg-img-cover-center ratio-1-1">
+                                    </div>
+                                    <div class="card-img-overlay d-flex py-4 py-sm-5 pl-6 pr-4">
+                                        <div class="d-flex flex-column">
+                                            <a href="#" class="font-weight-bold mb-1 d-block lh-12 product-card-title">Potato Chair</a>
+                                            <a href="#" class="text-uppercase text-muted letter-spacing-05 fs-12">Chair</a>
+                                            <p class="mt-auto text-primary mb-0">
+                                                EGP 1390.00</p>
+                                        </div>
+                                        <div class="ml-auto d-flex flex-column">
+                                            <div class="my-auto content-change-vertical">
+                                                <a href="#" data-toggle="tooltip" data-placement="left" title="Preview" class="preview d-flex align-items-center justify-content-center text-primary bg-white hover-white bg-hover-primary w-45px h-45px rounded-circle mb-2 border">
+                                                    <i class="far fa-eye"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end card -->
+                            <!-- card -->
+                            <div class="col-sm-6 col-lg-4 mb-6" data-animate="fadeInUp">
+                                <div class="card border-0 hover-change-content product">
+                                    <div style="background-image: url('images/product-08.jpg')" class="card-img ratio bg-img-cover-center ratio-1-1">
+                                    </div>
+                                    <div class="card-img-overlay d-flex py-4 py-sm-5 pl-6 pr-4">
+                                        <div class="d-flex flex-column">
+                                            <a href="#" class="font-weight-bold mb-1 d-block lh-12 product-card-title">Bow Chair</a>
+                                            <a href="#" class="text-uppercase text-muted letter-spacing-05 fs-12">Chair</a>
+                                            <p class="mt-auto text-primary mb-0">
+                                                EGP 1390.00</p>
+                                        </div>
+                                        <div class="ml-auto d-flex flex-column">
+                                            <div class="my-auto content-change-vertical">
+                                                <a href="#" data-toggle="tooltip" data-placement="left" title="Preview" class="preview d-flex align-items-center justify-content-center text-primary bg-white hover-white bg-hover-primary w-45px h-45px rounded-circle mb-2 border">
+                                                    <i class="far fa-eye"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end card -->
+                        </div>
+                        <nav class="pt-6 overflow-hidden paginator-style-1">
+                            <ul class="pagination justify-content-center align-items-center mb-0">
+                                <li class="page-item fs-12 d-none d-sm-block">
+                                    <a class="page-link" href="#" tabindex="-1"><i class="far fa-angle-double-left"></i></a>
+                                </li>
+                                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                <li class="page-item active" aria-current="page"><a class="page-link" href="#">2</a></li>
+                                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                <li class="page-item"><a class="page-link" href="#">4</a></li>
+                                <li class="page-item"><a class="page-link" href="#">5</a></li>
+                                <li class="page-item fs-12 d-none d-sm-block disabled">
+                                    <a class="page-link" href="#"><i class="far fa-angle-double-right"></i></a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <!-- END MAIN BODY -->
+
+    <!-- FOOTER -->
+    <footer class="pt-13 pb-4 footer bg-color-2">
+        <div class="container container-xxl">
+            <div class="row">
+                <div class="col-md-6 col-lg-3 mb-6 mb-md-0">
+                    <h3 class="fs-14 mb-3 text-uppercase letter-spacing-05 footer-title">menu</h3>
+                    <ul class="list-unstyled mb-0">
+                        <li class="py-0"><a href="#" class="text-gray lh-175 footer-navigation">Arm Chairs</a></li>
+                        <li class="py-0"><a href="#" class="text-gray lh-175 footer-navigation">Dining Chairs</a></li>
+                        <li class="py-0"><a href="#" class="text-gray lh-175 footer-navigation">Lounge Chairs</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-6 col-lg-3 mb-6 mb-md-0">
+                    <h3 class="fs-14 mb-3 text-uppercase letter-spacing-05 footer-title">about</h3>
+                    <ul class="list-unstyled mb-0">
+                        <li class="py-0"><a href="#" class="text-gray lh-175 footer-navigation">About Us</a> </li>
+                        <li class="py-0"><a href="#" class="text-gray lh-175 footer-navigation">Products</a> </li>
+                        <li class="py-0"><a href="#" class="text-gray lh-175 footer-navigation">Projects</a> </li>
+                        <li class="py-0"><a href="#" class="text-gray lh-175 footer-navigation">Contact Us</a> </li>
+                    </ul>
+                </div>
+                <div class="col-md-6 col-lg-3 mb-6 mb-md-0">
+                    <h3 class="fs-14 mb-3 text-uppercase letter-spacing-05 footer-title">follow us</h3>
+                    <ul class="list-unstyled mb-0">
+                        <li class="py-0"><a href="#" class="text-gray lh-175 footer-navigation">Facebook</a> </li>
+                        <li class="py-0"><a href="#" class="text-gray lh-175 footer-navigation">Pinterest</a> </li>
+                        <li class="py-0"><a href="#" class="text-gray lh-175 footer-navigation">Instagram</a> </li>
+                        <li class="py-0"><a href="#" class="text-gray lh-175 footer-navigation">Twitter</a> </li>
+                    </ul>
+                </div>
+                <div class="col-md-6 col-lg-3 mb-6 mb-md-0">
+                    <h3 class="fs-14 mb-3 text-uppercase letter-spacing-05 footer-title">newsletter</h3>
+                    <form id="newsletter_form">
+                        <div class="input-group position-relative">
+                            <input type="text" class="form-control border-top-0 border-left-0 border-right-0 px-0 border-2x bg-transparent footer-newsletter-input" placeholder="Email Address">
+                            <div class="input-group-append fs-14 position-absolute pos-fixed-right-center z-index-2">
+                                <button class="bg-transparent border-0 outline-none">
+                  <i class="far fa-arrow-right"></i>
+                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="mt-0 mt-md-7 row d-flex justify-content-between align-items-end">
+                <p class="col-md-auto mb-4 mb-md-0 text-gray lh-2 footer-copyright">
+                    © 2021 Seats. All rights reserved. Developed by <a class="our-company-name" href="https://perfectneeds.com/">Perfectneeds</a>
+                </p>
+                <p class="col-md-auto mb-0 mb-md-0 text-gray lh-1 guaranteed-by-text">
+                    <span>Guaranteed by</span>
+                    <a href="http://www.elgallad.com/" class="company-name">
+                        <i class="convert-svg" data-src="images/icons/gf.svg"></i>
+                        <span>Gallad Furniture</span>
+                    </a>
+                </p>
+            </div>
+        </div>
+    </footer>
+    <!-- END FOOTER -->
+
+    <!-- BASE SCRIPTS -->
+    <script src="vendors/jquery.min.js"></script>
+    <script src="vendors/jquery-ui/jquery-ui.min.js"></script>
+    <script src="vendors/bootstrap/bootstrap.bundle.js"></script>
+    <script src="vendors/bootstrap-select/js/bootstrap-select.min.js"></script>
+    <script src="vendors/waypoints/jquery.waypoints.min.js"></script>
+    <script src="vendors/magnific-popup/jquery.magnific-popup.min.js"></script>
+    <script src="vendors/hc-sticky/hc-sticky.min.js"></script>
+    <script src="vendors/jparallax/TweenMax.min.js"></script>
+    <script src="js/theme.js"></script>
+    <!-- END BASE SCRIPTS -->
+
+    <!-- PAGE JS -->
+    <script src="vendors/swiper/swiper.min.js"></script>
+    <script src="vendors/jquery-ui/jquery.ui.touch-punch.min.js"></script>
+    <script src="js/price-range.js"></script>
+    <!-- END PAGE JS -->
+
+    <!-- FIXED LAYOUTS -->
+    <div class="position-fixed pos-fixed-bottom-right p-6 z-index-10">
+        <a href="#" class="gtf-back-to-top bg-white text-primary hover-white bg-hover-primary shadow p-0 w-52px h-52 rounded-circle fs-20 d-flex align-items-center justify-content-center" title="Back To Top"><i
+          class="fal fa-arrow-up"></i></a>
+    </div>
+    <div class="canvas-sidebar cart-canvas">
+        <div class="canvas-overlay">
+        </div>
+        <form class="h-100">
+            <div class="card border-0 pt-5 pb-7 h-100">
+                <div class="px-6 text-right">
+                    <span class="canvas-close d-inline-block fs-24 mb-1 ml-auto lh-1 text-primary"><i
+                       class="fal fa-times"></i></span>
+                </div>
+                <div class="card-header bg-transparent py-0 px-6">
+                    <h3 class="fs-24 mb-5">
+                        Your Cart
+                    </h3>
+                    <p class="fs-15 text-primary"><span class="d-inline-block mr-2 fs-14"><i
+                      class="far fa-check-circle"></i></span> Your cart is saved for the next <span class="font-weight-500">4m34s</span></p>
+                </div>
+                <div class="card-body px-6 pt-7 overflow-y-auto">
+                    <div class="mb-6 d-flex">
+                        <a href="#" class="d-block mr-4"><i class="fal fa-times"></i></a>
+                        <div class="media">
+                            <div class="w-70px mr-4">
+                                <img src="images/cart-01.jpg" alt="Partridge Bar Stool">
+                            </div>
+                            <div class="media-body">
+                                <p class="text-muted fs-12 mb-0 text-uppercase letter-spacing-05 lh-1 mb-1">chairs</p>
+                                <a href="#" class="font-weight-bold mb-3 d-block">Partridge Bar Stool</a>
+                                <div class="d-flex align-items-center">
+                                    <div class="input-group position-relative">
+                                        <a href="#" class="down position-absolute pos-fixed-left-center pl-2"><i
+                                          class="far fa-minus"></i></a>
+                                        <input type="number" class="w-100px px-6 text-center" value="1">
+                                        <a href="#" class="up position-absolute pos-fixed-right-center pr-2"><i
+                                          class="far fa-plus"></i>
+                    </a>
+                                    </div>
+                                    <p class="mb-0 ml-12 text-primary">EGP 1250.00</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-6 d-flex">
+                        <a href="#" class="d-block mr-4"><i class="fal fa-times"></i></a>
+                        <div class="media">
+                            <div class="w-70px mr-4">
+                                <img src="images/cart-02.jpg" alt="Partridge Bar Stool">
+                            </div>
+                            <div class="media-body">
+                                <p class="text-muted fs-12 mb-0 text-uppercase letter-spacing-05 lh-1 mb-1">Table</p>
+                                <a href="#" class="font-weight-bold mb-3 d-block">Partridge Round Bar</a>
+                                <div class="d-flex align-items-center">
+                                    <div class="input-group position-relative">
+                                        <a href="#" class="down position-absolute pos-fixed-left-center pl-2"><i
+                                          class="far fa-minus"></i></a>
+                                        <input type="number" class="w-100px px-6 text-center number" value="1">
+                                        <a href="#" class="up position-absolute pos-fixed-right-center pr-2"><i
+                                          class="far fa-plus"></i>
+                    </a>
+                                    </div>
+                                    <p class="mb-0 ml-12 text-primary">EGP 1250.00</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer mt-auto border-0 bg-transparent px-6 pb-0 pt-5">
+                    <div class="d-flex align-items-center mb-4">
+                        <span class="font-weight-bold text-primary">Subtotal</span>
+                        <span class="d-block ml-auto text-primary">EGP 2000.00</span>
+                    </div>
+                    <input type="submit" class="btn btn-primary btn-outline-primary btn-block mb-2" value="Download PDF">
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="mfp-hide search-popup mfp-with-anim" id="search-popup">
+        <form>
+            <div class="input-group position-relative">
+                <div class="input-group-prepend d-none d-md-block">
+                    <select class="selectpicker" name="category" id="region-01" data-style="btn-lg letter-spacing-0 border-0 border-bottom border-2x bg-transparent text-white border-white fs-24 pl-0 shadow-none text-capitalize font-weight-normal">
+            <option value="" selected>All Categories</option>
+            <option value="chairs">Chairs</option>
+            <option value="stands">Stands</option>
+            <option value="tables">Tables</option>
+            <option value="accessory">Accessory</option>
+          </select>
+                </div>
+                <input type="text" id="keyword" name="keyword" class="form-control border-0 border-bottom border-2x bg-transparent text-white border-white fs-24 form-control-lg" placeholder="Search Something...">
+                <div class="input-group-append position-absolute pos-fixed-right-center">
+                    <button class="input-group-text bg-transparent border-0 text-white fs-30 px-0 btn-lg" type="submit"><i
+                      class="far fa-search"></i></button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="sidenav canvas-sidebar bg-white">
+        <div class="canvas-overlay">
+        </div>
+        <div class="pt-5 pb-7 card border-0 h-100">
+            <div class="d-flex align-items-center card-header border-0 py-0 pl-8 pr-7 mb-9 bg-transparent">
+                <a href="index.html" class="d-block w-52px">
+                    <img src="images/short_logo.png" alt="Seats">
+                </a>
+                <span class="canvas-close d-inline-block text-right fs-24 ml-auto lh-1 text-primary"><i
+                class="fal fa-times"></i></span>
+            </div>
+            <div class="overflow-y-auto pb-6 pl-8 pr-7 card-body pt-0">
+                <ul class="navbar-nav main-menu px-0">
+                    <li aria-haspopup="true" aria-expanded="false" class="nav-item dropdown py-1 px-0">
+                        <a class="nav-link p-0" href="index.html" data-toggle="dropdown">
+                        Home
+                    </a>
+                    </li>
+                    <li aria-haspopup="true" aria-expanded="false" class="nav-item dropdown py-1 px-0">
+                        <a class="nav-link p-0" href="#" data-toggle="dropdown">
+                        About Us
+                    </a>
+                    </li>
+                    <li aria-haspopup="true" aria-expanded="false" class="nav-item dropdown py-1 px-0">
+                        <a class="nav-link dropdown-toggle p-0" href="#" data-toggle="dropdown">
+                        Services 
+                        <span class="caret"></span>
+                      </a>
+                        <ul class="dropdown-menu pt-3 pb-0 pb-xl-3">
+                            <li class="dropdown-item active">
+                                <a class="dropdown-link" href="#">
+                                Service 1
+                              </a>
+                            </li>
+                            <li class="dropdown-item">
+                                <a class="dropdown-link" href="#">
+                                                Service 2
+                              </a>
+                            </li>
+                            <li class="dropdown-item">
+                                <a class="dropdown-link" href="#">
+                                                Service 3
+                              </a>
+                            </li>
+                            <li class="dropdown-item">
+                                <a class="dropdown-link" href="#">
+                                                Service 4
+                              </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li aria-haspopup="true" aria-expanded="false" class="nav-item dropdown py-1 px-0">
+                        <a class="nav-link p-0" href="#" data-toggle="dropdown">
+                        Products
+                    </a>
+                    </li>
+                    <li aria-haspopup="true" aria-expanded="false" class="nav-item dropdown py-1 px-0">
+                        <a class="nav-link p-0" href="#" data-toggle="dropdown">
+                        Projects
+                    </a>
+                    </li>
+                    <li aria-haspopup="true" aria-expanded="false" class="nav-item dropdown py-1 px-0">
+                        <a class="nav-link p-0" href="#" data-toggle="dropdown">
+                        Contact Us
+                    </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="card-footer bg-transparent border-0 mt-auto pl-8 pr-7 pb-0 pt-4">
+                <ul class="list-inline d-flex align-items-center mb-3">
+                    <li class="list-inline-item mr-4"><a href="#" class="fs-20 lh-1"><i class="fab fa-pinterest-p"></i></a>
+                    </li>
+                    <li class="list-inline-item mr-4"><a href="#" class="fs-20 lh-1"><i
+                    class="fab fa-facebook-f"></i></a></li>
+                    <li class="list-inline-item mr-4"><a href="#" class="fs-20 lh-1"><i
+                    class="fab fa-instagram"></i></a></li>
+                    <li class="list-inline-item"><a href="#" class="fs-20 lh-1"><i class="fab fa-twitter"></i></a></li>
+                </ul>
+                <p class="mb-0 text-gray">
+                    © 2021 Seats.<br> All rights reserved. Developed by <a class="company-name" href="https://perfectneeds.com/">Perfectneeds</a>
+                </p>
+            </div>
+        </div>
+    </div>
+    <!-- END FIXED LAYOUTS -->
+</body>
+
+</html>

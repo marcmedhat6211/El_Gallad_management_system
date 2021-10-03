@@ -1,0 +1,279 @@
+{% extends 'fe/base.html.twig' %}
+{% set seo = product.seo %}
+{% use '@PNSeo/FrontEnd/seo.html.twig' %}
+{% import 'fe/macros.html.twig' as macros %}
+{% block stylesheet %}
+    {{ parent() }}
+    <link rel="stylesheet"
+          href="{{ asset('vendors/swiper/swiper.css') }}">
+{% endblock %}
+{% block content %}
+    {% set mainImage = 'images/placeholders/placeholder-md.jpg' %}
+    {% if product.mainImage %}
+        {% set mainImage = product.mainImage %}
+    {% endif %}
+    {% set galleryImages = product.post.images([constant("\\PN\\Bundle\\MediaBundle\\Entity\\Image::TYPE_GALLERY")]) %}
+    <!-- PRODUCT DESCRIPTION AND IMAGES SECTION -->
+    <section class="pt-20 pb-lg-15 pb-11">
+        <div class="container">
+            <div class="row no-gutters">
+                {# PRODUCT IMAGES #}
+                <div class="col-md-7 mb-6 mb-md-0 pr-md-6 pr-lg-9">
+                    <div class="galleries position-relative">
+                        <div class="swiper-container product-details-swiper">
+                            {% if product.newArrival %}
+                            <div class="badge badge-blue badge-circle ml-auto w-45px h-45px fs-12 d-flex align-items-center justify-content-center mb-2">
+                                <span>{% trans %}new{% endtrans %}</span>
+                            </div>
+                            {% endif %}
+                            {% if isOnSale %}
+                                <div class="badge badge-purple badge-circle ml-auto w-45px h-45px fs-12 d-flex align-items-center justify-content-center mb-2">
+                                    <span>{% trans %}sale{% endtrans %}</span>
+                                </div>
+                            {% endif %}
+                            <div class="swiper-wrapper">
+                                <div class="swiper-slide">
+                                    <div class="box">
+                                        <div class="card p-0 hover-change-image rounded-0 border-0 card-bg-transparent">
+                                            <a href="{{ product.mainImage ? asset(mainImage.assetPath) : asset(mainImage) }}"
+                                               class="card-img ratio ratio-1-1 bg-img-cover-center" data-gtf-mfp="true"
+                                               data-gallery-id="02"
+                                               style="background-image:url('{{ product.mainImage ? asset(mainImage.assetPath) : asset(mainImage) }}')">
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% for image in galleryImages %}
+                                    <div class="swiper-slide">
+                                        <div class="box">
+                                            <div class="card p-0 hover-change-image rounded-0 border-0 card-bg-transparent">
+                                                <a href="{{ asset(image.assetPath) }}"
+                                                   class="card-img ratio ratio-1-1 bg-img-cover-center"
+                                                   data-gtf-mfp="true" data-gallery-id="02"
+                                                   style="background-image:url('{{ asset(image.assetPath) }}')">
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <div class="swiper-container product-details-thumbs-swiper">
+                            <div class="swiper-wrapper">
+                                <div class="swiper-slide">
+                                    <div class="box px-0 thumbnail">
+                                        <div class="p-1 h-100">
+                                            <img data-src="{{ product.mainImage ? asset(mainImage.assetPathThumb) : asset(mainImage) }}"
+                                                 alt="{{ product.title }}" class="h-100 w-100 swiper-lazy">
+                                        </div>
+                                    </div>
+                                </div>
+                                {% for image in galleryImages %}
+                                    <div class="swiper-slide">
+                                        <div class="box px-0 thumbnail">
+                                            <div class="p-1 h-100">
+                                                <img data-src="{{ asset(image.assetPath) }}" alt="{{ product.title }}"
+                                                     class="h-100 w-100 swiper-lazy">
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {# END PRODUCT IMAGES #}
+                <div class="col-md-5">
+                    <p class="text-muted fs-12 font-weight-500 letter-spacing-05 text-uppercase mb-3">{{ product.category.title }}</p>
+                    <h2 class="fs-30 fs-lg-40 mb-2">{{ product.title }}</h2>
+                    <p class="fs-20 text-primary mb-4">{% trans %}Starting From{% endtrans %} {{ product.minPrice }} {% trans %}EGP{% endtrans %}</p>
+                    <p class="mb-5">{{ product.post.content.brief }}</p>
+                    {# PRODUCT PRICES #}
+                    <div class="product-details-offers mb-3">
+                        <h4>{% trans %}Offers:{% endtrans %}</h4>
+                        {% for productPrice in productPrices %}
+                            <div class="row mb-1">
+                                <div class="col-5">
+                                    {% if productPrice.minQuantity == 1 %}
+                                        <span class="price-range">{% trans %}Less than{% endtrans %} {{ productPrice.maxQuantity }} {% trans %}pieces{% endtrans %}</span> {% elseif loop.last and not loop.first %}
+                                        <span class="price-range">{% trans %}More than{% endtrans %} {{ productPrice.minQuantity }} {% trans %}pieces{% endtrans %}</span> {% else %}
+                                        <span class="price-range">{% trans %}From{% endtrans %} {{ productPrice.minQuantity }} {% trans %}to{% endtrans %} {{ productPrice.maxQuantity }} {% trans %}pieces{% endtrans %}</span> {% endif %}
+                                </div>
+                                <div class="col-4">
+                                    {% if productPrice.sellPrice < productPrice.unitPrice %}
+                                        <p class="mb-0">
+                                            <span class="price">{{ productPrice.sellPrice }} {% trans %}EGP{% endtrans %}</span> {% trans %}per piece{% endtrans %}
+                                            <br>
+                                            <span class="text-line-through">{{ productPrice.unitPrice }} {% trans %}EGP{% endtrans %}</span> {% trans %}per piece{% endtrans %}
+                                        </p>
+                                    {% else %}
+                                        <p class="mb-0">
+                                            <span class="price">{{ productPrice.unitPrice }} {% trans %}EGP{% endtrans %}</span> {% trans %}per piece{% endtrans %}
+                                        </p>
+                                    {% endif %}
+                                </div>
+                                {% set savedPercentage = productPrice.savedPercentage %}
+                                {% if savedPercentage is not empty and savedPercentage != 0 %}
+                                    <div class="col-3 pl-0 pr-1">
+                                        <span class="badge bg-transparent border border-primary badge-style-1">{% trans %}Saved{% endtrans %} {{ savedPercentage }}%</span>
+                                    </div>
+                                {% endif %}
+                            </div>
+                        {% endfor %}
+                    </div>
+                    {# END PRODUCT PRICES #}
+                    <form id="add_to_cart_form" data-link="{{ path('fe_cart_add_ajax', {"type": "add"}) }}"
+                          data-uuid="{{ product.uuid }}">
+                        <div class="row align-items-end no-gutters mx-n2">
+                            <div class="col-sm-4 form-group px-2 mb-6 inc-dec-container">
+                                <label class="text-primary fs-16 font-weight-bold mb-3"
+                                       for="number">{% trans %}Quantity:{% endtrans %} </label>
+                                <div class="input-group position-relative w-100 incrementer-style-1">
+                                    <input type="hidden" value="1" name="qty">
+                                    <button type="button" class="btn minus">
+                                        <i class="far fa-minus"></i>
+                                    </button>
+                                    <p class="mb-0 text-center" id="items_number">1</p>
+                                    <button type="button" class="btn plus">
+                                        <i class="far fa-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="submit"
+                                class="btn btn-outline-primary btn-block mb-4">{% trans %}Add To Cart{% endtrans %}</button>
+                        {% if product.details.tearSheet %}
+                            <a class="btn btn-style-2 w-100"
+                               href="{{ path('download', {'d': '{"document":'~product.details.tearSheet.id~'}'}) }}">{% trans %}Download tear sheet{% endtrans %}</a>
+                        {% endif %}
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- END PRODUCT DESCRIPTION AND IMAGES SECTION -->
+
+    <!-- PRODUCT INFO SECTION -->
+    <section class="pb-11 pb-lg-13">
+        {% set productDescription = product.post.content.description %}
+        <div class="container">
+            <div class="collapse-tabs tabs-style-1">
+                <ul class="nav nav-pills mb-3 justify-content-center d-md-flex d-none" id="pills-tab" role="tablist">
+                    {% if productDescription is not empty %}
+                        <li class="nav-item">
+                            <a class="nav-link active show fs-lg-30 fs-24 font-weight-bold p-0 mr-md-10 mr-4"
+                               id="pills-description-tab" data-toggle="pill" href="#pills-description" role="tab"
+                               aria-controls="pills-description"
+                               aria-selected="false">{% trans %}Description{% endtrans %}</a>
+                        </li>
+                    {% endif %}
+                    {% if specs is not empty %}
+                        <li class="nav-item">
+                            <a class="nav-link {{ productDescription is empty ? " active show " }} fs-lg-30 fs-24 font-weight-bold p-0 mr-md-10 mr-4"
+                               id="pills-Specifications-tab" data-toggle="pill" href="#pills-Specifications" role="tab"
+                               aria-controls="pills-Specifications"
+                               aria-selected="false">{% trans %}Specifications{% endtrans %}</a>
+                        </li>
+                    {% endif %}
+                </ul>
+                <div class="tab-content bg-white-md shadow-none py-md-5 p-0">
+                    <div id="collapse-tabs-accordion-01">
+                        {% if productDescription is not empty %} {# PRODUCT DESCRIPTION #}
+                            <div class="tab-pane tab-pane-parent fade show active" id="pills-description"
+                                 role="tabpanel">
+                                <div class="card border-0 bg-transparent">
+                                    <div class="card-header border-0 d-block d-md-none bg-transparent px-0 py-1"
+                                         id="headingDetails-01">
+                                        <h5 class="mb-0">
+                                            <button class="btn lh-2 fs-18 py-1 px-6 shadow-none w-100 collapse-parent border text-primary"
+                                                    data-toggle="false" data-target="#description-collapse-01"
+                                                    aria-expanded="true" aria-controls="description-collapse-01">
+                                                {% trans %}Description{% endtrans %}
+                                            </button>
+                                        </h5>
+                                    </div>
+                                    <div id="description-collapse-01" class="collapsible collapse show"
+                                         aria-labelledby="headingDetails-01" data-parent="#collapse-tabs-accordion-01"
+                                         style="">
+                                        <div id="accordion-style-01"
+                                             class="accordion accordion-01 border-md-0 border p-md-0 p-6">
+                                            <div class="mxw-830 mx-auto mb-0 text-center">{{ productDescription|raw }}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {# END PRODUCT DESCRIPTION #} {% endif %}
+                        {% if specs is not empty %}
+                            {# PRODUCT SPECIFICATIONS #}
+                            <div class="tab-pane tab-pane-parent fade {{ productDescription is empty ? " active show " }}"
+                                 id="pills-Specifications" role="tabpanel">
+                                <div class="card border-0 bg-transparent">
+                                    <div class="card-header border-0 d-block d-md-none bg-transparent px-0 py-1"
+                                         id="headingSpecifications-01">
+                                        <h5 class="mb-0">
+                                            <button class="btn lh-2 fs-18 py-1 px-6 shadow-none w-100 collapse-parent border collapsed text-primary"
+                                                    data-toggle="collapse" data-target="#Specifications-collapse-01"
+                                                    aria-expanded="false" aria-controls="Specifications-collapse-01">
+                                                {% trans %}Specifications{% endtrans %}
+                                            </button>
+                                        </h5>
+                                    </div>
+                                    <div id="Specifications-collapse-01"
+                                         class="collapsible collapse {{ productDescription is empty ? " show " }}"
+                                         aria-labelledby="headingSpecifications-01"
+                                         data-parent="#collapse-tabs-accordion-01" style="">
+                                        <div id="accordion-style-01-2"
+                                             class="accordion accordion-01 border-md-0 border p-md-0 p-6 ">
+                                            <div class="mxw-830 mx-auto pt-md-4">
+                                                <div class="table-responsive mb-md-7">
+                                                    <table class="table table-border-top-0">
+                                                        <tbody>
+                                                        {% for spec in specs %}
+                                                            <tr>
+                                                                <td class="pl-0">{{ spec.title }}</td>
+                                                                <td class="text-right pr-0">{{ spec.value }}</td>
+                                                            </tr>
+                                                        {% endfor %}
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {# END PRODUCT SPECIFICATIONS #}
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- END PRODUCT INFO SECTION -->
+
+    {% if relatedProducts is not empty %}
+        <!-- YOU MAY ALSO LIKE SECTION -->
+        <section class="pb-11 pb-lg-15">
+            <div class="container container-xxl">
+                <h2 class="fs-md-40 fs-30 mb-9 text-center">{% trans %}You May Like This{% endtrans %}</h2>
+                <div class="swiper-container"
+                     data-swiper-options='{"slidesPerView": 1.2,"loop":false,"spaceBetween":20,"freeMode":true,"lazy":{"preloadImages":false,"loadPrevNext":true,"loadPrevNextAmount":4},"breakpoints":{"991.98":{"slidesPerView":4.2,"spaceBetween":20}}}'>
+                    <div class="swiper-wrapper">
+                        {% for product in relatedProducts %}
+                            <div class="swiper-slide">
+                                {{ macros.product(product) }}
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- END YOU MAY ALSO LIKE SECTION -->
+    {% endif %}
+
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('vendors/swiper/swiper.min.js') }}"></script>
+    <script src="{{ asset('js/pages/product-details.js') }}"></script>
+{% endblock %}

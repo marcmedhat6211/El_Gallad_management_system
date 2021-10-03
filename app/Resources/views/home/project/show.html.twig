@@ -1,0 +1,139 @@
+{% extends 'fe/base.html.twig' %}
+{% set seo = project.seo %}
+{% use '@PNSeo/FrontEnd/seo.html.twig' %}
+{% import 'fe/macros.html.twig' as macros %}
+
+{% block stylesheet %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('vendors/swiper/swiper.css') }}">
+{% endblock %}
+
+{% block content %}
+    {% set mainImage = 'images/placeholders/placeholder-md.jpg' %}
+    {% if project.post.mainImage %}
+        {% set mainImage = project.post.mainImage %}
+    {% endif %}
+    {% set galleryImages = project.post.images([constant("\\PN\\Bundle\\MediaBundle\\Entity\\Image::TYPE_GALLERY")]) %}
+    <section class="pt-20 pb-lg-15 pb-11 project-details-section">
+        <div class="container">
+            <div class="row no-gutters">
+                <div class="col-md-7 mb-6 mb-md-0 pr-md-6 pr-lg-9">
+                    <div class="galleries position-relative">
+                        <div class="swiper-container project-details-swiper">
+                            <div class="swiper-wrapper">
+                                <div class="swiper-slide">
+                                    <div class="box">
+                                        <div class="card p-0 hover-change-image rounded-0 border-0 card-bg-transparent">
+                                            <a href="{{ project.post.mainImage ? asset(mainImage.assetPathThumb) : asset(mainImage) }}"
+                                               class="card-img ratio ratio-1-1 bg-img-cover-center" data-gtf-mfp="true"
+                                               data-gallery-id="02"
+                                               style="background-image:url('{{ project.post.mainImage ? asset(mainImage.assetPath) : asset(mainImage) }}')">
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% for image in galleryImages %}
+                                    <div class="swiper-slide">
+                                        <div class="box">
+                                            <div class="card p-0 hover-change-image rounded-0 border-0 card-bg-transparent">
+                                                <a href="{{ asset(image.assetPath) }}"
+                                                   class="card-img ratio ratio-1-1 bg-img-cover-center"
+                                                   data-gtf-mfp="true" data-gallery-id="02"
+                                                   style="background-image:url('{{ asset(image.assetPath) }}')">
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <div class="swiper-container project-details-thumbs-swiper">
+                            <div class="swiper-wrapper">
+                                <div class="swiper-slide">
+                                    <div class="box px-0 thumbnail">
+                                        <div class="p-1 h-100">
+                                            <img data-src="{{ project.post.mainImage ? asset(mainImage.assetPath) : asset(mainImage) }}"
+                                                 alt="{{ project.title }}" class="h-100 w-100 swiper-lazy">
+                                        </div>
+                                    </div>
+                                </div>
+                                {% for image in galleryImages %}
+                                    <div class="swiper-slide">
+                                        <div class="box px-0 thumbnail">
+                                            <div class="p-1 h-100">
+                                                <img data-src="{{ asset(image.assetPath) }}" alt="{{ project.title }}"
+                                                     class="h-100 w-100 swiper-lazy">
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    {% if project.date %}
+                        <p class="text-muted fs-12 font-weight-500 letter-spacing-05 text-uppercase mb-3">
+                            {{ project.date|date('d-m-Y') }}
+                        </p>
+                    {% endif %}
+                    <h2 class="fs-30 fs-lg-40 mb-2">{{ project.title }}</h2>
+                    <div class="mb-5">
+                        {{ project.post.content.description|raw }}
+                    </div>
+                    <div class="project-info">
+                        <p class="mb-1 text-uppercase">{% trans %}Project{% endtrans %}</p>
+                        <p class="description">{{ project.title }}</p>
+                        {% if project.client %}
+                            <p class="mb-1 text-uppercase">{% trans %}Client{% endtrans %}</p>
+                            <p class="description">{{ project.client }}</p>
+                        {% endif %}
+                        {% if project.interiorDesignerName %}
+                            <p class="mb-1 text-uppercase">{% trans %}Interior Designer{% endtrans %}</p>
+                            <p class="description">{{ project.interiorDesignerName }}</p>
+                        {% endif %}
+                        {% if project.projectScope %}
+                            <p class="mb-1 text-uppercase">{% trans %}Project Scope{% endtrans %}</p>
+                            <p class="description">{{ project.projectScope }}</p>
+                        {% endif %}
+                    </div>
+                    <div class="social-media-icons">
+                        <label class="text-primary font-weight-bold mr-3 mb-0">{% trans %}Share:{% endtrans %}</label>
+                        <div class="icons-container">
+                            <a href="#" class="icon fs-20 lh-1" id="facebook_link"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" class="icon fs-20 lh-1" id="pinterest_link"><i
+                                        class="fab fa-pinterest-p"></i></a>
+                            <a href="#" class="icon fs-20 lh-1" id="linkedin_link"><i class="fab fa-linkedin"></i></a>
+                            <a href="#" class="icon fs-20 lh-1" id="twitter_link"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="icon fs-20 lh-1" id="whatsapp_link"><i class="fab fa-whatsapp"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {% if productsUsingProject is not empty %}
+        <section class="pb-11 pb-lg-15">
+        <div class="container container-xxl">
+            <h2 class="fs-md-40 fs-30 mb-9 text-center">{% trans %}Used Products{% endtrans %}</h2>
+            <div class="swiper-container" data-swiper-options='{"slidesPerView": 1.2,"loop":false,"spaceBetween":20,"freeMode":true,"lazy":{"preloadImages":false,"loadPrevNext":true,"loadPrevNextAmount":4},"breakpoints":{"991.98":{"slidesPerView":4.2,"spaceBetween":20}}}'>
+                <div class="swiper-wrapper">
+                    {% for product in productsUsingProject %}
+                        <div class="swiper-slide">
+                            {{ macros.product(product, true) }}
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </section>
+    {% endif %}
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('vendors/swiper/swiper.min.js') }}"></script>
+    <script src="{{ asset('js/pages/project-details.js') }}"></script>
+{% endblock %}

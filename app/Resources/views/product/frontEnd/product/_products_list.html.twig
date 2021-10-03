@@ -1,0 +1,49 @@
+{% import 'fe/macros.html.twig' as macros %}
+<div class="col-md-9">
+    <div class="d-flex mb-6">
+        <div class="d-flex align-items-center text-primary">
+            {% if productsCount > 0 %}
+                {% trans %}Showing{% endtrans%} {{ paginator.show.start|number_format }}-{{ paginator.show.end|number_format }} {% trans %}of{% endtrans%} {{ paginator.totalItems|number_format }} {% trans %}results{% endtrans %}
+            {% else %}
+                {% trans %}No Results Found{% endtrans %}
+            {% endif %}
+        </div>
+        <div class="ml-auto">
+            <div class="dropdown">
+                <a href="#" class="dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false">
+                    {% if app.request.get('sort') == 1 %}
+                        {% trans %}Recommended{% endtrans %}
+                    {% elseif app.request.get('sort') == 2 %}
+                        {% trans %}Newest{% endtrans %}
+                    {% elseif app.request.get('sort') == 3 %}
+                        {% trans %}Price high to low{% endtrans %}
+                    {% elseif app.request.get('sort') == 4 %}
+                        {% trans %}Price low to high{% endtrans %}
+                    {% else %}
+                        {% trans %}Random{% endtrans %}
+                    {% endif %}
+                </a>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton"
+                     style="" id="sorting_links">
+                    <a class="dropdown-item text-primary" href="#" data-url="{{ path(app.request.attributes.get('_route'),app.request.attributes.get('_route_params')|merge(app.request.query.all)|merge({'page':1, 'sort':1})) }}">{% trans %}Recommended{% endtrans %}</a>
+                    <a class="dropdown-item text-primary" href="#" data-url="{{ path(app.request.attributes.get('_route'),app.request.attributes.get('_route_params')|merge(app.request.query.all)|merge({'page':1, 'sort':2})) }}">{% trans %}Newest{% endtrans %}</a>
+                    <a class="dropdown-item text-primary" href="#" data-url="{{ path(app.request.attributes.get('_route'),app.request.attributes.get('_route_params')|merge(app.request.query.all)|merge({'page':1, 'sort':3})) }}">{% trans %}Price high to low{% endtrans %}</a>
+                    <a class="dropdown-item text-primary" href="#" data-url="{{ path(app.request.attributes.get('_route'),app.request.attributes.get('_route_params')|merge(app.request.query.all)|merge({'page':1, 'sort':4})) }}">{% trans %}Price low to high{% endtrans %}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% if entities is not empty %}
+        <div class="row">
+            {% for product in entities %}
+                <!-- card -->
+                <div class="col-sm-6 col-lg-4 mb-6" data-animate="fadeInUp">
+                    {{ macros.product(product) }}
+                </div>
+                <!-- end card -->
+            {% endfor %}
+        </div>
+        {% include 'fe/pagination.html.twig' %}
+    {% endif %}
+</div>

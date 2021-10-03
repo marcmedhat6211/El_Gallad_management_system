@@ -1,0 +1,41 @@
+imports:
+    - { resource: config.yml }
+
+#framework:
+#    validation:
+#        cache: validator.mapping.cache.doctrine.apc
+#    serializer:
+#        cache: serializer.mapping.cache.apc
+
+#doctrine:
+#    orm:
+#        metadata_cache_driver: apc
+#        result_cache_driver: apc
+#        query_cache_driver: apc
+
+monolog:
+    handlers:
+        main:
+            type:         fingers_crossed
+            action_level: critical
+            handler:      grouped
+        grouped:
+            type:    group
+            members: [streamed, deduplicated]
+        streamed:
+            type:  stream
+            path:  '%kernel.logs_dir%/%kernel.environment%.log'
+            level: debug
+        deduplicated:
+            type:    deduplication
+            handler: swift
+        swift:
+            type:       swift_mailer
+            from_email: '%mailer_user%'
+            to_email:   'peter.nassef@gmail.com'
+            # or list of recipients
+            # to_email:   ['dev1@example.com', 'dev2@example.com', ...]
+            subject:    'Esorus - An Error Occurred! %%message%%'
+            level:      debug
+            formatter:  monolog.formatter.html
+            content_type: text/html

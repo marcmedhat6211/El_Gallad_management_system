@@ -1,0 +1,27 @@
+.widget-instagram {
+    .item {
+        padding: 0 3px;
+        margin-bottom: 6px;
+    }
+}
+
+.widget-color {
+    .list-inline {
+        max-width: 200px;
+    }
+    .item {
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+    }
+    .list-inline-item {
+        border-radius: 50%;
+        border: 1px solid transparent;
+        transition: all 0.2s;
+        padding: 4px;
+        margin-#{$end-direction}: 5px;
+        &:hover {
+            border-color: $primary;
+        }
+    }
+}

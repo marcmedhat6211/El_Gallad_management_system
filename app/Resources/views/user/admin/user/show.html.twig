@@ -1,0 +1,204 @@
+{% extends 'adminTemplate/base.html.twig' %}
+{% set page_title %}User show{% endset %}
+
+{% block breadcrumb %}
+    <div class="breadcrumb-line">
+        <ul class="breadcrumb">
+            <li><a href="{{ path('dashboard') }}"><i class="icon-home2 position-left"></i>Dashboard</a></li>
+            <li class="active">{{ page_title }}</li>
+        </ul>
+    </div>
+{% endblock %}
+{% block body %}
+    <!-- Detailed task -->
+    <div class="row">
+        <div class="col-md-4">
+            <!-- Task details -->
+            <div class="panel panel-flat">
+                <div class="panel-heading">
+                    <h6 class="panel-title"><i class="icon-files-empty position-left"></i> User details</h6>
+                </div>
+
+                <div class="panel-body">
+                    <table class="table table-xs content-group-sm">
+                        <tbody>
+                            <tr>
+                                <td><i class="icon-user position-left"></i> Name:</td>
+                                <td class="text-right"><span class="pull-right">
+                                        <a href="{{ path('user_edit',{'id':user.id}) }}">{{ user.fullname }}</a>
+                                    </span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><i class="icon-mail5 position-left"></i> Email:</td>
+                                <td class="text-right"><span class="pull-right">{{ user.email }}</span></td>
+                            </tr>
+                            <tr>
+                                <td><i class="icon-phone position-left"></i> Phone:</td>
+                                <td class="text-right"><span class="pull-right">{{ user.phone }}</span></td>
+                            </tr>
+                            <tr>
+                                <td><i class="fa fa-venus position-left"></i> Gender:</td>
+                                <td class="text-right"><span class="pull-right">{% if user.gender == constant('\\PN\\Bundle\\UserBundle\\Entity\\User::GENDER_MALE') %}Male{% else %}Female{% endif %}</span></td>
+                            </tr>
+                            <tr>
+                                <td><i class="icon-calendar2 position-left"></i> Date of birth:</td>
+                                <td class="text-right"><span class="pull-right">{% if user.birthdate %}{{ user.birthdate|date("d/m/Y") }}{% else %}--{% endif %}</span></td>
+                            </tr>
+                            <tr>
+                                <td><i class="icon-earth position-left"></i> Nationality:</td>
+                                <td class="text-right"><span class="pull-right">{% if user.nationality %}{{ user.nationality.title }}{% else %}--{% endif %}</span></td>
+                            </tr>
+                            <tr>
+                                <td><i class="icon-cash2 position-left"></i> Credit:</td>
+                                <td class="text-right"><span class="pull-right"><strong>{{ credit|number_format }} Points</strong></span></td>
+                            </tr>
+                            <tr>
+                                <td><i class="icon-alarm-add position-left"></i> Last Login:</td>
+                                <td class="text-right">{{ user.lastLogin|date('d F, Y') }}</td>
+                            </tr>
+                            <tr>
+                                <td><i class="icon-alarm-check position-left"></i> Created:</td>
+                                <td class="text-right">{{ user.created|date('d F, Y') }}</td>
+                            </tr>
+
+                            <tr>
+                                <td><i class="icon-file-check position-left"></i> Status:</td>
+                                <td class="text-right">
+                                    {% if user.enabled %}
+                                        <span class="status-mark position-left bg-success"></span> Activated
+                                    {% else %}
+                                        <span class="status-mark position-left bg-danger"></span> Blocked
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <a href="#" class="btn btn-info btn-block">
+                                        <i class="icon-check"></i>
+                                        Log in as <strong>{{ user.fullname }}</strong>
+                                    </a>
+
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+            <!-- /task details -->
+        </div>
+        <div class="col-md-8">
+            <div class="panel panel-white">
+                <div class="panel-heading">
+                    <h6 class="panel-title">Answered Surveys</h6>
+                    <div class="heading-elements">
+                        <ul class="icons-list">
+                            <li><a data-action="collapse"></a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Title</th>
+                                <th>State</th>
+                                <th>Complated date</th>
+                                <th>Collected Points</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for survey in surveys %}
+                                <tr>
+                                    <td>{{ survey.survey.id }}</td>
+                                    <td>
+                                        <a href="{{ path('survey_show', { 'id': survey.survey.id }) }}" class="text-semibold">{{ survey.survey.title }}</a>
+                                    </td>
+                                    <td>
+                                        {% if survey.completedDateTime %}
+                                            <span class="label label-flat boffer-success text-success">Completed</span>
+                                        {% else %}
+                                            <span class="label label-flat boffer-warning text-warning">Not completed</span> ({{ survey.completePercentage }}%)
+                                        {% endif %}
+
+                                    </td>
+                                    <td>{% if survey.completedDateTime %}{{ survey.completedDateTime|date('d/m/Y h:i A') }}{% else %}--{% endif %}</td>
+                                    <td>{% if survey.completedDateTime %}{{ survey.collectedPoints }} Points{% else %}--{% endif %}</td>
+
+                                    <td class="text-center">
+                                        <ul class="icons-list">
+                                            <li>
+                                                <a href="{{ path('survey_show', { 'id': survey.survey.id }) }}"><i class="icon-eye"></i></a>
+                                            </li>
+                                        </ul>
+                                    </td>
+                                </tr>
+                            {% else %}
+                                <tr>
+                                    <td colspan="7" class="text-center">
+                                        <p>No record found!!</p>
+                                    </td>
+
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="panel panel-white">
+                <div class="panel-heading">
+                    <h6 class="panel-title">Offers</h6>
+                    <div class="heading-elements">
+                        <ul class="icons-list">
+                            <li><a data-action="collapse"></a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Title</th>
+                                <th>Price</th>
+                                <th>Purchased Date</th>
+                                <th>Redeemed Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for offer in offers %}
+                                <tr>
+                                    <td{{ offer.id }}</td>
+                                    <td>{{ offer.offer.title }}</td>
+                                    <td>{% if offer.price %}{{ offer.price }} Points{% else %}--{% endif %}</td>
+                                    <td>{% if offer.purchasedDate %}{{ offer.purchasedDate|date('d/m/Y h:i A') }}{% endif %}</td>
+                                    <td>{% if offer.redeemedDate %}{{ offer.redeemedDate|date('d/m/Y h:i A') }}{% else %}--{% endif %}</td>
+                                </tr>
+                            {% else %}
+                                <tr>
+                                    <td colspan="7" class="text-center">
+                                        <p>No record found!!</p>
+                                    </td>
+
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /detailed task -->
+
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+{% endblock javascripts %}

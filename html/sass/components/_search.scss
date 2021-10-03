@@ -1,0 +1,111 @@
+.section-search-active {
+    padding-top: 10px;
+    padding-bottom: 40px;
+    display: none;
+}
+
+.form-search {
+    transition: all 0.5s;
+    opacity: 0;
+    width: 0;
+    position: relative;
+    z-index: -1;
+    &.show {
+        transform: translateX(-50px * $transform-direction);
+        opacity: 1;
+        width: 75%;
+        z-index: 1;
+    }
+}
+
+.nav-search-event {
+    transform: translateX(0);
+    opacity: 1;
+    position: relative;
+    z-index: 999;
+    &.hide {
+        opacity: 0;
+        width: 0;
+        transform: translateX(-50px * $transform-direction);
+    }
+}
+
+.section-search-result {
+    .item {
+        flex: 0 0 14.3%;
+        max-width: 14.3%;
+    }
+}
+
+.mfp-search-form {
+    background-color: rgba(0, 0, 0, 0.95);
+    .mfp-content {
+        vertical-align: top;
+    }
+    .search-popup {
+        margin: 60px auto 0;
+        width: 80%;
+    }
+    button.dropdown-toggle {
+        &:focus-visible,
+        &:focus {
+            outline: none !important;
+        }
+    }
+    .mfp-close {
+        font-family: "Font Awesome 5 Pro";
+        font-size: 3rem;
+        width: 64px;
+        height: 64px;
+        line-height: 64px;
+        font-weight: 400;
+        color: $white;
+        opacity: 1;
+    }
+}
+
+.mfp-move-from-top {
+    /* start state */
+    .mfp-with-anim {
+        opacity: 0;
+        transition: all 0.5s;
+        transform: translateY(-100px);
+    }
+    .mfp-close,
+    &.mfp-bg {
+        opacity: 0;
+        transition: all 0.5s;
+        transition-delay: 0s;
+    }
+    /* animate in */
+    &.mfp-ready {
+        .mfp-with-anim {
+            opacity: 1;
+            transform: translateY(0);
+            transition-delay: 0.5s;
+        }
+        &.mfp-bg {
+            opacity: 0.95;
+        }
+        &.gsf-menu-popup {
+            opacity: 1;
+        }
+        .mfp-close {
+            opacity: 1;
+            font-weight: 400;
+        }
+    }
+    /* animate out */
+    &.mfp-removing {
+        .mfp-with-anim {
+            transform: translateY(-50px);
+            opacity: 0;
+            transition-delay: 0s;
+        }
+        .mfp-close,
+        &.mfp-bg {
+            opacity: 0;
+            transition-delay: 0.5s;
+        }
+    }
+}

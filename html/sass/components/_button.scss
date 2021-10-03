@@ -1,0 +1,48 @@
+.btn {
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+.btn-outline-primary {
+    background: linear-gradient(to $end-direction, rgba($color-purple-primary, 1), rgba($color-purple-primary, .8));
+    border: 1px solid transparent !important;
+    border-radius: 6px !important;
+    color: $white !important;
+}
+
+.btn-style-2 {
+    color: $white !important;
+    border-radius: 6px;
+    padding: 14px 65px;
+    font-weight: 500;
+    font-size: 14px;
+    text-transform: none;
+    background: $color-purple-2;
+    &:focus {
+        box-shadow: none;
+    }
+    &:active {
+        box-shadow: none !important;
+    }
+    &[disabled] {
+        background: rgba($color-grey-medium, .4);
+    }
+}
+
+.btn-style-3 {
+    border: 2px solid $color-purple-2;
+    border-radius: 6px;
+    color: $color-purple-2;
+    background: transparent;
+    padding: 14px 65px;
+    display: block;
+    &:focus {
+        box-shadow: none;
+    }
+    &:active {
+        box-shadow: none !important;
+    }
+    &:hover {
+        color: $color-purple-2;
+    }
+}

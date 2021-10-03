@@ -1,0 +1,50 @@
+{% extends "FEBundle::base.html.twig" %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block content %}
+<section class="page-content products">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 col-xs-12">
+            {% if error %}
+                 <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+            {% endif %}
+            <div class="box">
+                <h3>{% trans %}Login{% endtrans %}</h3>
+                <form action="{{ path("fos_user_security_check") }}" method="post">
+                    <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+
+                    <div class="form-group">
+                    <label for="username">{{ 'security.login.username'|trans }}<span class="required">*</span></label>
+                    <input type="text"  id="username" class="form-control" name="_username" value="{{ last_username }}" required="required" />
+                    </div>
+                    <div class="form-group">
+                        <div class="clearfix">
+                            <label for="password" class="pull-left">{{ 'security.login.password'|trans }}<span class="required">*</span></label>
+                            <span class="pull-right"><a href="{{ path('fos_user_resetting_request')}}">{% trans %}Forgot your password?{% endtrans %}</a></span>
+                        </div>
+                        <input type="password" class="form-control" id="password" name="_password" required="required" />
+                    </div>
+                    <input type="submit" class="btn btn-primary btn-inline" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans }}" />
+
+                    <input type="checkbox" id="remember_me" name="_remember_me" value="on" />
+                    <label for="remember_me">{{ 'security.login.remember_me'|trans }}</label>
+                </form>
+
+                {#{{ render(controller('HWIOAuthBundle:Connect:connect')) }}#}
+
+                <a href="{{ path('hwi_oauth_service_redirect', {'service': 'facebook' }) }}">
+                    <span>sign in with Facebook</span>
+                </a>
+    <br>
+          </div>
+        </div>
+      </div>
+    </div>
+</section>
+
+{% endblock %}
+
+
+

@@ -1,0 +1,22 @@
+{
+    "recordsTotal":
+    {{ recordsTotal }},
+    "recordsFiltered":
+    {{ recordsFiltered }},
+    "data": [
+        {% for banner in banners %}
+        [
+            "{% if banner.tarteb  %}{{ banner.tarteb }}{% else %}N/A{% endif %}",
+            "{{ banner.title }}",
+            "{% if banner.placement %}{{ banner.placementName }}{% else %}--{% endif %}",
+            "{% if banner.openType %}<a href='#' class='label label-flat border-success text-success-600'>New Page</a>{% else %}<a href='#' class='label label-flat border-danger text-danger-600'>Same Page</a>{% endif %}",
+            "{% if banner.image %}<div class='thumb' style='width: 58px; height: 58px;'><a href='{{ asset(banner.image.assetPath) }}' data-popup='lightbox'><img src='{{ asset(banner.image.assetPath) }}' alt='' style='width: 58px; height: 58px;'><span class='zoom-image'><i class='icon-plus2'></i></span></a></div>{% else %}--{% endif %}",
+            "{% if banner.created %}{{ banner.created|date('d/m/Y') }}{% else %}--{% endif %}",
+            "{% if banner.publish %}<span class='label label-flat border-success-800 text-success-800 change-state-btn'>Yes</span>{% else %}<span class='label label-flat border-danger text-danger change-state-btn'>No</span>{% endif %}",
+            "<ul class='icons-list'><li class='dropdown'><a href='#' class='dropdown-toggle' data-toggle='dropdown'><i class='icon-menu9'></i></a><ul class='dropdown-menu dropdown-menu-right'><li><a href='{{ path('banner_edit',{'id':banner.id}) }}'><i class='icon-pencil7'></i> Edit</a></li><li><a href='#' class='delete-btn' data-toggle='modal' data-target='#modal_delete' data-delete='{{ path('banner_delete',{'id':banner.id}) }}'><i class='icon-bin'></i> Remove</a></li></ul></li></ul>"
+        ]
+        {% if loop.last == false %},
+        {% endif %}
+        {% endfor %}
+    ]
+}

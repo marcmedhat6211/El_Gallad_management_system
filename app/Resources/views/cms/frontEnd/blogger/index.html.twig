@@ -1,0 +1,34 @@
+{% extends 'fe/base.html.twig' %}
+{% set seo = seoPage.seo %}
+{% use '@PNSeo/FrontEnd/seo.html.twig' %}
+{% import 'fe/macros.html.twig' as macros %}
+
+{% block stylesheet %}
+    {{ parent() }}
+{% endblock %}
+
+{% block content %}
+
+    {% if blogs is not empty %}
+        <section class="pb-11 pb-lg-15 pt-20">
+            <div class="container container-xxl">
+                <h2 class="mb-9 text-center fs-30 fs-md-40">{% trans %}Our Journal{% endtrans %}</h2>
+                <div class="row">
+                    {% for blog in blogs %}
+                        <!-- blog -->
+                        <div class="col-12 col-sm-6 col-lg-4 mb-4">
+                            {{ macros.blog(blog) }}
+                        </div>
+                        <!-- end blog -->
+                    {% endfor %}
+                </div>
+                {% include 'fe/pagination.html.twig' %}
+            </div>
+        </section>
+    {% endif %}
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}

@@ -1,0 +1,26 @@
+.accordion {
+    .card {
+        overflow: visible;
+    }
+    .card-header {
+        .icon {
+            &::before {
+                content: '\f068';
+                color: $primary;
+                font-family: "Font Awesome 5 Pro";
+                font-size: 12px;
+                transition: all 0.2s;
+            }
+        }
+        a:not(.collapsed) {
+            border-color: $primary!important;
+        }
+        a.collapsed {
+            .icon {
+                &::before {
+                    content: '\f067';
+                }
+            }
+        }
+    }
+}

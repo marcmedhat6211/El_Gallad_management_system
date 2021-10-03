@@ -1,0 +1,40 @@
+{% import 'adminTemplate/macros.html.twig' as macros %}
+
+<div class="panel panel-flat">
+    <div class="panel-body">
+
+        <div class="row">
+            {{ macros.input(form.fullName) }}
+            {{ macros.input(form.role) }}
+        </div>
+        <div class="row">
+            {{ macros.input(form.email) }}
+            {{ macros.input(form.phone) }}
+        </div>
+
+        <div class="row">
+            {% set passwordRequired = (user.id == null) ? true : false %}
+            <div class="col-md-6">
+                <div class="form-group">
+                    {{ form_label(form.plainPassword.first) }}
+                    {{ form_widget(form.plainPassword.first,{'attr':{'class':'form-control'} ,'required':passwordRequired}) }}
+                    {{ form_errors(form.plainPassword.first) }}
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    {{ form_label(form.plainPassword.second) }}
+                    {{ form_widget(form.plainPassword.second,{'attr':{'class':'form-control'},'required':passwordRequired}) }}
+                    {{ form_errors(form.plainPassword.second) }}
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            {{ macros.checkbox(form.enabled) }}
+        </div>
+    </div>
+    <div class="panel-footer">
+        {% include 'adminTemplate/saveAndResetFormFooter.html.twig' %}
+    </div>
+</div>

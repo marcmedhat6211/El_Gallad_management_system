@@ -1,0 +1,17 @@
+.breadcrumb-item {
+    color: #959595;
+    letter-spacing: 0;
+    text-transform: capitalize;
+    a {
+        color: inherit;
+        text-decoration: none;
+    }
+    &:hover {
+        color: $breadcrumb-active-color;
+        text-decoration: none;
+    }
+}
+
+.breadcrumb-item+.breadcrumb-item::before {
+    padding-#{$end-direction}: 1rem;
+}

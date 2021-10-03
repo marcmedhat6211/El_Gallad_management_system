@@ -1,0 +1,46 @@
+parameters:
+  request_blocker_path: '%kernel.project_dir%/var/request-blocker/'
+
+services:
+  # default configuration for services in *this* file
+  _defaults:
+    # automatically injects dependencies in your services
+    autowire: true
+    # automatically registers your services as commands, event subscribers, etc.
+    autoconfigure: true
+    # this means you cannot fetch services directly from the container via $container->get()
+    # if you need to do this, you can override this setting on individual services
+    public: true
+
+  Doctrine\Migrations\Version\DbalMigrationFactory: ~
+  PN\Bundle\BaseBundle\Migrations\Factory\MigrationFactoryDecorator:
+    decorates: Doctrine\Migrations\Version\DbalMigrationFactory
+    arguments: ['@PN\Bundle\BaseBundle\Migrations\Factory\MigrationFactoryDecorator.inner', '@service_container']
+
+  PN\Bundle\BaseBundle\Service\:
+    resource: '../../Service/*'
+
+  pn.listener.redirect:
+    class: PN\Bundle\BaseBundle\Listener\KernelRequestListener
+    tags:
+      - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
+  # START-Loggable
+  extension.listener:
+    class:  PN\Bundle\BaseBundle\Listener\DoctrineExtensionListener
+    calls:
+      - [ setContainer, [ "@service_container" ] ]
+    tags:
+      # loggable hooks user username if one is in security context
+      - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
+
+  gedmo.listener.loggable:
+    public: true
+    class: Gedmo\Loggable\LoggableListener
+    tags:
+      - { name: doctrine.event_subscriber, connection: default }
+    calls:
+      - [ setAnnotationReader, [ "@annotation_reader" ] ]
+  # END-Loggable
+
+  PN\Bundle\BaseBundle\Twig\:
+    resource: '../../Twig/*'

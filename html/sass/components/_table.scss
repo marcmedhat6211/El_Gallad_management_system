@@ -1,0 +1,12 @@
+.table{
+	th,td{
+		color: $primary;
+	}
+	&.table-border-top-0{
+		tr:first-child{
+			td,th{
+				border-top: none;
+			}
+		}
+	}
+}

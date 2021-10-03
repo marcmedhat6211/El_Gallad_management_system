@@ -1,0 +1,88 @@
+<div class="sidenav canvas-sidebar bg-white">
+    <div class="canvas-overlay">
+    </div>
+    <div class="pt-5 pb-7 card border-0 h-100">
+        <div class="d-flex align-items-center card-header border-0 py-0 pl-8 pr-7 mb-9 bg-transparent">
+            <a href="{{ path('fe_home') }}" class="d-block w-52px">
+                <img src="{{ asset('images/short_logo.png') }}" alt="Seats">
+            </a>
+            <span class="canvas-close d-inline-block text-right fs-24 ml-auto lh-1 text-primary"><i
+                        class="fal fa-times"></i></span>
+        </div>
+        <div class="overflow-y-auto pb-6 pl-8 pr-7 card-body pt-0">
+            <ul class="navbar-nav main-menu px-0">
+                <li aria-haspopup="true" aria-expanded="false" class="nav-item dropdown py-1 px-0">
+                    <a class="nav-link p-0" href="{{ path('fe_home') }}">
+                        {% trans %}Home{% endtrans %}
+                    </a>
+                </li>
+                <li aria-haspopup="true" aria-expanded="false" class="nav-item dropdown py-1 px-0">
+                    <a class="nav-link p-0" href="{{ path('fe_about') }}">
+                        {% trans %}About Us{% endtrans %}
+                    </a>
+                </li>
+                <li aria-haspopup="true" aria-expanded="false" class="nav-item dropdown py-1 px-0">
+                    <a class="nav-link dropdown-toggle p-0" href="{{ path('fe_service') }}" data-toggle="dropdown">
+                        {% trans %}Services{% endtrans %}
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu pt-3 pb-0 pb-xl-3">
+                        {% for service in services %}
+                            <li class="dropdown-item active">
+                                <a class="dropdown-link"
+                                   href="{{ path('fe_service_show', {"slug": service.seo.slug}) }}">
+                                    {{ service.title }}
+                                </a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </li>
+                <li aria-haspopup="true" aria-expanded="false" class="nav-item dropdown py-1 px-0">
+                    <a class="nav-link p-0" href="{{ path('fe_filter_product') }}">
+                        {% trans %}Products{% endtrans %}
+                    </a>
+                </li>
+                <li aria-haspopup="true" aria-expanded="false" class="nav-item dropdown py-1 px-0">
+                    <a class="nav-link p-0" href="{{ path('fe_project') }}">
+                        {% trans %}Projects{% endtrans %}
+                    </a>
+                </li>
+                <li aria-haspopup="true" aria-expanded="false" class="nav-item dropdown py-1 px-0">
+                    <a class="nav-link p-0" href="{{ path('fe_contact') }}">
+                        {% trans %}Contact Us{% endtrans %}
+                    </a>
+                </li>
+                <li aria-haspopup="true" aria-expanded="false" class="nav-item dropdown py-1 px-0">
+                    <a class="nav-link p-0" href="{{ changeLanguagePath }}">
+                        {{ locale == "ar" ? "English" : "عربي" }}
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="card-footer bg-transparent border-0 mt-auto pl-8 pr-7 pb-0 pt-4">
+            <ul class="list-inline d-flex align-items-center mb-3">
+                {% if getDCA(19) %}
+                    <li class="list-inline-item mr-4"><a href="{{ getDCA(19) }}" class="fs-20 lh-1"><i
+                                    class="fab fa-pinterest-p"></i></a>{{ editDCA(19) }}</li>
+                {% endif %}
+                {% if getDCA(20) %}
+                    <li class="list-inline-item mr-4"><a href="{{ getDCA(20) }}" class="fs-20 lh-1"><i
+                                    class="fab fa-facebook-f"></i></a>{{ editDCA(20) }}</li>
+                {% endif %}
+                {% if getDCA(21) %}
+                    <li class="list-inline-item mr-4"><a href="{{ getDCA(21) }}" class="fs-20 lh-1"><i
+                                    class="fab fa-instagram"></i></a>{{ editDCA(21) }}</li>
+                {% endif %}
+                {% if getDCA(22) %}
+                    <li class="list-inline-item"><a href="{{ getDCA(22) }}" class="fs-20 lh-1"><i
+                                    class="fab fa-twitter"></i></a>{{ editDCA(22) }}</li>
+                {% endif %}
+            </ul>
+            <p class="mb-0 text-gray">
+                {% trans %}© 2021 Seats.{% endtrans %}<br> {% trans %}All rights reserved. Developed by{% endtrans %} <a
+                        class="company-name"
+                        href="https://perfectneeds.com/">{% trans %}Perfectneeds{% endtrans %}</a>
+            </p>
+        </div>
+    </div>
+</div>

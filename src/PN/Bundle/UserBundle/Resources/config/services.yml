@@ -1,0 +1,21 @@
+services:
+            
+    PN\Bundle\UserBundle\Services\:
+        autoconfigure: true
+        public: true
+        autowire: true
+        resource: '../../Services/*'
+        
+    user:
+        class: PN\Bundle\UserBundle\Services\UserService
+        autowire: true
+        autoconfigure: true
+        public: true
+
+    user.mailer:
+         class: PN\Bundle\UserBundle\Mailer\Mailer
+         arguments:
+             - '@mailer'
+             - '@router'
+             - '@templating'
+             - {from_email: {confirmation: "%fos_user.registration.confirmation.from_email%", resetting: "%fos_user.resetting.email.from_email%"},resetting.template: "%fos_user.resetting.email.template%", confirmation.template: "%fos_user.registration.confirmation.template%" }

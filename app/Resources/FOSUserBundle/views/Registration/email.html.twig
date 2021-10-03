@@ -1,0 +1,18 @@
+{% block subject %}
+   Registration
+{% endblock %}
+
+{% block body_text %}
+    {% autoescape false %}
+
+    {% endautoescape %}
+{% endblock %}
+{% block body_html %}
+
+    <h4>Hello {{ user.username }}</h4>
+
+    To finish activating your account - please visit <a href="{{ confirmationUrl }}">This link</a>
+
+    Regards,
+    the Team.
+{% endblock %}

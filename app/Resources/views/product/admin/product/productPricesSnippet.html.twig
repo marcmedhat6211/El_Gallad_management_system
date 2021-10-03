@@ -1,0 +1,41 @@
+<div class="row">
+    <div class="col-md-12">
+        <hr />
+        {{ form_errors(form.productPrices) }}
+
+        <div class="panel panel-primary border-left-lg border-left-info">
+            <div class="panel-heading">
+                <h6 class="panel-title text-semibold">Product Prices</h6>
+                <div class="heading-elements">
+                    <button type="button" class="btn btn-default btn-block" id="addPrice" data-prototype="{% filter escape %}{{ include('product/admin/product/productPriceRow.html.twig', { 'form': form.productPrices.vars.prototype }) }}{% endfilter %}">
+                        <i class="icon-plus3"></i>
+                        Add new Product Price
+                    </button>
+                </div>
+            </div>
+            <div class="panel-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered sorted_table" id="addTable">
+                        <thead>
+                        <tr>
+                            <th>Min Quantity Of Products</th>
+                            <th>Max Quantity Of Products</th>
+                            <th>Unit Price</th>
+                            <th>Promotional Price</th>
+                            <th>Promotional Expiry Date</th>
+                            <th>Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for child in form.productPrices.children %}
+                            {{ include('product/admin/product/productPriceRow.html.twig', { 'form': child }) }}
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <hr />
+    </div>
+</div>
+

@@ -1,0 +1,95 @@
+<style>
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 13px;
+    }
+
+    thead tr th {
+        font-weight: bold;
+        background: #808080;
+    }
+
+    td, th {
+        text-align: center;
+        padding: 8px 0;
+        vertical-align: middle;
+    }
+
+    img {
+        height: 70px;
+    }
+</style>
+
+<span style="text-align: center">
+    <img src="{{ asset('images/logo_colored.jpg') }}" alt="seats">
+</span>
+<h1 style="text-align:center; font-size:30px; margin-bottom: 20px;">Price List</h1>
+<p>
+<hr>
+</p>
+
+<p style="text-align: right;margin-top: 10px;width: 100%; font-size: 12px;">
+    Quotation Automatically generated on {{ "now"|date("d/m/Y") }}
+    at {{ "now"|date("h:i A") }}
+</p>
+<table border="1" cellpadding="3">
+    <thead>
+    <tr style="background-color:#2f0236; color: #ffffff">
+        <th style="font-weight: bold;">Image</th>
+        <th style="font-weight: bold;">Product Name</th>
+        <th style="font-weight: bold;">Qty</th>
+        <th style="font-weight: bold;">Unit Price</th>
+        <th style="font-weight: bold;">Total Price</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for cartItem in cart.cartItems %}
+        {% set mainImage = 'images/placeholders/placeholder-sm.jpg' %}
+        {% if cartItem.product.mainImage %}
+            {% set mainImage = cartItem.product.mainImage.assetPathThumb %}
+        {% endif %}
+
+        <tr>
+            <td>
+                <img src="{{ asset(mainImage) }}" alt="{{ cartItem.product.title }}">
+            </td>
+            <td style="text-align: left;">
+                {# <div style="font-size:5pt">&nbsp;</div> #}
+                <div style="margin: 0">{{ cartItem.product.title }}</div>
+                <span>SKU: {{ cartItem.product.sku }}</span>
+            </td>
+            <td>
+                {# <div style="font-size:15pt">&nbsp;</div> #}
+                <div style="margin: 0">{{ cartItem.qty }}</div>
+            </td>
+            <td>
+                {# <div style="font-size:15pt">&nbsp;</div> #}
+                <div style="margin: 0">{{ cartItem.unitPrice|number_format }} {% trans %}EGP{% endtrans %}</div>
+            </td>
+            <td>
+                {# <div style="font-size:15pt">&nbsp;</div> #}
+                <div style="margin: 0">{{ cartItem.totalPrice|number_format }} {% trans %}EGP{% endtrans %}</div>
+            </td>
+        </tr>
+    {% else %}
+        <tr>
+            <td colspan="5">{% trans %}Your cart is empty{% endtrans %}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+    <tfoot>
+    <tr>
+        <td colspan="5"><strong>Total:</strong> {{ cart.grandTotal|number_format(1) }} {% trans %}EGP{% endtrans %}</td>
+    </tr>
+    </tfoot>
+</table>
+
+<p>
+    <span>1. This quotation is valid for 20 days.</span><br>
+    <span>2. Prices are ex-factory.</span><br>
+    <span>3. Price excludes foam fire-retarding processing.</span><br>
+    <span>4. Price excludes surface fabrics or leather.</span><br>
+    <span>5. Price excludes VAT.</span>
+</p>
+

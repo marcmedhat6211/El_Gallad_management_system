@@ -1,0 +1,13 @@
+product_admin:
+  resource: "@ProductBundle/Controller/Administration"
+  type:     annotation
+  prefix:   /admin/product
+
+product_frontEnd:
+  resource: "@ProductBundle/Controller/FrontEnd"
+  type:     annotation
+  prefix:   /{_locale}/product
+  defaults:  {_locale: '%locale%' }
+  requirements:
+      _locale: '%app.locales%'
+  

@@ -1,0 +1,55 @@
+.banner-04 {
+	.card-img{
+		height: 300px;
+	}
+	@include media-breakpoint-up(sm) {
+		.card-img {
+			height: 408px;
+		}
+
+	}
+
+}
+.banner-05 {
+	.card-img{
+		height: 300px;
+	}
+	@include media-breakpoint-up(sm) {
+		.card-img {
+			height: 400px;
+		}
+
+	}
+	@include media-breakpoint-up(xxl) {
+		.card-img {
+			height: 515px;
+		}
+
+	}
+
+}
+.banner-09 {
+	.card-img{
+		height: 400px;
+	}
+
+	@include media-breakpoint-up(md) {
+		.card-img {
+			height: 500px;
+		}
+
+	}
+
+}
+.banner-07 {
+	.card-img{
+		height: 250px;
+	}
+	@include media-breakpoint-up(md) {
+		.card-img {
+			height: 370px;
+		}
+
+	}
+
+}

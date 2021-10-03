@@ -1,0 +1,104 @@
+.input-style-1 {
+    border-radius: 6px !important;
+}
+
+.custom-control-input:checked~.custom-control-label::before {
+    border-color: $color-purple-2;
+    background-color: $color-purple-2;
+    // border-radius: 3px;
+}
+
+.custom-control-input~.custom-control-label::before {
+    border-radius: 3px;
+}
+
+.radio-style-1 {
+    color: $color-black;
+    input {
+        display: none;
+    }
+    &>label {
+        display: inline-block;
+        position: relative;
+        margin-right: 16px;
+        padding-left: 24px;
+        cursor: pointer;
+        font-size: 14px;
+        &::before {
+            content: "";
+            display: block;
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            left: 0;
+            top: 50%;
+            margin-top: -8px;
+            border: 1px solid $color-purple-2;
+            border-radius: 8px;
+        }
+        &::after {
+            content: "";
+            display: block;
+            position: absolute;
+            width: 0;
+            height: 0;
+            top: 50%;
+            left: 8px;
+            margin-top: 0;
+            background: $color-purple-2;
+            border-radius: 4px;
+            @include transition(all .2s ease-in-out);
+        }
+        &:hover {
+            &::after {
+                background: rgba($color-purple-2, 0.4);
+            }
+        }
+    }
+}
+
+.radio-style-1 :checked+label:after {
+    height: 8px;
+    width: 8px;
+    margin-top: -4px;
+    left: 4px;
+}
+
+.inc-dec-container {
+    .inc-dec-input {
+        border-radius: 6px !important;
+    }
+    .far {
+        color: $color-purple-3 !important;
+    }
+}
+
+.input-style-2 {
+    position: relative;
+    input {
+        background: $white;
+        border: 1px solid $input-border-color;
+        border-radius: 6px;
+        color: $primary;
+        font-weight: 500;
+        font-size: 14px;
+        padding-#{$start-direction}: 40px;
+        &::-webkit-inner-spin-button,
+        &::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+            display: none;
+        }
+    }
+    &::after {
+        content: "EGP";
+        position: absolute;
+        left: 10px;
+        top: 50%;
+        width: fit-content;
+        transform: translateY(-50%);
+        font-size: 14px;
+        font-weight: 400;
+        color: $input-placeholder-color;
+    }
+}

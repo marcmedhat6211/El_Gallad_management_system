@@ -1,0 +1,156 @@
+// Color system
+$primary: #333132;
+$secondary: #777777;
+$accent: #ece4de;
+$white: #fff;
+$off-white: #EFEAF0;
+$colors: ( "accent": $accent, );
+$theme-colors: ( "accent": $accent, 'white':$white, );
+// Body
+//
+// Settings for the `<body>` element.
+$body-color: $secondary;
+$headings-color: $primary;
+// Options
+//
+// Quickly modify global styling by enabling or disabling optional features.
+$enable_shadows: true;
+// Components
+//
+// Define common padding and border radius sizes and more.
+$caret-spacing: 0.25rem;
+// Typography
+//
+// Font, line-height, and color for body text, headings, and more.
+$font-family-sans-serif: 'Goldplay';
+$font-size-base: 1rem;
+$line-height-base: 1.63;
+$font-size-lg: 1.25rem;
+$font-size-sm: 0.75rem;
+$line-height-lg: 2;
+$font-weight-normal: 400;
+$font-weight-bold: 600;
+$danger: #f8d7da;
+$success: #d4edda;
+$warning: #fff3cd;
+$info: #d1ecf1;
+$headings-font-weight: 500;
+$headings-line-height: 1.25;
+$color-bg: #F4F4F4;
+$color-purple-primary: #2f0236;
+$color-purple-2: #60326D;
+$color-purple-3: #8F53A1;
+$color-purple-4: #DFD6E2;
+$color-blue-1: #221939;
+$color-blue-2: #007199;
+$color-blue-3: #00A7E1;
+$color-black: #333132;
+$color-grey-medium: #939598;
+$color-grey-medium-2: #222222;
+$color-grey-light: #d1d3d4;
+$headings-color: $color-black;
+$text-muted: #8b7c7c;
+$border-color: #e4e4e4;
+// Grid containers
+//
+// Define the maximum width of `.container` for different screen sizes.
+$container-max-widths: ( sm: 546px, md: 738px, lg: 962px, xl: 1200px);
+$grid-breakpoints: ( xs: 0, sm: 576px, md: 768px, lg: 992px, xl: 1200px, xxl: 1750px);
+// Spacing
+// Control the default styling of most Bootstrap elements by modifying these
+// variables. Mostly focused on spacing.
+// You can add more entries to the $spacers map, should you need more variation.
+$spacer: 1rem;
+$spacers: ( 0: 0, 1: ($spacer * .3125), //5px
+2: ($spacer * .625), //10px
+3: $spacer, //16px
+4: ($spacer * 1.25), //20px
+5: ($spacer * 1.5), //24px
+6: ($spacer * 1.875), //30px
+7: ($spacer * 2.5), //40px
+8: ($spacer * 3.125), //50px
+9: ($spacer * 3.75), //60px
+10: ($spacer * 4.375), //70px
+11: ($spacer * 5), //80px
+12: ($spacer * 5.625), //90px
+13: ($spacer * 6.25), //100px
+14: ($spacer * 6.875), //110px
+15: ($spacer * 7.5), //120px
+16:($spacer * 9.375), //150px
+17:($spacer * 10.625), //170px
+18:($spacer * 13.75) //220px
+);
+// Buttons
+//
+// For each of Bootstrap's buttons, define text, background, and border color.
+$btn-font-weight: 500;
+$btn-padding-x-lg: 2.1875rem;
+$btn-padding-x: 1.875rem;
+$input-font-weight: 500;
+$input-bg: #fff;
+$input-color: $body-color;
+$input-border-color: #d2d2d2;
+$input-border-width: 1px;
+$input-box-shadow: none;
+$input-focus-border-color: $primary;
+$input-focus-box-shadow: none;
+$input-btn-line-height: 1.65;
+$input-placeholder-color: #777777;
+$input-btn-font-size: 0.875rem;
+$input-btn-padding-y: 0.625rem;
+$input-btn-padding-y-sm: 0.47rem;
+$input-padding-y: 0.71875rem;
+$input-padding-x: 1.25rem;
+$input-line-height: 1.25;
+$input-font-size: $font-size-base;
+$input-font-weight: $font-weight-normal;
+$input-border-radius: 0;
+$input-border-radius-lg: 0;
+$input-btn-font-size-lg: $font-size-base;
+$custom-checkbox-indicator-border-radius: 0;
+$custom-control-label-color: $primary;
+$custom-control-indicator-border-color: $primary;
+$custom-control-indicator-checked-box-shadow: none;
+$custom-checkbox-indicator-indeterminate-box-shadow: none;
+$custom-control-indicator-active-box-shadow: none;
+$btn-box-shadow: none;
+$btn-padding-y: $input-btn-padding-y;
+$btn-font-size: $input-btn-font-size;
+$btn-line-height: $input-btn-line-height;
+$btn-border-radius: 0;
+$btn-border-radius-lg: 0;
+$btn-border-radius-sm: 0;
+// Nav Tabs
+$nav-tabs-link-active-color: $primary;
+$nav-tabs-border-width: 1px;
+$nav-tabs-border-radius: 5px;
+// Navbar
+$navbar-light-color: $primary;
+$navbar-nav-link-padding-x: 1.25rem;
+$navbar-dark-color: #fff;
+$navbar-dark-hover-color: #fff;
+$navbar-dark-active-color: #fff;
+$navbar-dark-disabled-color: #f5f5f5;
+$breadcrumb-padding-x: 0;
+$breadcrumb-item-padding: 1rem;
+$breadcrumb-margin-bottom: 0;
+$breadcrumb-bg: transparent;
+$breadcrumb-divider-color: #b2b2b2;
+$breadcrumb-active-color: #333132;
+$breadcrumb-font-size: 15px;
+$card-border-radius: 0;
+$pagination-padding-x: 21px;
+$pagination-color: #a2a2a2;
+$pagination-border-width: 0;
+$pagination-bg: transparent;
+$pagination-hover-color: $primary;
+$pagination-hover-bg: transparent;
+$pagination-hover-border-color: transparent;
+$pagination-active-color: $primary;
+$pagination-active-bg: transparent;
+$pagination-active-border-color: transparent;
+$dropdown-link-color: $primary;
+$dropdown-link-hover-color: $primary;
+$dropdown-link-hover-bg: $accent;
+$dropdown-link-active-color: $primary;
+$dropdown-link-active-bg: $accent;

@@ -1,0 +1,143 @@
+imports:
+  - { resource: parameters.yml }
+  - { resource: security.yml }
+  - { resource: services.yml }
+
+# Put parameters here that don't need to change on each machine where the app is deployed
+# https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
+parameters:
+  locale: en
+  app.locales: "|en|ar"
+
+framework:
+  esi: ~
+  translator: { fallbacks: [ '%locale%' ] }
+  secret: '%secret%'
+  router:
+    resource: '%kernel.project_dir%/app/config/routing.yml'
+    strict_requirements: ~
+  form: ~
+  csrf_protection: ~
+  validation: { enable_annotations: true }
+  #serializer: { enable_annotations: true }
+  templating:
+    engines: [ 'twig' ]
+  default_locale: '%locale%'
+  trusted_hosts: ~
+  session:
+    # https://symfony.com/doc/current/reference/configuration/framework.html#handler-id
+    handler_id: session.handler.native_file
+    save_path: '%kernel.project_dir%/var/sessions/%kernel.environment%'
+  fragments: ~
+  http_method_override: true
+  assets: ~
+  php_errors:
+    log: true
+
+sensio_framework_extra:
+  router:
+    annotations: false
+
+# Twig Configuration
+twig:
+  debug: '%kernel.debug%'
+  strict_variables: '%kernel.debug%'
+  form_themes:
+    - 'form/fields.html.twig'
+  globals:
+    root_path: '%kernel.root_dir%'
+
+# Doctrine Configuration
+doctrine:
+  dbal:
+    driver: pdo_mysql
+    host: '%database_host%'
+    port: '%database_port%'
+    dbname: '%database_name%'
+    user: '%database_user%'
+    password: '%database_password%'
+    charset: UTF8
+    # if using pdo_sqlite as your database driver:
+    #   1. add the path in parameters.yml
+    #     e.g. database_path: '%kernel.project_dir%/var/data/data.sqlite'
+    #   2. Uncomment database_path in parameters.yml.dist
+    #   3. Uncomment next line:
+    #path: '%database_path%'
+
+  orm:
+    auto_generate_proxy_classes: '%kernel.debug%'
+    naming_strategy: doctrine.orm.naming_strategy.underscore
+    auto_mapping: true
+    mappings:
+      gedmo_loggable:
+        type: annotation
+        prefix: Gedmo\Loggable\Entity
+        dir: "%kernel.root_dir%/../vendor/gedmo/doctrine-extensions/lib/Gedmo/Loggable/Entity"
+        alias: GedmoLoggable # (optional) it will default to the name set for the mapping
+        is_bundle: false
+    dql:
+      string_functions:
+        MATCH_AGAINST: PN\ServiceBundle\Extensions\Doctrine\MatchAgainst
+        RAND: PN\ServiceBundle\Extensions\Doctrine\Rand
+        JSON_CONTAINS: Scienta\DoctrineJsonFunctions\Query\AST\Functions\Mysql\JsonContains
+        GREATEST: DoctrineExtensions\Query\Mysql\Greatest
+        LEAST: DoctrineExtensions\Query\Mysql\Least
+        IFNULL: DoctrineExtensions\Query\Mysql\IfNull
+    resolve_target_entities:
+      VM5\EntityTranslationsBundle\Model\Language: PN\LocaleBundle\Entity\Language
+      PN\MediaBundle\Entity\Image: PN\Bundle\MediaBundle\Entity\Image
+      PN\MediaBundle\Entity\Document: PN\Bundle\MediaBundle\Entity\Document
+      PN\SeoBundle\Entity\Seo: PN\Bundle\SeoBundle\Entity\Seo
+
+# Swiftmailer Configuration
+swiftmailer:
+  transport: '%mailer_transport%'
+  host: '%mailer_host%'
+  username: '%mailer_user%'
+  password: '%mailer_password%'
+  port: 587
+
+
+fos_user:
+  db_driver: orm # other valid values are 'mongodb', 'couchdb' and 'propel'
+  firewall_name: main
+  user_class: PN\Bundle\UserBundle\Entity\User
+  from_email:
+    address: no-reply@seats.com
+    sender_name: Seats
+  resetting:
+    email:
+      template: UserBundle:Resetting:email.html.twig
+  registration:
+    form:
+      type: PN\Bundle\UserBundle\Form\RegistrationType
+
+  profile:
+    form:
+      type: PN\Bundle\UserBundle\Form\ProfileType
+  service:
+    mailer: user.mailer
+
+pn_seo:
+  seo_class: PN\Bundle\SeoBundle\Entity\Seo
+  seo_translation_class: PN\Bundle\SeoBundle\Entity\Translation\SeoTranslation
+
+pn_content:
+  post_class: PN\Bundle\ContentBundle\Entity\Post
+  post_translation_class: PN\Bundle\ContentBundle\Entity\Translation\PostTranslation
+
+pn_media:
+  image:
+    image_class: PN\Bundle\MediaBundle\Entity\Image
+    mime_types: [ 'image/gif', 'image/jpeg', 'image/jpg', 'image/png' ]
+    upload_paths:
+      - { id: 100, path: 'banner' }
+      - { id: 101, path: 'partner', width: 85, height: 85, validateWidthAndHeight: false, validateSize: true }
+      - { id: 102, path: 'team', width: 130, height: 130, validateWidthAndHeight: true }
+      - { id: 103, path: 'category', width: 580, height: 580, validateWidthAndHeight: true, validateSize: true }
+  document:
+    document_class: PN\Bundle\MediaBundle\Entity\Document
+    mime_types: [ 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'application/vnd.openxmlformats-officedocument.presentationml.presentation', 'application/mspowerpoint', 'application/powerpoint', 'application/vnd.ms-powerpoint', 'application/x-mspowerpoint', 'application/pdf', 'application/excel', 'application/vnd.ms-excel', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' ]
+    upload_paths:
+      - { id: 100, path: 'application' }
+      - { id: 101, path: 'tear-sheet' }

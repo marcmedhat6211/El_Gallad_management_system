@@ -1,0 +1,40 @@
+{% import 'adminTemplate/macros.html.twig' as macros %}
+<div class="panel panel-flat">
+    <div class="panel-body">
+        <div class="row">
+            {{ macros.input(form.title, 4) }}
+            {{ macros.input(form.text, 4) }}
+            {{ macros.input(form.tarteb, 4) }}
+        </div>
+        <div class="row">
+            {{ macros.input(form.placement,6,null,null,'select-search select2-hidden-accessible') }}
+            {{ macros.input(form.url,6,'Hint : https://www.google.com') }}
+        </div>
+        <div class="row">
+            {{ macros.input(form.actionButton) }}
+            {{ macros.checkbox(form.openType) }}
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Banner Image:</label>
+                    <div class="media no-margin-top">
+                        {% if banner.image %}
+                            <div class="media-left">
+                                <a href="#"><img src="{{ asset(banner.image.assetPath) }}" style="width: 58px; height: 58px; border-radius: 2px;" alt=""></a>
+                            </div>
+                        {% endif %}
+                        <div class="media-body">
+                            {{ form_widget(form.image.file,{'attr':{'class':'file-styled'}}) }}
+                        </div>
+                    </div>
+                    <span class="help-block">Accepted formats: gif, png, jpg. Max file size 2Mb</span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="panel-footer">
+        {% include 'adminTemplate/saveAndResetFormFooter.html.twig' %}
+    </div>
+</div>

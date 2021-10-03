@@ -1,0 +1,22 @@
+{% extends 'fe/base.html.twig' %}
+{% set seo = seoPage.seo %}
+{% use '@PNSeo/FrontEnd/seo.html.twig' %}
+{% import 'fe/macros.html.twig' as macros %}
+
+{% block content %}
+    {% if projects is not empty %}
+        <section class="pb-11 pb-lg-15 pt-20">
+            <div class="container container-xxl">
+                <h2 class="mb-9 text-center fs-30 fs-md-40">{% trans %}Projects{% endtrans %}</h2>
+                <div class="row">
+                    {% for project in projects %}
+                        <div class="col-12 col-sm-6 col-lg-4 mb-4">
+                            {{ macros.project(project) }}
+                        </div>
+                    {% endfor %}
+                </div>
+                {% include 'fe/pagination.html.twig' %}
+            </div>
+        </section>
+    {% endif %}
+{% endblock %}

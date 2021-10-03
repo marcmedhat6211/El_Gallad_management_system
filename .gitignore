@@ -1,0 +1,41 @@
+# Cache, session files and logs (Symfony3)
+/var/cache/*
+/var/logs/*
+/var/sessions/*
+/var/spool/*
+!var/cache/.gitkeep
+!var/logs/.gitkeep
+!var/sessions/.gitkeep
+
+# Parameters
+/app/config/parameters.yml
+
+# Managed by Composer
+/app/bootstrap.php.cache
+/var/bootstrap.php.cache
+/bin/*
+!bin/console
+!bin/symfony_requirements
+/vendor/
+
+# Assets and user uploads
+/web/bundles/
+/web/uploads/
+/web/.htaccess
+
+
+# Composer PHAR
+/composer.phar
+
+# Backup entities generated with doctrine:generate:entities command
+**/Entity/*~
+
+# PHPStorem folder
+/.idea/*
+
+# Mac OS Files
+/.DS_Store
+
+# netbeans folder
+/nbproject
+.web-server-pid

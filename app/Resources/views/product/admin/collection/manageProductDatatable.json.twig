@@ -1,0 +1,19 @@
+{
+    "recordsTotal": {{ recordsTotal }},
+    "recordsFiltered": {{ recordsFiltered }},
+    "data": [
+        {% for product in products %}
+        [
+            "<input type='checkbox' {% if product.inCollection == true %}checked{% endif %} id='check-{{ product.id }}' value='{{ product.id }}' class='checkProduct'>",
+            "{{ product.id|pn_json_encode }}",
+            "{% if product.sku %}{{ product.sku|pn_json_encode }}{% else %}N/A{% endif %}",
+            "{{ product.title|pn_json_encode }}",
+            "{% if product.mainImage %}<div class='thumb' style='width: 58px; height: 58px;'><a href='{{ asset(product.mainImage.assetPath) }}' data-popup='lightbox'><img src='{{ asset(product.mainImage.assetPathThumb) }}' alt='' style='width: 58px; height: 58px;'><span class='zoom-image'><i class='icon-plus2'></i></span></a></div>{% else %}--{% endif %}",
+            "{{ product.details.pricing }}",
+            "{{ product.category.title|pn_json_encode }}",
+            "{% if product.created %}{{ product.created|date('d/m/Y') }}{% else %}--{% endif %}",
+            "{% if product.publish %}<a href='#' class='label label-success'>Yes</a>{% else %}<a href='#' class='label label-danger'>No</a>{% endif %}"
+        ]{% if loop.last == false %},{% endif %}
+        {% endfor %}
+    ]
+}

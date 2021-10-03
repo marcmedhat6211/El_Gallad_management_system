@@ -1,0 +1,18 @@
+{
+    "recordsTotal": {{ recordsTotal }},
+    "recordsFiltered": {{ recordsFiltered }},
+    "data": [
+        {% for partner in partners %}
+        [
+            "{{ partner.title }}",
+            "{% if partner.tarteb  %}{{ partner.tarteb }}{% else %}N/A{% endif %}",
+            "{% if partner.rating  %}{{ partner.rating }}{% else %}N/A{% endif %}",
+            "{% if partner.publish %}<a href='#' class='label label-flat border-success text-success-600'>Yes</a>{% else %}<a href='#' class='label label-flat border-danger text-danger-600'>No</a>{% endif %}",
+            "{% if partner.image %}<div class='thumb' style='width: 58px; height: 58px;'><a href='{{ asset(partner.image.assetPath) }}' data-popup='lightbox'><img src='{{ asset(partner.image.assetPath) }}' alt='' style='width: 58px; height: 58px;'><span class='zoom-image'><i class='icon-plus2'></i></span></a></div>{% else %}--{% endif %}",
+            " <ul class='icons-list'><li class='dropdown'><a href='#' class='dropdown-toggle' data-toggle='dropdown'><i class='icon-menu9'></i></a><ul class='dropdown-menu dropdown-menu-right'><li><a href='{{ path('partner_edit',{'id':partner.id}) }}'><i class='icon-pencil7'></i> Edit</a></li><li><a href='#' class='delete-btn' data-toggle='modal' data-target='#modal_delete' data-delete='{{ path('partner_delete',{'id':partner.id}) }}'><i class='icon-bin'></i> Remove</a></li></ul></li></ul>"
+        ]
+        {% if loop.last == false %},
+        {% endif %}
+        {% endfor %}
+    ]
+}

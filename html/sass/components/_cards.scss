@@ -1,0 +1,100 @@
+.filter-card {
+    cursor: pointer;
+    position: relative;
+    height: 275px;
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+    &::after {
+        transition: all .3s ease-in-out;
+        content: "";
+        position: absolute;
+        #{$start-direction}: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background: $color-grey-medium;
+        opacity: 0;
+    }
+    &.active {
+        border: 3px solid $color-purple-2 !important;
+        .card-title {
+            color: $color-purple-2;
+        }
+    }
+    &:hover {
+        .card-title {
+            color: $color-purple-2;
+        }
+        &::after {
+            opacity: .2;
+        }
+    }
+}
+
+.service-card {
+    img {
+        border-radius: 16px;
+    }
+}
+
+.card-1 {
+    .badge+.badge {
+        top: 80px;
+    }
+}
+
+.card-2 {
+    a.card-img-top {
+        height: 255px;
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+}
+
+.card-3 {
+    img {
+        height: 250px;
+        object-fit: cover;
+    }
+    p {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 3;
+    }
+}
+
+.card-4 {
+    div {
+        .card-img {
+            width: 130px;
+            height: 130px;
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+        }
+    }
+}
+
+@media (min-width: 1350.98px) {
+    a.card-img-top {
+        height: 365px !important;
+    }
+}
+
+@include media-breakpoint-down(md) {
+    .card-2 {
+        a.card-img-top {
+            height: 180px;
+        }
+    }
+}

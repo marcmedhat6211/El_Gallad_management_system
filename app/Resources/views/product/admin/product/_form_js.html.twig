@@ -1,0 +1,183 @@
+<script type="text/javascript" src="{{ asset('admin/js/plugins/pickers/pickadate/picker.js') }}"></script>
+<script type="text/javascript" src="{{ asset('admin/js/plugins/pickers/pickadate/picker.date.js') }}"></script>
+<script type="text/javascript" src="{{ asset('admin/js/plugins/notifications/bootbox.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('admin/js/plugins/notifications/sweet_alert.min.js') }}"></script>
+
+<script type="text/javascript" src="{{ asset('admin/js/core/libraries/jquery_ui/core.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('fancytree/jquery.fancytree.js') }}"></script>
+<script>
+    {#let relatedProductUrl = '{{ path('related_product_select_ajax') }}';#}
+    let getSpecsUrl = '{{ path('product_specs_form_ajax') }}';
+    let productId = {% if product.id is null %}null{% else %}"{{ product.id }}"{% endif %};
+    let specsAjaxRequest = null;
+    $(document).ready(function () {
+        // $('#product_details_relatedProducts').select2({
+        //     minimumInputLength: 2,
+        //     language: {
+        //         inputTooShort: function () {
+        //             return "Please enter product name";
+        //         }
+        //     },
+        //     ajax: {
+        //         url: relatedProductUrl,
+        //         delay: 250,
+        //         data: function (params) {
+        //             return {
+        //                 q: params.term, // search term
+        //                 page: params.page
+        //             };
+        //         }
+        //     }
+        // });
+
+
+        {#$('#myFancyTreeID').fancytree({#}
+        {#    checkbox: true,#}
+        {#    debugLevel: 0,#}
+        {#    selectMode: 1,#}
+        {#    click: function (event, data) {#}
+        {#        if (typeof data.node.data.id != "undefined") {#}
+        {#            data.node.setSelected(true);#}
+        {#            return false;#}
+
+        {#        }#}
+        {#    },#}
+        {#    select: function (event, data) {#}
+        {#        // Display list of selected nodes#}
+        {#        if (typeof data.node.data.id != "undefined") {#}
+        {#            changeCategory(data.node.data.id, data.node.title);#}
+        {#        }#}
+        {#    },#}
+        {#    source: {#}
+        {#        url: "{{ path('product_category_fancy_tree', {"id":product.id}) }}"#}
+        {#    }#}
+        {#});#}
+
+        $("select[name*='[subAttributes]']").change(function () {
+
+            let otherInputId = $(this).attr("id") + "_other";
+            let otherInput = $('#' + otherInputId);
+
+            if (otherInput.length > 0) {
+                let dropDownValue = $(this).find("option:selected").val();
+                if (dropDownValue == "other") {
+                    otherInput.closest(".form-group").parent().show();
+                } else {
+                    otherInput.closest(".form-group").parent().hide();
+                }
+            }
+        });
+        $("select[name*='[category]']").change(function () {
+            getSpecsForm($(this).val());
+        });
+
+        $("body").on("click", ".delete-pdf", function (e) {
+            var $this = $(this);
+            e.preventDefault();
+
+            bootbox.confirm({
+                title: 'Confirm dialog',
+                message: 'Are you sure you want to delete the brochure?',
+                buttons: {
+                    confirm: {
+                        label: 'OK',
+                        className: 'btn-primary'
+                    },
+                    cancel: {
+                        label: 'Cancel',
+                        className: 'btn-link'
+                    }
+                },
+                callback: function (result) {
+                    if (result === true) {
+                        window.location = $this.attr("href");
+                    }
+                }
+            });
+        });
+    });
+
+    function changeCategory(id, title) {
+        $("#categoryName").text(title);
+        $("#product_category").val(id);
+        getSpecsForm(id);
+    }
+
+    function getSpecsForm(categoryId) {
+        let subAttributesBox = $("#sub-attributes-box");
+        let submitBtns= $("button[type=submit]");
+        submitBtns.attr("disabled","disabled");
+        subAttributesBox.addClass("box-loading");
+        specsAjaxRequest = $.ajax({
+            type: "post",
+            "url": getSpecsUrl,
+            dataType: "json",
+            data: {productId: productId, categoryId: categoryId},
+            beforeSend: function () {
+                if (specsAjaxRequest != null) {
+                    specsAjaxRequest.abort();
+                }
+            },
+            success: function (json) {
+                submitBtns.removeAttr("disabled");
+                subAttributesBox.removeClass("box-loading");
+                if (json.error == 0) {
+                    subAttributesBox.empty().append(json.html);
+                    subAttributesBox.find('.select-search').select2();
+                } else {
+                }
+            },
+        });
+    }
+    $(document).ready(function () {
+        initDatepicker();
+
+        var productPriceHolder = $('#addTable>tbody');
+
+        if (productPriceHolder.find("td").length == 0) {
+            addPrice();
+        }
+
+        function addPrice() {
+            var collectionHolder = $('#addPrice');
+            var prototype = collectionHolder.attr('data-prototype');
+            form = prototype.replace(/\_\_name\_\_/g, productPriceHolder.children().length);
+            productPriceHolder.append(form);
+            initDatepicker();
+        }
+
+        $("#addPrice").on('click', function (e) {
+            e.preventDefault();
+            addPrice();
+        });
+
+        $("body").on("click", ".delete", function (e) {
+            var $this = $(this);
+            bootbox.confirm({
+                title: 'Confirm dialog',
+                message: 'Are you sure you want to delete?',
+                buttons: {
+                    confirm: {
+                        label: 'OK',
+                        className: 'btn-primary'
+                    },
+                    cancel: {
+                        label: 'Cancel',
+                        className: 'btn-link'
+                    }
+                },
+                callback: function (result) {
+                    if (result === true) {
+                        $this.parent().parent().remove();
+                    }
+                }
+            });
+        });
+        function initDatepicker() {
+            $(".datepicker").pickadate({
+                format: 'dd/mm/yyyy',
+                formatSubmit: 'dd/mm/yyyy'
+            });
+        }
+    });
+</script>

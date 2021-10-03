@@ -1,0 +1,27 @@
+{% import 'adminTemplate/macros.html.twig' as macros %}
+<div class="panel panel-flat">
+    <div class="panel-body">
+        <div class="row">
+            {{ macros.input(form.title, 4) }}
+            {{ macros.input(form.interiorDesignerName, 4) }}
+            {{ macros.input(form.projectScope, 4) }}
+        </div>
+        <div class="row">
+{#            {{ macros.input(form.relatedProducts, 4) }}#}
+            {{ macros.input(form.tarteb, 4) }}
+            {{ macros.input(form.client, 4) }}
+            {{ macros.input(form.date, 4) }}
+        </div>
+        <div class="row">
+            {{ macros.input(form.services, 6) }}
+            {{ macros.input(form.products, 6) }}
+        </div>
+        <div class="row">
+            {{ macros.input(form.post.description, 12, null,null, 'form-control ckeditor') }}
+        </div>
+    </div>
+    <div class="panel-footer">
+        {% include 'adminTemplate/saveAndResetFormFooter.html.twig' %}
+    </div>
+</div>
+{% include '@PNSeo/Administration/Seo/seo.html.twig' with { 'seoForm':form.seo, 'entity':project } %}

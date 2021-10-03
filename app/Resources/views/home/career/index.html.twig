@@ -1,0 +1,95 @@
+{% extends 'fe/base.html.twig' %}
+{% set seo = seoPage.seo %}
+{% use '@PNSeo/FrontEnd/seo.html.twig' %}
+
+{% block content %}
+    <section class="page-header-section background-1" {% if banner and banner.image %}style="background-image: url('{{ asset(banner.image.assetPath) }}')" {% endif %}>
+        <div class="container">
+            <h1 class="page-title">Careers</h1>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{{ path('fe_home') }}">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Careers</li>
+                </ol>
+            </nav>
+        </div>
+    </section>
+
+    <section class="careers-section">
+        <div class="container">
+            {{ include("fe/_flash_messages.html.twig") }}
+            <div class="row">
+                <div class="col-md-6 offset-md-3">
+                    <h2 class="text-center">Join our Team</h2>
+                    <p class="text-center">C.Reality fosters and promotes the growth of individuals who are dedicated and innovative in various fields including furniture design and production, sales, interior styling, marketing, and finance.</p>
+                </div>
+            </div>
+                {{ form_start(career_form, {'attr':{"id":"career-form" } }) }}
+                <div class="row mt-3">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            {{ form_widget(career_form.firstName) }}
+                            {{ form_errors(career_form.firstName) }}
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            {{ form_widget(career_form.lastName) }}
+                            {{ form_errors(career_form.lastName) }}
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            {{ form_widget(career_form.email) }}
+                            {{ form_errors(career_form.email) }}
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            {{ form_widget(career_form.phone) }}
+                            {{ form_errors(career_form.phone) }}
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            {{ form_widget(career_form.applyFor) }}
+                            {{ form_errors(career_form.applyFor) }}
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            {{ form_widget(career_form.yearOfExperience) }}
+                            {{ form_errors(career_form.yearOfExperience) }}
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            {{ form_widget(career_form.coverLetter) }}
+                            {{ form_errors(career_form.coverLetter) }}
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            {{ form_widget(career_form.resume) }}
+                            {{ form_errors(career_form.resume) }}
+                            <small class="form-text text-muted">Accepted Formats: pdf, doc, docx</small>
+                        </div>
+                    </div>
+                    <div class="col-md-12 text-center">
+                        <button type="submit" class="btn btn-style-2">
+                            Apply
+                            <span class="icon_minus-06 "></span>
+                            <span class="arrow_right"></span>
+                        </button>
+                    </div>
+                </div>
+            {{ form_end(career_form) }}
+        </div>
+    </section>
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+     <script src="{{ asset('js/pages/careers.js') }}"></script>
+{% endblock %}

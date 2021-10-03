@@ -1,0 +1,67 @@
+{% set cookies = app.request.cookies %}
+
+<div id="cart_sidebar_canvas">
+    <div class="canvas-sidebar cart-canvas">
+        <div class="canvas-overlay">
+        </div>
+        <form class="h-100">
+            <div class="card border-0 pt-5 pb-7 h-100">
+                <div class="px-6 text-right">
+                        <span class="canvas-close d-inline-block fs-24 mb-1 ml-auto lh-1 text-primary"><i
+                                    class="fal fa-times"></i></span>
+                </div>
+                <div class="card-header bg-transparent py-0 px-6">
+                    <h3 class="fs-24 mb-5">
+                        {% trans %}Your Cart{% endtrans %}
+                    </h3>
+                    {% if cart.cartItems is empty %}
+                        <p class="fs-15 text-primary">
+                            <span class="d-inline-block mr-2 fs-14"><i class="far fa-check-circle"></i></span>
+                            {% trans %}Your cart is empty{% endtrans %}
+                        </p>
+                    {% endif %}
+                </div>
+                <div class="card-body px-6 pt-7 overflow-y-auto">
+                    {% for cartItem in cart.cartItems %}
+                        {% set mainImage = 'images/placeholders/placeholder-sm.jpg' %}
+                        {% if cartItem.product.mainImage %}
+                            {% set mainImage = cartItem.product.mainImage.assetPathThumb %}
+                        {% endif %}
+                        <div class="mb-6 d-flex">
+                            <a href="#" class="d-block mr-4" data-uuid="{{ cartItem.product.uuid }}" data-link="{{ path('fe_cart_remove_ajax') }}"><i class="fal fa-times"></i></a>
+                            <div class="media">
+                                <div class="w-70px mr-4">
+                                    <img src="{{ asset(mainImage) }}" alt="{{ cartItem.product.title }}">
+                                </div>
+                                <div class="media-body">
+                                    <p class="text-muted fs-12 mb-0 text-uppercase letter-spacing-05 lh-1 mb-1">{{ cartItem.product.category.title }}</p>
+                                    <a href="#" class="font-weight-bold mb-3 d-block">{{ cartItem.product.title }}</a>
+                                    <div class="d-flex align-items-center">
+                                        <div class="input-group position-relative">
+                                            <a href="#" class="down position-absolute pos-fixed-left-center pl-2"><i
+                                                        class="far fa-minus"></i></a>
+                                            <input type="number" class="w-100 px-6 text-center" value="{{ cartItem.qty }}" data-uuid="{{ cartItem.product.uuid }}" data-link="{{ path('fe_cart_add_ajax', {"type": "update"}) }}">
+                                            <a href="#" class="up position-absolute pos-fixed-right-center pr-2"><i
+                                                        class="far fa-plus"></i>
+                                            </a>
+                                        </div>
+                                        <p class="mb-0 ml-12 text-primary">{{ cartItem.totalPrice|number_format(1) }} {% trans %}EGP{% endtrans %}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+                <div class="card-footer mt-auto border-0 bg-transparent px-6 pb-0 pt-5">
+                    <div class="d-flex align-items-center mb-4">
+                        <span class="font-weight-bold text-primary">{% trans %}Total{% endtrans %}</span>
+                        <span class="d-block ml-auto text-primary">{{ cart.grandTotal|number_format(1) }} {% trans %}EGP{% endtrans %}</span>
+                    </div>
+                    <a href="{{ path('fe_cart_download_pdf') }}" class="btn btn-primary btn-outline-primary btn-block mb-2">
+                        {% trans %}Download PDF{% endtrans %}
+                    </a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,61 @@
+{% extends 'adminTemplate/base.html.twig' %}
+{% import 'adminTemplate/macros.html.twig' as macros %}
+{% block breadcrumb %}
+    <div class="breadcrumb-line">
+        <ul class="breadcrumb">
+            <li><a href="{{ path('dashboard') }}"><i class="icon-home2 position-left"></i>Dashboard</a></li>
+            <li><a href="{{ path('admin_index') }}">Users list</a></li>
+            <li class="active">Edit {{ user.fullname }}</li>
+        </ul>
+    </div>
+{% endblock %}
+{% block body %}
+    {{ form_start(edit_form, {'attr':{"data-toggle":"validator", 'novalidate':'novalidate'}}) }}
+    <div class="panel panel-flat">
+        <div class="panel-heading">
+            <h5 class="panel-title">Edit Administrator</h5>
+        </div>
+
+        <div class="panel-body">
+            <div class="row">
+                {{ macros.input(edit_form.fullName) }}
+                {{ macros.input(edit_form.email) }}
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label> {{ form_label(edit_form.plainPassword.first) }} : </label>
+                        {{ form_widget(edit_form.plainPassword.first,{'attr':{'class':'form-control'},'required':false}) }}
+                        <label id="with_icon-error" class="validation-error-label" for="with_icon">{{ form_errors(edit_form.plainPassword.first) }}</label>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label> {{ form_label(edit_form.plainPassword.second) }} : </label>
+                        {{ form_widget(edit_form.plainPassword.second,{'attr':{'class':'form-control'},'required':false}) }}
+                        <label id="with_icon-error" class="validation-error-label" for="with_icon">{{ form_errors(edit_form.plainPassword.second) }}</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                {{ macros.input(edit_form.phone) }}
+                {{ macros.checkbox(edit_form.enabled) }}
+            </div>
+        </div>
+        <div class="panel-footer">
+            {% include 'adminTemplate/saveAndResetFormFooter.html.twig' %}
+        </div>
+    </div>
+    {{ form_end(edit_form) }}
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript" src="{{ asset('admin/js/plugins/forms/validation/validate.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('admin/js/pages/form_validation.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('admin/js/pages/form_select2.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('admin/js/plugins/forms/selects/select2.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('admin/js/plugins/forms/styling/switchery.min.js') }}"></script>
+
+{% endblock javascripts %}

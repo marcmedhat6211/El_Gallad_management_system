@@ -1,0 +1,91 @@
+<div class="sidebar sidebar-main sidebar-fixed">
+    <div class="sidebar-content">
+        <!-- Main navigation -->
+        <div class="sidebar-category sidebar-category-visible">
+            <div class="category-content no-padding">
+                <ul class="navigation navigation-main navigation-accordion">
+
+                    <!-- Main -->
+                    <li {% if cr in ['dashboard'] %} class="active" {% endif %}>
+                        <a href="{{ path('dashboard') }}"><i class="icon-home4"></i> <span>Dashboard</span></a>
+                    </li>
+                    {% if is_granted('ROLE_ADMIN') %} 
+                        <li {% if cr in ['admin_index', 'admin_new', 'admin_edit'] %} class="active" {% endif %}>
+                            <a href="{{ path('admin_index') }}"><i class="icon-user-tie"></i><span>Administrators List</span></a>
+                        </li>
+                        {#<li {% if cr in ['user_index', 'user_edit', 'user_show'] %} class="active" {% endif %}>
+                            <a href="{{ path('user_index') }}"><i class="icon-users"></i><span>User</span></a>
+                        </li>#}
+                    {% endif %}
+
+{#                    <li {% if cr in ['product_index','product_new', 'product_edit','category_index','category_new', 'category_edit','collection_index','collection_new', 'collection_edit', 'collection_manage_product', 'product_group_update_index','product_group_update_action'] %} class="active" {% endif %}>#}
+{#                        <a href="#"><i class="icon-basket"></i> <span>Product Catalog</span></a>#}
+{#                        <ul>#}
+{#                            <li {% if cr in ['product_index','product_new', 'product_edit'] %}class="active" {% endif %}>#}
+{#                                <a href="{{ path('product_index') }}">Products List</a>#}
+{#                            </li>#}
+{#                            <li {% if cr in ['category_index','category_new', 'category_edit'] %}class="active" {% endif %}>#}
+{#                                <a href="{{ path('category_index') }}">Categories List</a>#}
+{#                            </li>#}
+{#                            <li {% if cr in ['collection_index','collection_new', 'collection_edit', 'collection_manage_product'] %}class="active" {% endif %}>#}
+{#                                <a href="{{ path('collection_index') }}">Collections List</a>#}
+{#                            </li>#}
+{#                            <li {% if cr in ['product_group_update_index','product_group_update_action'] %}class="active" {% endif %}>#}
+{#                                <a href="{{ path('product_group_update_index') }}">Bulk Update</a>#}
+{#                            </li>#}
+{#                        </ul>#}
+{#                    </li>#}
+
+
+                    <li {% if cr in ['product_group_update_index', 'product_group_update_action','product_index','product_new', 'product_edit','category_index','category_new', 'category_edit', 'attribute_index','attribute_new', 'attribute_edit','collection_index', 'collection_edit', 'collection_new', 'collection_clone', 'collection_manage_product', 'occasion_index', 'occasion_edit', 'occasion_new', 'occasion_clone', 'occasion_manage_product'] %} class="active" {% endif %}>
+                        <a href="#"><i class="icon-basket"></i> <span>Products Catalog</span></a>
+                        <ul>
+                            <li {% if cr in ['product_index','product_new', 'product_edit'] %}class="active" {% endif %}>
+                                <a href="{{ path('product_index') }}">Products List</a>
+                            </li>
+                            <li {% if cr in ['category_index','category_new', 'category_edit', 'attribute_index','attribute_new', 'attribute_edit'] %}class="active" {% endif %}>
+                                <a href="{{ path('category_index') }}">Categories List</a>
+                            </li>
+{#                            <li {% if cr in  ['collection_index', 'collection_edit', 'collection_new', 'collection_clone', 'collection_manage_product'] %}class="active" {% endif %}>#}
+{#                                <a href="{{ path('collection_index') }}">Collections List</a>#}
+{#                            </li>#}
+{#                            <li {% if cr in  ['occasion_index', 'occasion_edit', 'occasion_new', 'occasion_clone', 'occasion_manage_product'] %}class="active" {% endif %}>#}
+{#                                <a href="{{ path('occasion_index') }}">Occasions List</a>#}
+{#                            </li>#}
+                            <li {% if cr in ['product_group_update_index','product_group_update_action'] %}class="active" {% endif %}>
+                                <a href="{{ path('product_group_update_index') }}">Group Update List</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li {% if cr in ['project_index', 'project_new', 'project_edit'] %} class="active" {% endif %}>
+                        <a href="{{ path('project_index') }}"><i class="fa fa-sitemap"></i> <span>Projects List</span></a>
+                    </li>
+                    <li {% if cr in ['service_index', 'service_new', 'service_edit'] %} class="active" {% endif %}>
+                        <a href="{{ path('service_index') }}"><i class="icon-compose"></i><span>Services List</span></a>
+                    </li>
+                    <li {% if cr in ['partner_index', 'partner_new', 'partner_edit'] %} class="active" {% endif %}>
+                        <a href="{{ path('partner_index') }}"><i class="fa fa-link"></i><span>Clients List</span></a>
+                    </li>
+                    <li {% if cr in ['team_index', 'team_new', 'team_edit'] %} class="active" {% endif %}>
+                        <a href="{{ path('team_index') }}"><i class="fa fa-male"></i><span>Team Members List</span></a>
+                    </li>
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <li {% if cr in ['banner_index', 'banner_new', 'banner_edit'] %} class="active" {% endif %}>
+                            <a href="{{ path('banner_index') }}"><i class="icon-images2"></i><span>Banners List</span></a>
+                        </li>
+                    {% endif %}
+                    <li {% if cr in ['blogger_index','blogger_new', 'blogger_edit'] %}class="active" {% endif %}>
+                        <a href="{{ path('blogger_index') }}"><i class="icon-paragraph-center2"></i> <span>Blogs List</span></a>
+                    </li>
+{#                    <li {% if cr in ['dynamicpage_index', 'dynamicpage_new', 'dynamicpage_edit'] %} class="active" {% endif %}>#}
+{#                        <a href="{{ path('dynamicpage_index') }}"><i class=" icon-files-empty"></i><span>Dynamic page</span></a>#}
+{#                    </li>#}
+                    <!-- /main -->
+
+                </ul>
+            </div>
+        </div>
+        <!-- /main navigation -->
+
+    </div>
+</div>

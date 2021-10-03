@@ -1,0 +1,30 @@
+.not-found-container {
+    padding-bottom: 200px;
+    padding-top: 200px;
+    .not-found-text {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 25px;
+        line-height: 90%;
+        .text {
+            font-size: 130px;
+            color: $color-purple-2;
+        }
+        svg {
+            color: $color-purple-2;
+            width: 114px;
+            height: 114px;
+        }
+    }
+    .error-message {
+        color: $primary;
+        font-size: 23px;
+        margin-bottom: 24px;
+    }
+    .btn {
+        position: relative;
+        #{$start-direction}: 50%;
+        transform: translateX(-50% * $transform-direction);
+    }
+}

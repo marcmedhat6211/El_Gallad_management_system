@@ -1,0 +1,111 @@
+{% extends "FEBundle::base.html.twig" %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+{% block title %}Sign Up{% endblock %}
+{% block breadcrumb %}
+    <div class="wrapper-breadcrums">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-24">
+                    <div class="breadcrumbs">
+                        <ul>
+                            <li class="home"><a href="{{ path('fe_home') }}" title="Home"><span>Home</span></a> <span
+                                        class="separator">/ </span></li>
+                            <li class="contact"><strong> Join Al-Nassera</strong></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div><!-- /.wrapper-breadcrums -->
+{% endblock %}
+{% block content %}
+    <div class="em-wrapper-main">
+        <div class="container container-main">
+            <div class="em-inner-main">
+
+                <div class="em-wrapper-area02"></div>
+                <div class="em-wrapper-area03"></div>
+                <div class="em-wrapper-area04"></div>
+                <div class="em-main-container em-col2-left-layout">
+                    <div class="row">
+                        <div class="col-sm-24 em-col-main loginBG regs">
+                            <div class="category-products">
+                                <div class="col-sm-24">
+                                    <div class="toolbar text-center">
+                                        <h1 class="formTitle">Join Al-Nassera</h1>
+                                    </div>
+                                </div>
+                                <div class="clearfix">
+                                    <div class="col-md-16 col-sm-16 col-xs-24 background centering">
+                                        <form action="{{ path("fos_user_registration_register") }}" method="post"
+                                              class="borderBG col-xs-22 centering" id="login">
+                                            <input type="hidden" id="fos_user_registration_form__token"
+                                                   name="fos_user_registration_form[_token]"
+                                                   value="{{ csrf_token('registration') }}">
+
+                                            <div class="form-group overFlowHidden">
+                                                <div class="col-xs-12 col-xxs-24">
+                                                    <label for="fullname">Full Name <span class="red">*</span></label>
+                                                    {{ form_widget(form.fullname,{'attr': {'placeholder': 'Full Name'}}) }}
+                                                    {{ form_errors(form.fullname) }}
+                                                </div>
+                                                <div class="col-xs-12 col-xxs-24">
+                                                    <label for="username">Username <span class="red">*</span></label>
+                                                    {{ form_widget(form.username,{'attr': {'placeholder': 'UserName'}}) }}
+                                                    {{ form_errors(form.username) }}
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group overFlowHidden">
+                                                <div class="col-xs-12 col-xxs-24">
+                                                    <label for="email">Email <span class="red">*</span></label>
+                                                    {{ form_widget(form.email,{'attr': {'placeholder': 'Email'}}) }}
+                                                    {{ form_errors(form.email) }}
+                                                </div>
+                                            </div>
+                                            <div class="form-group overFlowHidden">
+                                                <div class="col-xs-12 col-xxs-24">
+                                                    <label for="upassword">Password <span class="red">*</span></label>
+                                                    {{ form_widget(form.plainPassword.first ,{'attr': {'placeholder': 'Password'}}) }}
+                                                    {{ form_errors(form.plainPassword.first) }}
+
+                                                </div>
+                                                <div class="col-xs-12 col-xxs-24">
+                                                    <label for="repeat">Repeat Password <span class="red">*</span></label>
+                                                    {{ form_widget(form.plainPassword.second,{'attr': {'placeholder': 'Confirm Password'}}) }}
+                                                    {{ form_errors(form.plainPassword.second) }}
+
+                                                </div>
+                                            </div>
+                                            <div class="form-group overFlowHidden">
+                                                <div class="col-xs-12 col-xxs-24">
+                                                    <label for="phone">Phone</label>
+                                                    {{ form_widget(form.phone,{'attr': {'placeholder': 'Phone'}}) }}
+                                                    {{ form_errors(form.phone) }}
+                                                </div>
+                                                <div class="col-xs-12 col-xxs-24">
+                                                    <label for="phone">Date of Birth</label>
+                                                    {{ form_widget(form.birthdate,{'attr': {'placeholder': 'BirthDate'}}) }}
+                                                    {{ form_errors(form.birthdate) }}
+
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-5 centering clearfix">
+                                                <input type="submit" class="btn btn-default btn-block" value="JOIN">
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block javascript %}
+    {{ parent() }}
+    <script type="text/javascript" src="{{ asset('bundles/fe/js/bootstrap-datepicker.js') }}"></script>
+{% endblock %}

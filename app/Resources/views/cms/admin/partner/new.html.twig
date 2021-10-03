@@ -1,0 +1,66 @@
+{% extends 'adminTemplate/base.html.twig' %}
+{% import 'adminTemplate/macros.html.twig' as macros %}
+{% set page_title %}New Client{% endset %}
+
+{% block breadcrumb %}
+    <div class="breadcrumb-line">
+        <ul class="breadcrumb">
+            <li><a href="{{ path('dashboard') }}"><i class="icon-home2 position-left"></i>Dashboard</a></li>
+            <li><a href="{{ path('partner_index') }}">Clients List</a></li>
+            <li class="active">{{ page_title }}</li>
+        </ul>
+    </div>
+{% endblock %}
+{% block body %}
+    {{ form_start(form, {'attr':{'class':'form-validate-jquery','novalidate':'novalidate', 'enctype':'multipart/form-data'}}) }}
+    {% set form = form %}
+    <div class="row">
+        <div class="col-md-9">
+            {% set defaultTwig= include ("cms/admin/partner/_form.html.twig") %}
+            {{ include ("@PNLocale/new_or_edit_tab_structure.html.twig", {'defaultTwig': defaultTwig, "transTwigPath" : "cms/admin/partner/_form_trans.html.twig"} ) }}
+        </div>
+        <div class="col-md-3">
+            <div class="panel panel-flat">
+                <div class="panel-body">
+                    <div class="row">
+                        {{ macros.checkbox(form.publish,12,null,null,'form-control switchery') }}
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-6">Creator</div>
+                        <div class="col-xs-6">{% if partner.creator %}{{ partner.creator }}{% else %}--{% endif %}</div>
+                    </div>
+                    <div class="row mt-10">
+                        <div class="col-xs-6">Created date</div>
+                        <div class="col-xs-6">{% if partner.created %}{{ partner.created|dateFormat }}{% else %}--/--/----{% endif %}</div>
+                    </div>
+                    <div class="row mt-10">
+                        <div class="col-xs-6">Modified by</div>
+                        <div class="col-xs-6">{% if partner.modifiedBy %}{{ partner.modifiedBy }}{% else %}--{% endif %}</div>
+                    </div>
+                    <div class="row mt-10">
+                        <div class="col-xs-6">Modified date</div>
+                        <div class="col-xs-6">{% if partner.modified %}{{ partner.modified|dateFormat }}{% else %}--/--/----{% endif %}</div>
+                    </div>
+                </div>
+                <div class="panel-footer">
+                    {% include 'adminTemplate/saveAndResetFormFooter.html.twig' %}
+                </div>
+            </div>
+        </div>
+    </div>
+    {{ form_end(form) }}
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript" src="{{ asset('admin/js/plugins/forms/validation/validate.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('admin/js/pages/form_validation.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('admin/js/plugins/forms/styling/switchery.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('admin/js/pages/form_select2.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('admin/js/plugins/forms/selects/select2.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('admin/js/pages/form_layouts.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('admin/js/plugins/forms/styling/uniform.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('admin/js/ckeditor/ckeditor.js') }}"></script>
+
+
+
+{% endblock javascripts %}

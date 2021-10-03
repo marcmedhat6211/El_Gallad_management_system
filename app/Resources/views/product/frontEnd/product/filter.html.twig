@@ -1,0 +1,55 @@
+{% extends 'fe/base.html.twig' %}
+{% set seo = seoPage.seo %}
+{% use '@PNSeo/FrontEnd/seo.html.twig' %}
+{% import 'fe/macros.html.twig' as macros %}
+{% set cr = request.attributes.get('_route') %}
+
+{% block stylesheet %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('vendors/swiper/swiper.css') }}">
+{% endblock %}
+
+{% block content %}
+
+    {# PAGE TITLE #}
+    <section class="pt-20 py-8 page-title border-top">
+        <div class="container">
+            <h1 class="fs-40 my-1 text-capitalize text-center">{% trans %}Shop All{% endtrans %}</h1>
+        </div>
+    </section>
+    {# END PAGE TITLE #}
+
+    {# CATEGORIES FILTER #}
+    {% include 'product/frontEnd/product/_category_filter.html.twig' %}
+    {# END CATEGORIES FILTER #}
+
+    {# FILTER SECTION #}
+    <section class="pt-13 pb-11 pb-lg-14">
+        <div class="container">
+            <div class="row d-flex justify-content-center">
+                {# filter side menu #}
+                {% include 'product/frontEnd/product/_filter_side_menu.html.twig' %}
+                {# end filter side menu #}
+
+                {# products list #}
+                {% include 'product/frontEnd/product/_products_list.html.twig' %}
+                {# end products list #}
+            </div>
+        </div>
+    </section>
+    {# END FILTER SECTION #}
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('vendors/swiper/swiper.min.js') }}"></script>
+    <script src="{{ asset('vendors/jquery-ui/jquery.ui.touch-punch.min.js') }}"></script>
+    <script src="{{ asset('js/price-range.js') }}"></script>
+    <script>
+        $(document).on('click', '#sorting_links a', function() {
+            let url = $(this).data('url');
+            window.location.href = url;
+        });
+    </script>
+{% endblock %}

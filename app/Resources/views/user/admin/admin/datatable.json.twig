@@ -1,0 +1,19 @@
+{
+    "recordsTotal": {{ recordsTotal }},
+    "recordsFiltered": {{ recordsFiltered }},
+    "data": [
+        {% for admin in admins %}
+            [
+            "{{ admin.id }}",
+            "{{ admin.fullName }}",
+            "{{ admin.email }}",
+            "{{ admin.phone }}",
+            "{{ admin.roleName }}",
+            "{% if admin.lastLogin %}{{ admin.lastLogin|date('d/m/Y h:i A') }}{% else %}N/A{% endif %}",
+            "{% if admin.created %}{{ admin.created|date('d/m/Y') }}{% else %}--{% endif %}",
+            "{% if admin.enabled %}<a href='#' class='label label-success change-state-btn' data-toggle='modal' data-target='#modal_change_state' data-state='{{ path('user_change_state',{'id':admin.id}) }}'>ACTIVE</a>{% else %}<a href='#' class='label label-danger change-state-btn' data-toggle='modal' data-target='#modal_change_state' data-state='{{ path('user_change_state',{'id':admin.id}) }}'>Blocked</a>{% endif %}",
+            "<ul class='icons-list'><li class='dropdown'><a href='#' class='dropdown-toggle' data-toggle='dropdown'><i class='icon-menu9'></i></a><ul class='dropdown-menu dropdown-menu-right'>{% if is_granted('ROLE_SUPER_ADMIN') %}<li><a href='{{ path('user_login_as_user',{'id':admin.id}) }}'><i class='icon-enter3'></i> Login</a></li>{% endif %}<li><a href='{{ path('admin_edit',{'id':admin.id}) }}'><i class='icon-pencil7'></i> Edit</a></li><li><a href='#' class='delete-btn' data-toggle='modal' data-target='#modal_delete' data-delete='{{ path('user_delete',{'id':admin.id}) }}'><i class='icon-bin'></i> Remove</a></li></ul></li></ul>"
+            ]{% if loop.last == false %},{% endif %}
+        {% endfor %}
+    ]
+}

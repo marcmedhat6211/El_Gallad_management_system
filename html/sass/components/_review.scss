@@ -1,0 +1,33 @@
+.rate-input {
+    direction: rtl;
+    input {
+        display: none;
+    }
+    label {
+        margin-#{$start-direction}: -2px;
+        margin-#{$end-direction}: -2px;
+        color: $border-color;
+        font-size: 18px;
+    }
+    label:hover,
+    label:hover~label,
+    input:checked~label,
+    &:hover>input:checked~label {
+        color: $primary;
+        i::before {
+            content: '\f005';
+            font-weight: 900;
+            font-family: "Font Awesome 5 Pro";
+        }
+    }
+}
+
+.form-review {
+    display: none;
+}
+
+.rating-result {
+    .list-inline-item:not(:last-child) {
+        margin-#{$end-direction}: 1.5px;
+    }
+}

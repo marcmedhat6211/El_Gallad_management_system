@@ -1,0 +1,64 @@
+{% extends 'fe/base.html.twig' %}
+{% set seo = collection.seo %}
+{% use '@PNSeo/FrontEnd/seo.html.twig' %}
+{% import 'fe/macros.html.twig' as macros %}
+
+{% block content %}
+    {% set coverPhoto = collection.post.imageByType(constant("\\PN\\Bundle\\MediaBundle\\Entity\\Image::TYPE_COVER_PHOTO")) %}
+    <section class="page-header-section background-geem" {% if coverPhoto %}style="background-image: url('{{ asset(coverPhoto.assetPath) }}')" {% endif %}>
+        <div class="container">
+            <h1 class="page-title">{{ collection.title }}</h1>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{{ path('fe_home') }}">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">{{ collection.title }}</li>
+                </ol>
+            </nav>
+        </div>
+    </section>
+    <section class="geem-intro">
+        <div class="container">
+            <div class="col-md-8 offset-md-2 text-center">
+                <img data-src="{{ asset('images/geem-logo.png') }}" class="lazy geem-intro-logo" alt="Geem">
+
+                <p>
+                    {{ collection.post.content.description|raw }}
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="related-products grey-bg mt-5">
+
+        <div class="container">
+            <h2 class="related-products-title">Geem Owners</h2>
+
+            <div class="geem-members">
+                <div class="geem-member">
+                    <img data-src="{{ asset('images/amir.jpg') }}" class="lazy" alt="Amir Dous">
+                    <h3 class="geem-member-name">Amir Dous</h3>
+                    <p class="geem-member-position">C.Reality CEO</p>
+                </div>
+                <div class="geem-member">
+                    <img data-src="{{ asset('images/karim.jpg?v=1.0.0') }}" class="lazy" alt="Karim Mekhtigian">
+                    <h3 class="geem-member-name">Karim Mekhtigian</h3>
+                    <p class="geem-member-position">Art Director Geem collection</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    {% if products|length > 0 %}
+        <section class="related-products white-bg">
+            <div class="container">
+                <h2 class="related-products-title">Geem Products</h2>
+                <div class="row">
+                    {% for product in products %}
+                        <div class="col-lg-3 col-md-4 col-sm-6 col-12">
+                            {{ macros.product(product) }}
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+    {% endif %}
+{% endblock %}

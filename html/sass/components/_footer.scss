@@ -1,0 +1,54 @@
+.footer-logo {
+    max-width: 164px;
+}
+
+.footer-title {
+    color: $white;
+}
+
+.footer-navigation {
+    color: $white !important;
+    &:hover {
+        color: $white !important;
+    }
+}
+
+.input-group {
+    .footer-newsletter-input {
+        color: $white !important;
+        border-color: $white;
+        &::placeholder {
+            color: $white;
+        }
+        &:focus {
+            border-color: $white;
+        }
+    }
+    .fa-arrow-right {
+        color: $white;
+    }
+}
+
+.footer-copyright {
+    color: $white !important;
+    .our-company-name {
+        color: $white;
+    }
+}
+
+.guaranteed-by-text {
+    color: $white !important;
+    display: flex;
+    align-items: center;
+    svg {
+        width: 32px;
+        height: 32px;
+        margin: 0 10px;
+    }
+}
+
+.company-name {
+    color: $white !important;
+    display: flex;
+    align-items: center;
+}

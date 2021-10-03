@@ -1,0 +1,24 @@
+{% set queryParams = app.request.query.all %}
+{% if paginator.items is defined and paginator.items|length > 1 %}
+    <nav class="pt-6 overflow-hidden paginator-style-1">
+        <ul class="pagination justify-content-center align-items-center mb-0">
+            <li class="page-item fs-12 d-none d-sm-block {% if paginator.prev is not defined %}disabled{% endif %}">
+                <a class="page-link"
+                   href="{% if paginator.prev is defined %} {{ path(app.request.attributes.get('_route'),app.request.attributes.get('_route_params')|merge({'page':paginator.prev})|merge(queryParams)) }}{% endif %}"
+                   tabindex="-1"><i class="far fa-angle-double-left"></i></a>
+            </li>
+            {% if paginator.items is defined %}
+                {% for item in paginator.items %}
+                    <li class="page-item {% if paginator.currentPage == item %}active{% endif %}" {% if paginator.currentPage == item %}aria-current="page"{% endif %}>
+                        <a class="page-link" href="{{ path(app.request.attributes.get('_route'),app.request.attributes.get('_route_params')|merge({'page':item})|merge(queryParams)) }}">{{ item }}</a>
+                    </li>
+                {% endfor %}
+            {% endif %}
+            <li class="page-item fs-12 d-none d-sm-block {% if paginator.next is not defined %}disabled{% endif %}">
+                <a class="page-link" href="{% if paginator.next is defined %} {{ path(app.request.attributes.get('_route'),app.request.attributes.get('_route_params')|merge({'page':paginator.next})|merge(queryParams)) }}{% endif %}"><i class="far fa-angle-double-right"></i></a>
+            </li>
+        </ul>
+    </nav>
+{% endif %}
+
+

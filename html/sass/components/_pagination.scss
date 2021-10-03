@@ -1,0 +1,23 @@
+.pagination {
+    .page-item {
+        font-size: 18px;
+        font-weight: 500;
+        letter-spacing: 4.5px;
+    }
+    .page-link:focus {
+        box-shadow: none;
+    }
+}
+
+.paginator-style-1 {
+    .pagination {
+        .page-item {
+            &.disabled {
+                .page-link {
+                    background-color: transparent;
+                    opacity: .3;
+                }
+            }
+        }
+    }
+}

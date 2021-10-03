@@ -1,0 +1,69 @@
+{% import 'fe/macros.html.twig' as macros %}
+<div class="col-md-3 mb-10 mb-md-0 filters-sidebar-container" id="sidebar">
+    <form>
+        <div class="primary-sidebar-inner">
+            <div class="card border-0 mb-7 card-bg-transparent">
+                <div class="card-header bg-transparent border-0 p-0">
+                    <h3 class="card-title fs-18 mb-0">
+                        {% trans %}Price{% endtrans %}
+                    </h3>
+                </div>
+                {# price range filter #}
+                <div class="card-body px-0 pt-4 pb-0">
+                    <div class="price-range-block">
+                        <div id="slider-range" class="price-filter-range" name="rangeInput"></div>
+                        <div class="d-flex justify-content-center">
+                            <div class="input-container input-style-2 price-range-field">
+                                <input type="number" min="{{ minPrice }}" max="{{ maxPrice }}"
+{#                                       oninput="validity.valid||(value='{{ minPrice }}');"#}
+                                       id="min_price" class="form-control" name="minPrice"
+                                       value="{{ search.priceFrom != null ? search.priceFrom : minPrice }}"
+                                       data-price="{{ minPrice }}"/>
+                            </div>
+                            <div class="input-container input-style-2 price-range-field">
+                                <input type="number" min="{{ minPrice }}" max="{{ maxPrice }}"
+{#                                       oninput="validity.valid||(value='{{ maxPrice }}');" #}
+                                       value="{{ search.priceTo != null ? search.priceTo : maxPrice }}"
+                                       id="max_price"
+                                       class="form-control" name="maxPrice" data-price="{{ maxPrice }}"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {# end price range #}
+            </div>
+            {# specs filter #}
+            {% if attributes is not empty %}
+                {% for attribute in attributes %}
+                    {% if attribute.subSpecs is defined %}
+                        <div class="card border-0 mb-7 card-bg card-bg-transparent">
+                            <div class="card-header bg-transparent border-0 p-0">
+                                <h3 class="card-title fs-18 mb-0">
+                                    {{ attribute.title }}
+                                </h3>
+                            </div>
+                            <div class="card-body px-0 pt-4 pb-0">
+                                <ul class="list-unstyled">
+                                    {% for subSpecs in attribute.subSpecs %}
+                                        <li class="mb-1">
+                                            {% set label = subSpecs.title ~ " (" ~ subSpecs.noOfProducts ~")" %}
+                                            {% set name = "specs[" ~ attribute.id ~'][]' %}
+                                            {% set value = subSpecs.id %}
+                                            {% set id = "sub_attr_"~subSpecs.id %}
+                                            {% set isChecked = (attribute.id in search.specs|keys and subSpecs.id in search.specs[attribute.id]) %}
+
+                                            {{ macros.checkbox(label, name, value, id, isChecked) }}
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+            {# end specs filter #}
+            <button type="submit" class="btn btn-style-2 w-100">{% trans %}Search{% endtrans %}</button>
+            <a href="{{ path(app.request.get('_route'), app.request.get('_route_params')) }}" class="btn btn-style-3 w-100 mt-3">{% trans %}Clear All Filters{% endtrans %}</a>
+        </div>
+    </form>
+</div>

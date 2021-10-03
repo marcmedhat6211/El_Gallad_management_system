@@ -1,0 +1,29 @@
+{% if categories is not empty %}
+    <div class="pt-6">
+        <div class="container-fluid">
+            <div class="swiper-container swiper-style-1"
+                 data-swiper-options='{"slidesPerView": 1,"loop":false,"freeMode":true,"centeredSlides":false,"spaceBetween":20,"lazy":{"preloadImages":false,"loadPrevNext":true,"loadPrevNextAmount":4},"breakpoints":{"991.98":{"slidesPerView":4,"spaceBetween":20}},"pagination":{"el":".swiper-pagination","type":"bullets","clickable":true}}'>
+                <div class="swiper-wrapper">
+                    {% for category in categories %}
+                        {% set image = 'images/placeholders/placeholder-md.jpg' %}
+                        {% if category.image %}
+                            {% set image = category.image.assetPath %}
+                        {% endif %}
+                        <div class="swiper-slide">
+                            <a href="{{ path('fe_filter_category', {"slug": category.seo.slug}) }}" class="box d-block" data-animate="fadeInUp">
+                                <div class="card border-0 filter-card card-img-top card-img-top {{ singleCategory is defined and singleCategory != null and category.id == singleCategory.id ? "active" }}">
+                                    <img data-src="{{ asset(image) }}" alt="{{ category.title }}"
+                                         class="card-img swiper-lazy">
+                                    <div class="card-img-overlay d-inline-flex flex-column px-6 py-4">
+                                        <h3 class="card-title fs-30">{{ category.title }}</h3>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    {% endfor %}
+                </div>
+                <div class="swiper-pagination"></div>
+            </div>
+        </div>
+    </div>
+{% endif %}

@@ -1,0 +1,43 @@
+{% extends 'adminTemplate/base2.html.twig' %}
+{% set page_title %}Forgot password{% endset %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block body -%}
+    <div class="alert bg-success alert-styled-left">
+        <button type="button" class="close" data-dismiss="alert"><span>×</span><span class="sr-only">Close</span></button>
+        An email has been sent to you. It contains a link you must click to reset your password.
+    </div>
+    <!-- Password recovery -->
+    <form method="POST" action="{{ path('fos_user_resetting_send_email') }}" class="fos_user_resetting_request">
+        <div class="panel panel-body login-form">
+
+            <div class="text-center">
+                <div class="icon-object border-warning text-warning"><i class="icon-spinner11"></i></div>
+                <h5 class="content-group">Password recovery
+                    <small class="display-block">We'll send you instructions in email</small>
+                </h5>
+            </div>
+
+            <div class="form-group has-feedback">
+                <input type="email" class="form-control" placeholder="Your email" id="email" name="username"
+                       spellcheck="false" required="required">
+                <div class="form-control-feedback">
+                    <i class="icon-mail5 text-muted"></i>
+                </div>
+            </div>
+
+            <button type="submit" class="btn bg-blue btn-block">Reset password <i class="icon-arrow-right14 position-right"></i></button>
+        </div>
+    </form>
+    <!-- /password recovery -->
+{% endblock %}
+
+
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript" src="{{ asset('admin/js/plugins/forms/styling/uniform.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('admin/js/pages/login_validation.js') }}"></script>
+{% endblock javascripts %}
+

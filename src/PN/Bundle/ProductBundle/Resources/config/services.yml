@@ -1,0 +1,54 @@
+services:
+  _defaults:
+    # automatically injects dependencies in your services
+    autowire: true
+    # automatically registers your services as commands, event subscribers, etc.
+    autoconfigure: true
+    # this means you cannot fetch services directly from the container via $container->get()
+    # if you need to do this, you can override this setting on individual services
+    public: true
+
+  PN\Bundle\ProductBundle\Form\:
+    resource: '../../Form/*'
+    public: false
+    tags: [form.type]
+
+  PN\Bundle\ProductBundle\Form\Filter\:
+    resource: '../../Form/Filter/*'
+    public: false
+    tags: [form.type]
+
+  PN\Bundle\ProductBundle\Form\Transformer\:
+    resource: '../../Form/Transformer/*'
+    public: false
+
+  PN\Bundle\ProductBundle\DTO\:
+    resource: '../../DTO/*'
+
+  PN\Bundle\ProductBundle\Services\:
+    resource: '../../Services/*'
+
+  PN\Bundle\ProductBundle\Controller\FrontEnd\:
+    resource: '../../Controller/FrontEnd'
+    tags: [ 'controller.service_arguments' ]
+
+  PN\Bundle\ProductBundle\EventListener\CategorySubscriber:
+    tags:
+      - { name: 'doctrine.event_subscriber' }
+
+  product.search.index.subscriber:
+    class: PN\Bundle\ProductBundle\EventListener\ProductSearchIndexing
+    tags:
+      - { name: 'doctrine.event_subscriber' }
+
+  product.subscriber:
+    class: PN\Bundle\ProductBundle\EventListener\ProductSubscriber
+    tags:
+      - { name: 'doctrine.event_subscriber' }
+
+  product.price.subscriber:
+    class: PN\Bundle\ProductBundle\EventListener\ProductPriceSubscriber
+    tags:
+      - { name: 'doctrine.event_subscriber' }
+
+  Qipsius\TCPDFBundle\Controller\TCPDFController: '@qipsius.tcpdf'

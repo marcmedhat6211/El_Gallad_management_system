@@ -1,0 +1,25 @@
+<tr>
+    <td>
+        {{ form_widget(form.minQuantity) }}
+        {{ form_errors(form.minQuantity) }}
+    </td>
+    <td>
+        {{ form_widget(form.maxQuantity) }}
+        {{ form_errors(form.maxQuantity) }}
+    </td>
+    <td>
+        {{ form_widget(form.unitPrice) }}
+        {{ form_errors(form.unitPrice) }}
+    </td>
+    <td>
+        {{ form_widget(form.promotionalPrice) }}
+        {{ form_errors(form.promotionalPrice) }}
+    </td>
+    <td>
+        {{ form_widget(form.promotionalExpiryDate) }}
+        {{ form_errors(form.promotionalExpiryDate) }}
+    </td>
+    <td class="col-md-1 text-right">
+        <a href="#" class="btn btn-danger delete" data-toggle="tooltip" data-original-title="Delete"><i class="fa fa-minus"></i></a>
+    </td>
+</tr>

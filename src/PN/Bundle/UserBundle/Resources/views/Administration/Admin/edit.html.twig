@@ -1,0 +1,72 @@
+{% extends 'AdminTemplateBundle::base.html.twig' %}
+{% set page_title %}{{ entity.fullName }} Edit{% endset %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="{{ asset('bundles/admintemplate/assets/plugins/validator/bootstrapValidator.min.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block body -%}
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <form class="form bootstrap-validator-form" id="validation" action="{{ path('admin_update', { 'id': entity.id}) }}" role="form" method="POST" enctype="multipart/form-data">
+                <input type="hidden" name="_method" value="PUT" />
+
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label for="fullName" class="required">Full Name</label>
+                        <input name="full_name" placeholder="Full Name" id="full_name" required="required" maxlength="225" class="form-control" value="{{ entity.fullName }}" type="text">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label>Username</label>
+                        <input type="text" placeholder="Username" class="form-control" id="username"  required="required" name="username" value="{{ entity.username }}"/>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label>Email</label>
+                        <input type="text" placeholder="Email Address" class="form-control" id="email" name="email" value="{{ entity.email }}"/>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label>Password</label>
+                        <input type="password" placeholder="Password" class="form-control" id="pasword" name="password"/>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label>Phone</label>
+                        <input type="text" placeholder="Phone" class="form-control" id="phone" name="phone" value="{{ entity.phone }}"/>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label>State</label>
+                        <select class="form-control" name="enabled">
+                            <option {% if entity.enabled == true %}selected=""{% endif %} value="1">Active</option>
+                            <option {% if entity.enabled == false %}selected=""{% endif %} value="0">Block</option>
+                        </select>
+                    </div>
+                </div>
+
+
+                <div class="form-group text-right">
+                    <button class="btn btn-success" type="submit"><i class="fa fa-check"></i> Update</button>
+                    <button class="btn btn-danger" type="reset"><i class="fa fa-refresh"></i> Reset</button>
+                </div>
+            </form>
+            <div >
+              <a href="{{ path('admin') }}" class="btn btn-warning">Back to the list</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript" src="{{ asset('bundles/admintemplate/assets/plugins/validator/bootstrapValidator.min.js') }}"></script>
+    <script type="text/javascript">
+        $(function () {
+            $('#validation').bootstrapValidator();
+
+        });
+    </script>   
+{% endblock %}

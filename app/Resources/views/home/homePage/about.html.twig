@@ -1,0 +1,112 @@
+{% extends 'fe/base.html.twig' %}
+{% set seo = seoPage.seo %}
+{% use '@PNSeo/FrontEnd/seo.html.twig' %}
+{% import 'fe/macros.html.twig' as macros %}
+
+{% block stylesheet %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('vendors/swiper/swiper.css') }}">
+{% endblock %}
+
+{% block content %}
+
+    {# HEADER IMAGE #}
+    {% set headerImage = 'images/placeholders/placeholder-lg.jpg' %}
+    {% if getDCA(3) %}
+        {% set headerImage = getDCA(3) %}
+    {% endif %}
+    <section class="d-flex flex-column bg-img-cover-center vh-100 pt-xxl-13 custom-height-sm about-us-header-section"
+             style="background-image: url('{{ asset(headerImage) }}')">
+        <div class="d-flex flex-column h-100 justify-content-center">
+            <div class="container container-xxl z-index-2">
+                <div class="text-container">
+                    <h1 class="mb-4">{{ getDCA(4) }}</h1>
+                    <p class="mb-0 mxw-435px">{{ getDCA(5) }}</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    {{ editDCA(3) }}
+    {# END HEADER IMAGE #}
+
+    {# ABOUT US SECTION #}
+    <section class="about-us-description-section pt-20">
+        <div class="container container-xxl">
+            <div class="row">
+                <div class="col-lg-6 d-flex flex-column justify-content-center">
+                    <h2 class="title">{{ getDCA(6) }}</h2>
+                    <p class="description">
+                        {{ getDCA(7) }}
+                    </p>
+                </div>
+                {% set descriptionImage = 'images/placeholders/placeholder-md.jpg' %}
+                {% if getDCA(8) %}
+                    {% set descriptionImage = getDCA(8) %}
+                {% endif %}
+                <div class="col-lg-6">
+                    <div class="img-container w-100">
+                        <img src="{{ asset(descriptionImage) }}" alt="descriptionImage">
+                    </div>
+                    {{ editDCA(8) }}
+                </div>
+            </div>
+        </div>
+    </section>
+    {# END ABOUT US SECTION #}
+
+    {# CORE VALUES SECRION #}
+    <section class="mt-10 py-10 about-us-core-values-section">
+        <div class="container">
+            <h2 class="fs-30 fs-md-40 mb-10 text-center">{{ getDCA(9) }}</h2>
+            <div class="row">
+                <div class="col-lg-6 mb-6 mb-md-0">
+                    <div class="card bg-transparent border-0 align-items-center">
+                        <div class="card-img">
+                            <i class="convert-svg" data-src="{{ asset('images/icons/target.svg') }}"></i>
+                        </div>
+                        <div class="card-body px-0 pt-6 text-center">
+                            <h3 class="card-title fs-20 mb-3">{% trans %}Mission{% endtrans %}</h3>
+                            <p class="cart-text mb-0">{{ getDCA(10) }}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 mb-6 mb-md-0">
+                    <div class="card bg-transparent border-0 align-items-center">
+                        <div class="card-img">
+                            <i class="convert-svg" data-src="{{ asset('images/icons/eye.svg') }}"></i>
+                        </div>
+                        <div class="card-body px-0 pt-6 text-center">
+                            <h3 class="card-title fs-20 mb-3">{% trans %}Vision{% endtrans %}</h3>
+                            <p class="cart-text mb-0">{{ getDCA(11) }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    {# END CORE VALUES SECRION #}
+
+    {# TEAM SECTION #}
+    <section class="py-11 py-lg-15">
+        <div class="container">
+            <h2 class="text-center fs-30 fs-md-40 mb-8">{% trans %}Our Team{% endtrans %}</h2>
+            <div class="swiper-container"
+                 data-swiper-options='{"slidesPerView": 2,"loop":false, "centeredSlides": false, "spaceBetween":10,"freeMode":false,"lazy":{"preloadImages":false,"loadPrevNext":true,"loadPrevNextAmount":4},"navigation":{"nextEl":".swiper-btn-next","prevEl":".swiper-btn-prev"},"breakpoints":{"991.98":{"slidesPerView":5,"spaceBetween":20}}}'>
+                <div class="swiper-wrapper">
+                    {% for member in teamMembers %}
+                    <div class="swiper-slide">
+                        {{ macros.teamMember(member, true) }}
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </section>
+    {# END TEAM SECTION #}
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('vendors/swiper/swiper.min.js') }}"></script>
+{% endblock %}

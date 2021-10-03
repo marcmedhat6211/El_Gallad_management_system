@@ -1,0 +1,74 @@
+.product-03 {
+    .price-wrap {
+        height: 27px;
+        overflow: hidden;
+    }
+    .price,
+    .add-to-cart {
+        transition: all 0.5s;
+        transform: translateY(0);
+    }
+    &:hover {
+        .price,
+        .add-to-cart {
+            transform: translateY(-27px);
+        }
+    }
+}
+
+.product {
+    .badge {
+        position: absolute;
+        top: 25px;
+        #{$end-direction}: 25px;
+        transition: all 0.2s;
+    }
+    &:hover {
+        .badge {
+            opacity: 0
+        }
+    }
+    .add-to-cart {
+        transition: color .4s .001s ease-out, background .4s .001s ease-out, visibility .4s .1s ease-out, opacity .4s .15s ease-out, transform .4s .1s ease-out;
+    }
+    .add-to-wishlist {
+        transition: color .4s .001s ease-out, background .4s .001s ease-out, visibility .4s .15s ease-out, opacity .4s .15s ease-out, transform .4s .15s ease-out;
+    }
+    .add-to-compare {
+        transition: color .4s .001s ease-out, background .4s .001s ease-out, visibility .4s .2s ease-out, opacity .4s .2s ease-out, transform .4s .2s ease-out;
+    }
+    .preview {
+        transition: color .4s .001s ease-out, background .4s .001s ease-out, visibility .4s .25s ease-out, opacity .4s .25s ease-out, transform .4s .25s ease-out;
+    }
+    .content-change-vertical {
+        a {
+            transform: translateX(100% * $transform-direction);
+            opacity: 0;
+        }
+    }
+    .content-change-horizontal {
+        a {
+            transform: translateY(100%);
+            opacity: 0;
+        }
+    }
+    &:hover {
+        .content-change-vertical {
+            a {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+        .content-change-horizontal {
+            a {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+    }
+}
+
+.category-price {
+    #{$end-direction}: 14%;
+    bottom: 15%;
+}

@@ -1,0 +1,36 @@
+{% import 'adminTemplate/macros.html.twig' as macros %}
+<div class="panel panel-flat">
+    <div class="panel-body">
+        <div class="row">
+            {{ macros.input(form.title) }}
+            {{ macros.input(form.tarteb) }}
+        </div>
+        <div class="row">
+                {{ macros.input(form.rating) }}
+            {#            {{ macros.input(form.url) }}#}
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Logo:</label>
+                    <div class="media no-margin-top">
+                        {% if partner.image %}
+                            <div class="media-left">
+                                <a href="#"><img src="{{ asset(partner.image.assetPath) }}" style="width: 58px; height: 58px; border-radius: 2px;" alt=""></a>
+                            </div>
+                        {% endif %}
+                        <div class="media-body">
+                            {{ form_widget(form.image.file,{'attr':{'class':'file-styled'}}) }}
+                        </div>
+                    </div>
+                    <span class="help-block">{% include 'PNMediaBundle::imageDimension.html.twig' with {"type":101} %}</span>
+                    <span class="help-block">Accepted formats: gif, png, jpg. Max file size 2Mb</span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            {{ macros.input(form.review, 12) }}
+        </div>
+    </div>
+    <div class="panel-footer">
+        {% include 'adminTemplate/saveAndResetFormFooter.html.twig' %}
+    </div>
+</div>

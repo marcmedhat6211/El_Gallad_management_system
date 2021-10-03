@@ -1,0 +1,15 @@
+// stylelint-disable declaration-no-important
+@mixin float-left() {
+    float: $start-direction !important;
+    @include deprecate("The `float-#{$start-direction}` mixin", "v4.3.0", "v5");
+}
+
+@mixin float-right() {
+    float: $end-direction !important;
+    @include deprecate("The `float-#{$end-direction}` mixin", "v4.3.0", "v5");
+}
+
+@mixin float-none() {
+    float: none !important;
+    @include deprecate("The `float-none` mixin", "v4.3.0", "v5");
+}

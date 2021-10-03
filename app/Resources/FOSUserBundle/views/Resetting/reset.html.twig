@@ -1,0 +1,45 @@
+{% extends 'adminTemplate/base2.html.twig' %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block body -%}
+    <form action="{{ path('fos_user_resetting_reset', {'token': token}) }}" method="post" class="form-validate">
+        <input type="hidden" id="fos_user_resetting_form__token" name="fos_user_resetting_form[_token]"
+               value="{{ csrf_token('resetting') }}">
+        <div class="panel panel-body login-form">
+            <div class="text-center">
+                <div class="icon-object border-warning text-warning"><i class="icon-spinner11"></i></div>
+                <h5 class="content-group">Password recovery</h5>
+            </div>
+
+            <div class="form-group has-feedback has-feedback-left">
+                <label for="password">New Password</label>
+                {{ form_widget(form.plainPassword.first,{'attr': {'class': 'form-control'}}) }}
+                {#{{ form_errors(form.plainPassword.first) }}#}
+                <div class="form-control-feedback">
+                    <i class="icon-lock2 text-muted"></i>
+                </div>
+            </div>
+            <div class="form-group has-feedback has-feedback-left">
+                <label for="password">Confirm new Password</label>
+                {{ form_widget(form.plainPassword.second,{'attr': {'class': 'form-control'}}) }}
+                {#{{ form_errors(form.plainPassword.second) }}#}
+
+                <div class="form-control-feedback">
+                    <i class="icon-lock2 text-muted"></i>
+                </div>
+            </div>
+
+            <div>
+                <button type="submit" class="btn bg-blue btn-block">Change password <i class="icon-arrow-right14 position-right"></i></button>
+
+            </div>
+        </div>
+    </form>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript" src="{{ asset('admin/js/plugins/forms/styling/uniform.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('admin/js/pages/login_validation.js') }}"></script>
+{% endblock javascripts %}
+

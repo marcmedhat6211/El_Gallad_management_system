@@ -1,0 +1,22 @@
+<div class="mfp-hide search-popup mfp-with-anim" id="search-popup">
+    <form action="" method="get" data-link="{{ path('fe_filter_product') }}">
+        <div class="input-group position-relative">
+            <div class="input-group-prepend d-none d-md-block">
+                <select class="selectpicker" name="category" id="region-01"
+                        data-style="btn-lg letter-spacing-0 border-0 border-bottom border-2x bg-transparent text-white border-white fs-24 pl-0 shadow-none text-capitalize font-weight-normal">
+                    <option value="" selected>{% trans %}All Categories{% endtrans %}</option>
+                    {% for category in categories %}
+                        <option value="{{ category.seo.slug }}" data-link="{{ path('fe_filter_category', {"slug": category.seo.slug}) }}">{{ category.title }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <input type="text" id="keyword" name="q"
+                   class="form-control border-0 border-bottom border-2x bg-transparent text-white border-white fs-24 form-control-lg"
+                   placeholder="{% trans %}Search Something...{% endtrans %}">
+            <div class="input-group-append position-absolute pos-fixed-right-center">
+                <button class="input-group-text bg-transparent border-0 text-white fs-30 px-0 btn-lg" type="submit"><i
+                            class="far fa-search"></i></button>
+            </div>
+        </div>
+    </form>
+</div>

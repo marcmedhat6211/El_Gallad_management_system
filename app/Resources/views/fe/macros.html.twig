@@ -1,0 +1,145 @@
+{% macro product(entity) %}
+    {% set image = 'images/placeholders/placeholder-md.jpg' %}
+    {% if entity.post.mainImage %}
+        {% set image = entity.post.mainImage.assetPath %}
+    {% endif %}
+    <div class="card border-0 hover-change-content card-1 {{ entity.post.mainImage ? "product" }}">
+        {% if image %}
+            <div style="background-image: url({{ asset(image) }})"
+                 class="card-img ratio bg-img-cover-center ratio-1-1">
+            </div>
+        {% endif %}
+        <div class="card-img-overlay d-flex py-4 py-sm-5 pl-6 pr-4">
+            <div class="d-flex flex-column">
+                <a href="{{ path('fe_product_show', {"slug": entity.seo.slug}) }}"
+                   class="font-weight-bold mb-1 d-block lh-12 product-card-title">{{ entity.title }}</a>
+                <a href="{{ path('fe_filter_category', {"slug": entity.category.seo.slug}) }}"
+                   class="text-uppercase text-muted letter-spacing-05 fs-12">{{ entity.category.title }}</a>
+                <p class="mt-auto text-primary mb-0">{% trans %}Starting From{% endtrans %} {{ entity.minPrice }} {% trans %}EGP{% endtrans %}</p>
+            </div>
+            <div class="ml-auto d-flex flex-column">
+                {% if entity.newArrival %}
+                    <div class="badge badge-blue badge-circle ml-auto w-45px h-45px fs-12 d-flex align-items-center justify-content-center mb-2">
+                        {% trans %}new{% endtrans %}
+                    </div>
+                {% endif %}
+                {% if entity.isOnSale %}
+                    <div class="badge badge-purple badge-circle ml-auto w-45px h-45px fs-12 d-flex align-items-center justify-content-center mb-2">
+                        {% trans %}sale{% endtrans %}
+                    </div>
+                {% endif %}
+                <div class="my-auto content-change-vertical">
+                    <a href="{{ path('fe_product_show', {"slug": entity.seo.slug}) }}" data-toggle="tooltip"
+                       data-placement="{% trans %}left{% endtrans %}" title="{% trans %}Preview{% endtrans %}"
+                       class="preview d-flex align-items-center justify-content-center text-primary bg-white hover-white bg-hover-primary w-45px h-45px rounded-circle mb-2 border">
+                        <i class="far fa-eye"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endmacro %}
+
+{% macro blog(entity, swiper = false) %}
+    {% set image = 'images/placeholders/placeholder-md.jpg' %}
+    {% if entity.post.mainImage %}
+        {% set image = entity.post.mainImage.assetPath %}
+    {% endif %}
+    <div class="box card-2">
+        <div class="card border-0 card-bg-transparent">
+            <a href="{{ path('fe_blogger_show', {"slug": entity.seo.slug}) }}" class="hover-shine card-img-top">
+                <img class="{{ swiper ? "swiper-lazy" }}" {{ swiper ? "data-src" : "src" }}="{{ asset(image) }}" alt=
+                "{{ entity.title }}">
+            </a>
+            <div class="card-body px-0 pt-6">
+                {% if entity.date %}
+                    <p class="card-text fs-12 mb-2 text-muted lh-12 text-uppercase letter-spacing-05 font-weight-500">
+                        {{ entity.date|date('d-m-Y') }}
+                    </p>
+                {% endif %}
+                <h3 class="card-title mb-3 fs-20">
+                    <a href="{{ path('fe_blogger_show', {"slug": entity.seo.slug}) }}">{{ entity.title }}</a>
+                </h3>
+                <p class="card-text mb-4">{{ entity.post.content.brief }}</p>
+                <a href="{{ path('fe_blogger_show', {"slug": entity.seo.slug}) }}"
+                   class="fs-14 font-weight-bold border-bottom border-light-dark text-uppercase letter-spacing-05 d-inline-block border-hover-primary show-more-btn">
+                    {% trans %}Read more{% endtrans %}
+                </a>
+            </div>
+        </div>
+    </div>
+{% endmacro %}
+
+{% macro checkbox(label, name, value, id, isChecked) %}
+    <div class="custom-control custom-checkbox">
+        <input type="checkbox" class="custom-control-input"
+               id="{{ id }}" name="{{ name }}" value="{{ value }}" {{ isChecked ? 'checked' }}>
+        <label class="custom-control-label fs-15"
+               for="{{ id }}">{{ label }}</label>
+    </div>
+{% endmacro %}
+
+{% macro service(entity, swiper = false) %}
+    {% set image = 'images/placeholders/placeholder-md.jpg' %}
+    {% if entity.post.mainImage %}
+        {% set image = entity.post.mainImage.assetPath %}
+    {% endif %}
+    <a href="{{ path('fe_service_show', {"slug": entity.seo.slug}) }}"
+       class="card border-0 card-bg-transparent service-card card-3">
+        <img class="{{ swiper ? "swiper-lazy" }}" {{ swiper ? "data-src" : "src" }}="{{ asset(image) }}" alt=
+        "{{ entity.title }}">
+        <div class="card-body px-0 pt-6 pb-4">
+            <h3 class="fs-20 mb-3">{{ entity.title }}</h3>
+            <p class="mb-0">{{ entity.post.content.brief }}</p>
+        </div>
+    </a>
+{% endmacro %}
+
+{% macro project(entity, swiper = false) %}
+    {% set image = 'images/placeholders/placeholder-md.jpg' %}
+    {% if entity.post.mainImage %}
+        {% set image = entity.post.mainImage.assetPath %}
+    {% endif %}
+    <div class="box card-2">
+        <div class="card border-0 card-bg-transparent">
+            <a href="{{ path('fe_project_show', {"slug": entity.seo.slug}) }}" class="hover-shine card-img-top">
+                <img class="{{ swiper ? "swiper-lazy" }}" {{ swiper ? "data-src" : "src" }}="{{ asset(image) }}" alt=
+                "{{ entity.title }}">
+            </a>
+            <div class="card-body px-0 pt-6">
+                {% if entity.date %}
+                    <p class="card-text fs-12 mb-2 text-muted lh-12 text-uppercase letter-spacing-05 font-weight-500">
+                        {{ entity.date|date('d-m-Y') }}
+                    </p>
+                {% endif %}
+                <h3 class="card-title mb-3 fs-20">
+                    <a href="{{ path('fe_project_show', {"slug": entity.seo.slug}) }}">{{ entity.title }}</a>
+                </h3>
+                <p class="card-text mb-4">{{ entity.post.content.brief }}</p>
+                <a href="{{ path('fe_project_show', {"slug": entity.seo.slug}) }}"
+                   class="fs-14 font-weight-bold border-bottom border-light-dark text-uppercase letter-spacing-05 d-inline-block border-hover-primary show-more-btn">
+                    {% trans %}Read more{% endtrans %}
+                </a>
+            </div>
+        </div>
+    </div>
+{% endmacro %}
+
+{% macro teamMember(entity, swiper = false) %}
+    {% set memberImage = 'images/placeholders/placeholder-sm.jpg' %}
+    {% if entity.image %}
+        {% set memberImage = entity.image.assetPath %}
+    {% endif %}
+    <div class="box card-4">
+        <div class="card border-0 card-bg-transparent align-items-center">
+            <div class="w-130 rounded-circle overflow-hidden card-img">
+                <img class="{{ swiper ? "swiper-lazy" }}" {{ swiper ? "data-src" : "src" }}="{{ asset(memberImage) }}"
+                alt="{{ entity.name }}">
+            </div>
+            <div class="card-body px-0 pt-3 pb-0">
+                <p class="card-title text-center text-primary fs-18 font-weight-bold mb-0">{{ entity.name }}</p>
+                <p class="cart-text mb-0 text-center team-member-position">{{ entity.position }}</p>
+            </div>
+        </div>
+    </div>
+{% endmacro %}

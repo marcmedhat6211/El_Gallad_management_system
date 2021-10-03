@@ -1,0 +1,37 @@
+a {
+    transition: all 0.2s;
+    &:hover {
+        text-decoration: none;
+    }
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+svg.icon {
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    stroke-width: 0;
+    stroke: currentColor;
+    fill: currentColor;
+}
+
+button:focus {
+    outline: none;
+}
+
+.gtf-back-to-top {
+    opacity: 0;
+    transition: opacity 0.5s;
+    &.in {
+        opacity: 1;
+    }
+}
+
+body {
+    background: $color-bg;
+    -webkit-font-smoothing: subpixel-antialiased;
+}
