@@ -77,11 +77,8 @@ class CategoryController extends AbstractController
             $em->persist($category);
             $em->flush();
 
-            $uploadImage = $this->uploadImage($request, $form, $category);
-            if ($uploadImage != false) {
-                $this->addFlash('success', 'Successfully saved');
-                return $this->redirectToRoute('category_index');
-            }
+//            $uploadImage = $this->uploadImage($request, $form, $category);
+            $this->addFlash('success', 'Successfully saved');
 
             if ($category->getParent()) {
                 return $this->redirectToRoute('category_index', ['parentCategory' => $category->getParent()->getId()]);
@@ -99,10 +96,10 @@ class CategoryController extends AbstractController
     }
 
 
-    private function uploadImage(Request $request, \Symfony\Component\Form\Form $form, Category $entity) {
-        $file = $form->get("image")->get("file")->getData();
-        return $this->get('pn_media_upload_image')->uploadSingleImage($entity, $file, 103, $request);
-    }
+//    private function uploadImage(Request $request, \Symfony\Component\Form\Form $form, Category $entity) {
+//        $file = $form->get("image")->get("file")->getData();
+//        return $this->get('pn_media_upload_image')->uploadSingleImage($entity, $file, 103, $request);
+//    }
 
     private function getDepth(Category $category): int
     {
@@ -158,7 +155,7 @@ class CategoryController extends AbstractController
         $top = $parent;
         while ($top) {
             $concat = $top->getConcatIds();
-            $concat .= ",".$category->getId();
+            $concat .= "," . $category->getId();
             $top->setConcatIds($concat);
             $em->persist($top);
             $top = $top->getParent();
@@ -188,12 +185,7 @@ class CategoryController extends AbstractController
             $category->setModifiedBy($userName);
             $em->flush();
 
-            $uploadImage = $this->uploadImage($request, $form, $category);
-            if ($uploadImage != false) {
-                $this->addFlash('success', 'Successfully updated');
-                return $this->redirectToRoute('category_edit', array('id' => $category->getId()));
-            }
-
+//            $uploadImage = $this->uploadImage($request, $form, $category);
             $this->addFlash('success', 'Successfully saved');
 
             if ($request->request->get("action") == "saveAndNext") {

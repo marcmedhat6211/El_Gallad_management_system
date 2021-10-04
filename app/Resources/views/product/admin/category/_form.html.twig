@@ -3,27 +3,27 @@
     <div class="panel-body">
         <div class="row">
             {{ macros.input(form.title,6) }}
-            {{ macros.input(form.tarteb,6) }}
+{#            {{ macros.input(form.tarteb,6) }}#}
         </div>
-        <div class="row">
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label>Image:</label>
-                    <div class="media no-margin-top">
-                        {% if category.image %}
-                            <div class="media-left">
-                                <a href="#"><img src="{{ asset(category.image.assetPath) }}" style="width: 58px; height: 58px; border-radius: 2px;" alt=""></a>
-                            </div>
-                        {% endif %}
-                        <div class="media-body">
-                            {{ form_widget(form.image.file,{'attr':{'class':'file-styled'}}) }}
-                        </div>
-                    </div>
-                    <span class="help-block">{% include 'PNMediaBundle::imageDimension.html.twig' with {"type":103} %}</span>
-                    <span class="help-block">Accepted formats: gif, png, jpg. Max file size 2Mb</span>
-                </div>
-            </div>
-        </div>
+{#        <div class="row">#}
+{#            <div class="col-md-6">#}
+{#                <div class="form-group">#}
+{#                    <label>Image:</label>#}
+{#                    <div class="media no-margin-top">#}
+{#                        {% if category.image %}#}
+{#                            <div class="media-left">#}
+{#                                <a href="#"><img src="{{ asset(category.image.assetPath) }}" style="width: 58px; height: 58px; border-radius: 2px;" alt=""></a>#}
+{#                            </div>#}
+{#                        {% endif %}#}
+{#                        <div class="media-body">#}
+{#                            {{ form_widget(form.image.file,{'attr':{'class':'file-styled'}}) }}#}
+{#                        </div>#}
+{#                    </div>#}
+{#                    <span class="help-block">{% include 'PNMediaBundle::imageDimension.html.twig' with {"type":103} %}</span>#}
+{#                    <span class="help-block">Accepted formats: gif, png, jpg. Max file size 2Mb</span>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
 
     </div>
     <div class="panel-footer">

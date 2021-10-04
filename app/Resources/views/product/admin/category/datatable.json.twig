@@ -8,7 +8,6 @@
             "{% if category.tarteb %}{{ category.tarteb }}{% else %}--{% endif %}",
             "{{ category.title }}",
             "{{ category.noOfProducts }}",
-            "{{ category.noOfPublishProducts }}",
             "{% if category.created %}{{ category.created|date('d/m/Y') }}{% else %}--{% endif %}",
                 "<ul class='icons-list'><li class='dropdown'><a href='#' class='dropdown-toggle' data-toggle='dropdown'><i class='icon-menu9'></i></a><ul class='dropdown-menu dropdown-menu-right'>{% if category.depth < maximalDepthLevel and category.products|length ==0 %}<li><a href='{{ path('category_index',{'parentCategory':category.id}) }}'><i class='icon-tree7'></i> Sub categories</a></li>{% endif %}{% if category.children|length == 0 %}{#<li><a href='{{ path('product_index',{'category':category.id}) }}'><i class='icon-basket'></i> Manage Products</a></li>#}{% endif %}<li><a href='{{ path('category_edit',{'id':category.id}) }}'><i class='icon-pencil7'></i> Edit</a></li><li><a href='#' class='delete-btn' data-toggle='modal' data-target='#modal_delete' data-delete='{{ path('category_delete',{'id':category.id}) }}'><i class='icon-bin'></i> Remove</a></li></ul></li></ul>"
             ]{% if loop.last == false %},{% endif %}

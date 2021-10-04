@@ -24,7 +24,6 @@ class ProductHasAttributeType extends AbstractType
 
     private $em;
     private $translator;
-    private $product;
 
     //Constructor
     public function __construct(EntityManagerInterface $em, TranslatorInterface $translator)
@@ -39,11 +38,10 @@ class ProductHasAttributeType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
 
-        $this->product = $options['product'];
         $product = $options['product'];
         $attributes = [];
-        if ($this->product instanceof Product) {
-            $attributes = $this->em->getRepository(Attribute::class)->findByProduct($this->product);
+        if ($product instanceof Product) {
+            $attributes = $this->em->getRepository(Attribute::class)->findByProduct($product);
         }
 
         foreach ($attributes as $attribute) {
@@ -66,6 +64,7 @@ class ProductHasAttributeType extends AbstractType
                 //                    "attribute" => $attribute->getId(),
                 //                ]);
                 $productHasAttributes = $product->getProductHasAttributesByAttributeId($attribute);
+                dump($attribute);
                 foreach ($productHasAttributes as $productHasAttribute) {
                     $attributeValue = ($productHasAttribute->getSubAttribute() != null) ? $productHasAttribute->getSubAttribute()->getId() : null;
 

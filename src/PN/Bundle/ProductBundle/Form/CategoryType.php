@@ -25,17 +25,17 @@ class CategoryType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $postTypeModel = new PostTypeModel();
-        $postTypeModel->add("description", "Description", ["required" => false]);
+//        $postTypeModel = new PostTypeModel();
+//        $postTypeModel->add("description", "Description", ["required" => false]);
 
         $builder
             ->add('title')
             ->add('seo', SeoType::class)
-            ->add('image', SingleImageType::class, ["mapped" => false])
-            ->add('tarteb', IntegerType::class, [
-                "label" => "Sort No.",
-                'required' => false,
-            ])
+//            ->add('image', SingleImageType::class, ["mapped" => false])
+//            ->add('tarteb', IntegerType::class, [
+//                "label" => "Sort No.",
+//                'required' => false,
+//            ])
             ->add('translations', TranslationsType::class, [
                 'entry_type' => CategoryTranslationType::class,
                 //                    'query_builder' => function(EntityRepository $er) {

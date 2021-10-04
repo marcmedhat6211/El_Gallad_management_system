@@ -48,11 +48,6 @@ class ProductType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $this->product = $builder->getData();
-//        $postTypeModel = new PostTypeModel();
-//        $postTypeModel->add("description", "Description", [
-//            "required" => false,
-//        ]);
-//        $postTypeModel->add("brief", "Brief");
         $builder
             ->add('title')
             ->add('serial')
@@ -71,25 +66,7 @@ class ProductType extends AbstractType
                         ->orderBy('c.id', 'DESC');
                 },
             ])
-//            ->add('tag', TextType::class, [
-//                "label" => "Search Terms",
-//                "required" => false,
-//            ])
-//            ->add('publish', CheckboxType::class, [
-//                "required" => false,
-//                "label" => "Published",
-//            ])
-//            ->add('featured')
-//            ->add('newArrival', CheckboxType::class, [
-//                "required" => false,
-//                "label" => "New Arrival",
-//            ])
             ->add('seo', SeoType::class)
-//            ->add('post', PostType::class, [
-//                "attributes" => $postTypeModel,
-//                "required" => false,
-//            ])
-//            ->add('details', ProductDetailsType::class)
             ->add('translations', TranslationsType::class, [
                 'entry_type' => ProductTranslationType::class,
                 "label" => false,
